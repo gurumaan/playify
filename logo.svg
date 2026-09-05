@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Radial Gradient -->
+    <radialGradient id="pBg" cx="30%" cy="25%" r="80%">
+      <stop offset="0%" stop-color="#14261c"/>
+      <stop offset="50%" stop-color="#0c1712"/>
+      <stop offset="100%" stop-color="#050806"/>
+    </radialGradient>
+
+    <!-- Electric Cyan-Green Hyper Gradient -->
+    <linearGradient id="pGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="35%" stop-color="#00ff87"/>
+      <stop offset="70%" stop-color="#1ed760"/>
+      <stop offset="100%" stop-color="#00b84f"/>
+    </linearGradient>
+
+    <!-- Inner Glow Gradient -->
+    <linearGradient id="pShine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Deep Ambient Glow Filter -->
+    <filter id="pGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16" result="blur1"/>
+      <feGaussianBlur stdDeviation="30" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Soft Drop Shadow -->
+    <filter id="pShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base with Obsidian Glass Texture -->
+  <rect width="512" height="512" rx="128" fill="url(#pBg)"/>
+  
+  <!-- Subtle Border Ring -->
+  <rect x="6" y="6" width="500" height="500" rx="122" fill="none" stroke="url(#pGrad)" stroke-width="2.5" stroke-opacity="0.35"/>
+
+  <!-- Glowing Ambient Halo -->
+  <circle cx="256" cy="256" r="160" fill="url(#pGrad)" opacity="0.12" filter="url(#pGlow)"/>
+
+  <!-- ICONIC PLAYIFY SYMBOL (Modern 'P' + Soundwave + Play Triangle) -->
+  <g filter="url(#pShadow)" transform="translate(18, 0)">
+    
+    <!-- Sound Waves Vertical Equalizer Bars (The Stem of the 'P') -->
+    <g fill="url(#pGrad)" filter="url(#pGlow)">
+      <!-- Wave Bar 1 (Leftmost subtle) -->
+      <rect x="100" y="216" width="14" height="80" rx="7" opacity="0.75"/>
+      
+      <!-- Wave Bar 2 (Main Pillar / Spine of 'P') -->
+      <rect x="130" y="120" width="22" height="272" rx="11"/>
+      
+      <!-- Wave Bar 3 (Mid Accent) -->
+      <rect x="168" y="170" width="16" height="172" rx="8" opacity="0.9"/>
+    </g>
+
+    <!-- Upper Loop of 'P' merged with Kinetic Play Triangle -->
+    <path d="M 196 120 
+             L 290 120 
+             C 365 120 415 165 415 236 
+             C 415 307 365 352 290 352 
+             L 214 352
+             C 204 352 196 344 196 334 
+             L 196 120 Z" 
+          fill="url(#pGrad)" 
+          filter="url(#pGlow)"/>
+
+    <!-- Inner Cutout Play Triangle Shape (Negative Space Playhead) -->
+    <path d="M 230 176 
+             L 282 176 
+             C 324 176 352 201 352 236 
+             C 352 271 324 296 282 296 
+             L 230 296 
+             Z" 
+          fill="#0c1712"/>
+
+    <!-- Floating Neon Play Jewel (Center Core) -->
+    <polygon points="262,204 316,236 262,268" 
+             fill="url(#pGrad)" 
+             filter="url(#pGlow)"/>
+
+    <!-- Sound Ripple Rings (Radiating from the Playhead) -->
+    <path d="M 400 180 A 70 70 0 0 1 400 292" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" opacity="0.9" filter="url(#pGlow)"/>
+    <path d="M 432 152 A 110 110 0 0 1 432 320" fill="none" stroke="url(#pGrad)" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  </g>
+</svg>

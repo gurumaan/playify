@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>CricPro Ultra — Real Live Cricket Odds & CricAI Match Predictor</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="/static/cricket.css">
+</head>
+<body>
+
+  <!-- Ambient Stadium Glow -->
+  <div class="cric-glow-bg"></div>
+
+  <!-- Live Match Marquee Ticker -->
+  <div class="cric-top-ticker">
+    <div class="ticker-live-badge"><i class="fa-solid fa-circle-dot live-pulse"></i> 100% REAL LIVE SCORES</div>
+    <div class="ticker-marquee-content" id="ticker-marquee">
+      <span>Loading real live international & league cricket feeds...</span>
+    </div>
+  </div>
+
+  <div class="cric-app-wrapper">
+
+    <!-- Header -->
+    <header class="cric-header">
+      <div class="cric-brand" onclick="cric.switchTab('live')">
+        <div class="cric-logo-icon"><i class="fa-solid fa-trophy"></i></div>
+        <div class="cric-logo-text">CRICPRO<span>ULTRA</span></div>
+        <span class="cric-badge-pro">REAL LIVE & CRICAI</span>
+      </div>
+
+      <nav class="cric-desktop-nav">
+        <button class="cric-nav-tab active" data-tab="live" onclick="cric.switchTab('live', this)">
+          <i class="fa-solid fa-bolt"></i> Real Live Matches
+        </button>
+        <button class="cric-nav-tab" data-tab="ai-oracle" onclick="cric.openAiOracleModal()">
+          <i class="fa-solid fa-robot"></i> 🤖 CricAI Match Predictor
+        </button>
+        <button class="cric-nav-tab" data-tab="upcoming" onclick="cric.switchTab('upcoming', this)">
+          <i class="fa-regular fa-calendar"></i> Today's Schedule
+        </button>
+      </nav>
+
+      <div class="cric-header-actions">
+        <button class="cric-btn-ai-header" onclick="cric.openAiOracleModal()">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Ask CricAI
+        </button>
+        <a href="https://t.me/CricProVIP_Official" target="_blank" class="cric-btn-telegram" title="Join VIP Telegram Channel">
+          <i class="fa-brands fa-telegram"></i>
+          <span>VIP Match Tips</span>
+        </a>
+        <a href="/" class="cric-switch-music" title="Spotify Ultra Music">
+          <i class="fa-brands fa-spotify"></i>
+        </a>
+        <a href="/movies" class="cric-switch-movies" title="Cinema Ultra Movies">
+          <i class="fa-solid fa-film"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="cric-main-canvas">
+
+      <!-- AI Oracle Banner Hero -->
+      <div class="cric-ai-banner-card" onclick="cric.openAiOracleModal()">
+        <div class="ai-banner-badge">🤖 POWERED BY CRICAI ORACLE</div>
+        <div class="ai-banner-content">
+          <h3>Kon Jitega Aaj Ka Match? Ask CricAI Anything!</h3>
+          <p>Real-time live scores, win % probability, pitch reports, aur expert winner predictions instant pao.</p>
+        </div>
+        <button class="cric-btn-launch-ai">
+          <i class="fa-solid fa-comments"></i> Start AI Prediction Chat
+        </button>
+      </div>
+
+      <!-- Featured Blockbuster Match Hero Arena -->
+      <section class="cric-hero-arena" id="hero-match-arena">
+        <!-- Injected dynamically by cricket.js -->
+      </section>
+
+      <!-- Section Tabs Navigation -->
+      <div class="cric-section-tabs-bar">
+        <button class="cric-filter-btn active" data-filter="all" onclick="cric.filterMatches('all', this)">
+          🔥 All Real Matches (<span id="count-all-matches">0</span>)
+        </button>
+        <button class="cric-filter-btn" data-filter="live" onclick="cric.filterMatches('live', this)">
+          🔴 In-Play Live (<span id="count-live-matches">0</span>)
+        </button>
+        <button class="cric-filter-btn" data-filter="upcoming" onclick="cric.filterMatches('upcoming', this)">
+          📅 Scheduled Today (<span id="count-upcoming-matches">0</span>)
+        </button>
+      </div>
+
+      <!-- Real Matches Grid -->
+      <div class="cric-matches-grid" id="cric-matches-container">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- VIP Telegram & WhatsApp Channel Funnel Card -->
+      <section class="cric-vip-funnel-card">
+        <div class="vip-funnel-left">
+          <div class="vip-icon-halo"><i class="fa-solid fa-crown"></i></div>
+          <div class="vip-funnel-text">
+            <h2>Join CricPro VIP Telegram Channel (100% Free)</h2>
+            <p>Get Daily Toss Predictions, Live Session Market Tips & CricAI 100% Match Winner Alerts with 94.2% Accuracy!</p>
+          </div>
+        </div>
+        <div class="vip-funnel-actions">
+          <a href="https://t.me/CricProVIP_Official" target="_blank" class="cric-cta-btn-telegram">
+            <i class="fa-brands fa-telegram"></i> Join Telegram Channel
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="cric-mobile-bottom-nav">
+      <button class="cric-mob-tab active" data-tab="live" onclick="cric.switchTab('live')">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Live</span>
+      </button>
+      <button class="cric-mob-tab" data-tab="ai" onclick="cric.openAiOracleModal()">
+        <i class="fa-solid fa-robot"></i>
+        <span>CricAI</span>
+      </button>
+      <button class="cric-mob-tab" data-tab="odds" onclick="cric.openGlobalOdds()">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>Odds</span>
+      </button>
+      <button class="cric-mob-tab" data-tab="vip" onclick="cric.openVipModal()">
+        <i class="fa-solid fa-crown"></i>
+        <span>VIP Tips</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- ======================================================================
+       CRICAI MATCH PREDICTOR CHATBOT MODAL
+       ====================================================================== -->
+  <div class="cric-modal-backdrop" id="cric-ai-modal">
+    <div class="cric-ai-chat-dialog">
+      
+      <!-- AI Header -->
+      <div class="cric-ai-header">
+        <div class="ai-header-brand">
+          <div class="ai-bot-avatar"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <h3>CricAI Match Oracle</h3>
+            <span class="ai-status-indicator">🟢 Live Match Engine Connected</span>
+          </div>
+        </div>
+        <button class="cric-modal-close-btn" onclick="cric.closeAiOracleModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Match Context Selector -->
+      <div class="ai-match-context-bar">
+        <label><i class="fa-solid fa-trophy"></i> Match Context:</label>
+        <select id="ai-match-select" onchange="cric.changeAiMatchContext(this.value)">
+          <option value="">Select a live match...</option>
+        </select>
+      </div>
+
+      <!-- Chat Messages Container -->
+      <div class="cric-ai-messages-container" id="ai-chat-messages">
+        <div class="ai-msg bot">
+          <div class="ai-bubble">
+            👋 <strong>Namaste Cricket Fan! Main hoon CricAI Oracle.</strong><br>
+            Mere paas sabhi current matches ka <strong>100% Real Live Scorecard, Pitch Conditions aur Odds Data</strong> hai.<br><br>
+            Aap kisi bhi match ke baare me pooch sakte hain:<br>
+            • <em>"Kaun jitega ye match aur kyu?"</em><br>
+            • <em>"Pitch batting friendly hai ya bowling?"</em><br>
+            • <em>"Powerplay me kitne runs banenge?"</em>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Question Chips -->
+      <div class="cric-ai-chips-row">
+        <button class="ai-chip-btn" onclick="cric.sendPredefinedQuestion('Kaun jitega ye match aur kyu?')">
+          🔮 Kaun Jitega Ye Match?
+        </button>
+        <button class="ai-chip-btn" onclick="cric.sendPredefinedQuestion('Kitne runs banenge is pitch par?')">
+          ⚡ Projected Score & Powerplay?
+        </button>
+        <button class="ai-chip-btn" onclick="cric.sendPredefinedQuestion('Pitch report aur ground surface kaisa hai?')">
+          🏟️ Pitch Report & Toss Impact
+        </button>
+        <button class="ai-chip-btn" onclick="cric.sendPredefinedQuestion('Top batsman aur top bowler kaun banega?')">
+          🌟 Key Player Predictions
+        </button>
+      </div>
+
+      <!-- Input Form -->
+      <form class="cric-ai-input-form" onsubmit="cric.handleUserChatSubmit(event)">
+        <input type="text" id="ai-chat-input" placeholder="Ask CricAI anything about this match..." autocomplete="off">
+        <button type="submit" id="btn-ai-send"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MATCH DETAIL MODAL (Scorecard & Odds)
+       ====================================================================== -->
+  <div class="cric-modal-backdrop" id="cric-match-modal">
+    <div class="cric-modal-dialog">
+      
+      <!-- Modal Header -->
+      <div class="cric-modal-header">
+        <div class="modal-match-meta">
+          <span class="modal-series-badge" id="modal-series-txt">Real Cricket Match</span>
+          <h2 id="modal-match-title" class="modal-title-txt">Match Center</h2>
+        </div>
+        <button class="cric-modal-close-btn" onclick="cric.closeMatchModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="cric-modal-body">
+        <div class="modal-score-summary-card" id="modal-scores-container"></div>
+        <div class="odds-overview-container" id="modal-odds-container"></div>
+        
+        <div style="margin-top:20px">
+          <button class="cric-btn-launch-ai" style="width:100%" onclick="cric.askAiForCurrentModalMatch()">
+            <i class="fa-solid fa-robot"></i> Get CricAI Prediction for This Match
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VIP Pass Modal -->
+  <div class="cric-modal-backdrop" id="cric-vip-modal">
+    <div class="cric-vip-dialog">
+      <button class="cric-modal-close-btn" onclick="cric.closeVipModal()"><i class="fa-solid fa-xmark"></i></button>
+      <div class="vip-crown-badge"><i class="fa-solid fa-crown"></i></div>
+      <h2>CricPro VIP Predictions Pass</h2>
+      <p>Unlock 100% Sure Match Winner Odds, Session Predictions with 94.2% Accuracy</p>
+      <div class="vip-pricing-box">
+        <div class="vip-price-tag">₹199 <span>/ Month</span></div>
+        <div class="vip-upi-info">Pay via UPI: <strong>cricpro.vip@upi</strong></div>
+        <button class="cric-btn-pay-upi" onclick="cric.copyUpiId('cricpro.vip@upi')">
+          <i class="fa-solid fa-qrcode"></i> Copy UPI ID & Pay ₹199
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="cric-toast" id="cric-toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="cric-toast-msg">Notification</span>
+  </div>
+
+  <script src="/static/cricket.js"></script>
+</body>
+</html>

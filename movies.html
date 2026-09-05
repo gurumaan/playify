@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Cinema Ultra - All Movies & Web Series (All Languages)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="/static/movies.css">
+</head>
+<body>
+
+  <div class="cinema-glow-mesh" id="cinema-glow"></div>
+
+  <div class="cinema-app-wrapper">
+
+    <!-- Top Header -->
+    <header class="cinema-header">
+      <div class="cinema-brand" onclick="cinema.switchView('home')">
+        <div class="cinema-logo-icon"><i class="fa-solid fa-film"></i></div>
+        <div class="cinema-logo-text">CINEMA<span>ULTRA</span></div>
+        <span class="cinema-badge-4k">NETFLIX GRADE</span>
+      </div>
+
+      <nav class="cinema-desktop-nav">
+        <button class="cinema-nav-link active" data-cat="all" onclick="cinema.filterCategory('all', this)">Home</button>
+        <button class="cinema-nav-link" data-cat="punjabi_hits" onclick="cinema.filterCategory('punjabi_hits', this)">🦁 Punjabi</button>
+        <button class="cinema-nav-link" data-cat="bollywood_superhits" onclick="cinema.filterCategory('bollywood_superhits', this)">🎭 Bollywood (Hindi)</button>
+        <button class="cinema-nav-link" data-cat="south_action" onclick="cinema.filterCategory('south_action', this)">⚡ South Dubbed</button>
+        <button class="cinema-nav-link" data-cat="hollywood_blockbusters" onclick="cinema.filterCategory('hollywood_blockbusters', this)">🍿 Hollywood</button>
+        <button class="cinema-nav-link" data-cat="top_web_series" onclick="cinema.filterCategory('top_web_series', this)">📺 Web Series</button>
+        <button class="cinema-nav-link" onclick="cinema.switchView('watchlist')">My List (<span id="watchlist-count-txt">0</span>)</button>
+      </nav>
+
+      <div class="cinema-header-actions">
+        <div class="cinema-search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="cinema-search-input" placeholder="Search any movie/series in the world..." autocomplete="off">
+          <button id="cinema-search-clear" style="display:none;" onclick="cinema.clearSearch()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <a href="/" class="cinema-music-switch-btn" title="Switch to Spotify Ultra Music">
+          <i class="fa-brands fa-spotify"></i>
+          <span>Music App</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Canvas -->
+    <main class="cinema-main-content" id="cinema-main-view">
+
+      <!-- Billboard Hero Banner (Netflix Style) -->
+      <section class="cinema-hero-billboard" id="cinema-hero-billboard">
+        <div class="cinema-hero-backdrop-frame">
+          <img id="hero-backdrop-img" src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=1200" alt="Billboard">
+          <div class="cinema-hero-vignette"></div>
+        </div>
+
+        <div class="cinema-hero-info">
+          <div class="cinema-hero-meta-badges">
+            <span class="hero-badge-special"><i class="fa-solid fa-fire"></i> #1 TRENDING</span>
+            <span class="hero-badge-imdb"><i class="fa-solid fa-star"></i> <span id="hero-rating">7.8</span></span>
+            <span id="hero-lang-badge" class="hero-badge-lang">Multi-Audio</span>
+            <span id="hero-year" class="hero-badge-year">2024</span>
+          </div>
+
+          <h1 id="hero-title" class="cinema-hero-title">Jatt & Juliet 3</h1>
+          <div id="hero-genres" class="cinema-hero-genres">Comedy &bull; Romance &bull; Punjabi Superhit</div>
+          <p id="hero-overview" class="cinema-hero-overview">
+            Fateh and Pooja embark on a wild adventure in the UK full of laughs and romance.
+          </p>
+
+          <div class="cinema-hero-cta-row">
+            <button id="btn-hero-play" class="cinema-btn-primary" onclick="cinema.playHeroMovie()">
+              <i class="fa-solid fa-play"></i> Watch Full Movie
+            </button>
+            <button id="btn-hero-info" class="cinema-btn-secondary" onclick="cinema.openHeroInfo()">
+              <i class="fa-solid fa-circle-info"></i> More Info
+            </button>
+            <button id="btn-hero-watchlist" class="cinema-btn-icon" onclick="cinema.toggleHeroWatchlist()">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category Filter Bar -->
+      <div class="cinema-category-pills-bar">
+        <button class="cinema-pill-btn active" data-cat="all" onclick="cinema.filterCategory('all', this)">🔥 All Movies & Series</button>
+        <button class="cinema-pill-btn" data-cat="punjabi_hits" onclick="cinema.filterCategory('punjabi_hits', this)">🦁 Punjabi Hits</button>
+        <button class="cinema-pill-btn" data-cat="bollywood_superhits" onclick="cinema.filterCategory('bollywood_superhits', this)">🎭 Bollywood (Hindi)</button>
+        <button class="cinema-pill-btn" data-cat="south_action" onclick="cinema.filterCategory('south_action', this)">⚡ South Action</button>
+        <button class="cinema-pill-btn" data-cat="hollywood_blockbusters" onclick="cinema.filterCategory('hollywood_blockbusters', this)">🍿 Hollywood</button>
+        <button class="cinema-pill-btn" data-cat="top_web_series" onclick="cinema.filterCategory('top_web_series', this)">📺 Web Series</button>
+      </div>
+
+      <!-- Shelves Container -->
+      <div class="cinema-shelves-container" id="cinema-shelves-container">
+        
+        <section class="cinema-shelf-section" id="shelf-punjabi_hits">
+          <div class="cinema-shelf-header">
+            <h2 class="cinema-shelf-title">🦁 Punjabi Cinema Superhits</h2>
+            <span class="cinema-shelf-sub">Top Pollywood Blockbusters (Punjabi Audio)</span>
+          </div>
+          <div class="cinema-shelf-row" id="row-punjabi_hits"></div>
+        </section>
+
+        <section class="cinema-shelf-section" id="shelf-bollywood_superhits">
+          <div class="cinema-shelf-header">
+            <h2 class="cinema-shelf-title">🎭 Bollywood Blockbusters</h2>
+            <span class="cinema-shelf-sub">Hindi Superhits (Stree 2, Jawan, Animal, Kalki)</span>
+          </div>
+          <div class="cinema-shelf-row" id="row-bollywood_superhits"></div>
+        </section>
+
+        <section class="cinema-shelf-section" id="shelf-south_action">
+          <div class="cinema-shelf-header">
+            <h2 class="cinema-shelf-title">⚡ South Action (Hindi Dubbed)</h2>
+            <span class="cinema-shelf-sub">Pushpa 2, KGF 2, Salaar, RRR, Leo</span>
+          </div>
+          <div class="cinema-shelf-row" id="row-south_action"></div>
+        </section>
+
+        <section class="cinema-shelf-section" id="shelf-hollywood_blockbusters">
+          <div class="cinema-shelf-header">
+            <h2 class="cinema-shelf-title">🍿 Hollywood Blockbusters (Hindi Dubbed & English)</h2>
+            <span class="cinema-shelf-sub">Deadpool, Dune 2, Oppenheimer, Avatar 2</span>
+          </div>
+          <div class="cinema-shelf-row" id="row-hollywood_blockbusters"></div>
+        </section>
+
+        <section class="cinema-shelf-section" id="shelf-top_web_series">
+          <div class="cinema-shelf-header">
+            <h2 class="cinema-shelf-title">📺 Binge-Worthy Web Series (All Seasons)</h2>
+            <span class="cinema-shelf-sub">Mirzapur, Panchayat, Stranger Things, The Boys</span>
+          </div>
+          <div class="cinema-shelf-row" id="row-top_web_series"></div>
+        </section>
+
+      </div>
+
+      <!-- Search View -->
+      <section class="cinema-search-view" id="cinema-search-view" style="display:none;">
+        <div class="cinema-search-header">
+          <h2>Search Results for "<span id="search-query-display"></span>"</h2>
+          <button class="cinema-btn-back-home" onclick="cinema.closeSearch()"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+        </div>
+        <div class="cinema-movie-grid" id="cinema-search-grid"></div>
+      </section>
+
+      <!-- Watchlist View -->
+      <section class="cinema-watchlist-view" id="cinema-watchlist-view" style="display:none;">
+        <div class="cinema-search-header">
+          <h2>My Watchlist ❤️</h2>
+          <button class="cinema-btn-back-home" onclick="cinema.switchView('home')"><i class="fa-solid fa-arrow-left"></i> Back to Home</button>
+        </div>
+        <div class="cinema-movie-grid" id="cinema-watchlist-grid"></div>
+      </section>
+
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="cinema-mobile-bottom-nav">
+      <button class="cinema-mob-tab active" data-view="home" onclick="cinema.switchView('home')">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </button>
+      <button class="cinema-mob-tab" data-view="punjabi" onclick="cinema.filterCategory('punjabi_hits')">
+        <i class="fa-solid fa-fire"></i>
+        <span>Punjabi</span>
+      </button>
+      <button class="cinema-mob-tab" data-view="series" onclick="cinema.filterCategory('top_web_series')">
+        <i class="fa-solid fa-tv"></i>
+        <span>Series</span>
+      </button>
+      <button class="cinema-mob-tab" data-view="search" onclick="cinema.focusSearchMobile()">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <span>Search</span>
+      </button>
+      <button class="cinema-mob-tab" data-view="watchlist" onclick="cinema.switchView('watchlist')">
+        <i class="fa-solid fa-heart"></i>
+        <span>My List</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- MOVIE DETAIL MODAL -->
+  <div class="cinema-modal-backdrop" id="movie-detail-modal">
+    <div class="cinema-detail-dialog">
+      <button class="cinema-modal-close-btn" onclick="cinema.closeDetailModal()"><i class="fa-solid fa-xmark"></i></button>
+
+      <div class="cinema-modal-hero-frame">
+        <img id="modal-backdrop-img" src="" alt="Backdrop">
+        <div class="cinema-modal-hero-gradient"></div>
+        <div class="cinema-modal-hero-cta">
+          <h2 id="modal-movie-title" class="cinema-modal-title">Movie Title</h2>
+          <div class="cinema-modal-btn-row">
+            <button id="btn-modal-stream-play" class="cinema-btn-primary" onclick="cinema.playCurrentModalMovie()">
+              <i class="fa-solid fa-play"></i> Watch Full 1080p
+            </button>
+            <button id="btn-modal-watchlist" class="cinema-btn-icon" onclick="cinema.toggleCurrentModalWatchlist()">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cinema-modal-body">
+        <div class="cinema-modal-left-col">
+          <div class="cinema-modal-meta-row">
+            <span class="modal-badge-rating"><i class="fa-solid fa-star"></i> <span id="modal-rating">7.8</span>/10</span>
+            <span id="modal-year" class="modal-badge-year">2024</span>
+            <span id="modal-runtime" class="modal-badge-dur">2h 15m</span>
+            <span id="modal-lang-tag" class="modal-badge-lang">Multi-Audio</span>
+          </div>
+
+          <p id="modal-overview" class="cinema-modal-plot">Full movie overview...</p>
+        </div>
+
+        <div class="cinema-modal-right-col">
+          <div class="cinema-detail-meta-item">
+            <span class="meta-label">Cast:</span>
+            <span id="modal-cast" class="meta-val">Actor 1, Actor 2</span>
+          </div>
+          <div class="cinema-detail-meta-item">
+            <span class="meta-label">Director:</span>
+            <span id="modal-director" class="meta-val">Director Name</span>
+          </div>
+          <div class="cinema-detail-meta-item">
+            <span class="meta-label">Audio & Subtitles:</span>
+            <span id="modal-languages" class="meta-val">Hindi, English, Punjabi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CINEMA HD VIDEO PLAYER MODAL -->
+  <div class="cinema-player-backdrop" id="cinema-player-modal">
+    <div class="cinema-player-container">
+      
+      <div class="cinema-player-topbar">
+        <div class="player-title-info">
+          <i class="fa-solid fa-film"></i>
+          <span id="player-movie-title">Movie Playing</span>
+          <span class="player-badge-live">1080P FULL STREAM</span>
+        </div>
+
+        <!-- Series Season/Episode Controls -->
+        <div class="player-series-ctrls" id="player-series-controls" style="display:none;">
+          <select id="player-season-select" onchange="cinema.changeSeason(this.value)">
+            <option value="1">Season 1</option>
+          </select>
+          <select id="player-episode-select" onchange="cinema.changeEpisode(this.value)">
+            <option value="1">Episode 1</option>
+          </select>
+        </div>
+
+        <!-- Server Selector -->
+        <div class="player-server-selector">
+          <label><i class="fa-solid fa-server"></i> Server:</label>
+          <select id="player-server-select" onchange="cinema.changePlayerServer(this.value)">
+            <option value="0">⚡ Server 1: Netflix HD</option>
+          </select>
+        </div>
+
+        <button class="player-close-btn" onclick="cinema.closePlayerModal()">
+          <i class="fa-solid fa-xmark"></i> Close
+        </button>
+      </div>
+
+      <!-- Iframe Video Frame -->
+      <div class="cinema-iframe-frame">
+        <iframe 
+          id="cinema-video-iframe" 
+          src="" 
+          allowfullscreen="true" 
+          webkitallowfullscreen="true" 
+          mozallowfullscreen="true" 
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          referrerpolicy="origin"
+          frameborder="0">
+        </iframe>
+      </div>
+
+      <!-- Player Controls Footer -->
+      <div class="cinema-player-footer">
+        <div class="player-footer-left">
+          <button class="cinema-btn-alt-server" onclick="cinema.cycleNextServer()">
+            <i class="fa-solid fa-rotate"></i> Try Next Server
+          </button>
+          <button class="cinema-btn-external-tab" id="btn-open-direct-tab" onclick="cinema.openInExternalTab()">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Full Player
+          </button>
+        </div>
+
+        <div class="player-footer-right">
+          <button class="cinema-btn-player-fullscreen" onclick="cinema.togglePlayerFullscreen()">
+            <i class="fa-solid fa-expand"></i> Fullscreen
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="cinema-toast" id="cinema-toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="cinema-toast-msg">Notification</span>
+  </div>
+
+  <script src="/static/movies.js"></script>
+</body>
+</html>

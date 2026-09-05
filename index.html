@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#121212">
+  <title>Playify – Stream 320kbps Ultra HD Music</title>
+  
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  </noscript>
+  
+  <link rel="stylesheet" href="style.css?v=64.0">
+</head>
+<body>
+
+  <!-- DYNAMIC AMBIENT MESH GLOW (APPLE MUSIC ATMOSPHERE) -->
+  <div class="sp-ambient-mesh" id="sp-ambient-mesh"></div>
+
+  <!-- OFFLINE MODE NOTIFICATION BAR -->
+  <div class="sp-offline-bar" id="sp-offline-bar" style="display: none;">
+    <div class="sp-offline-bar-content">
+      <i class="fa-solid fa-wifi-slash" style="color: #ffaa00;"></i>
+      <span>Offline Mode — Showing your downloaded songs.</span>
+      <button class="sp-offline-action-btn" onclick="sp.openDownloadedSongsView()">View Downloads</button>
+    </div>
+  </div>
+
+
+  <!-- CINEMATIC LOGO INTRO SPLASH SCREEN -->
+  <div class="sp-splash-screen" id="sp-splash-screen">
+    <div class="sp-splash-ambient"></div>
+    <div class="sp-splash-center">
+      <!-- Pulsing Ripple Rings -->
+      <div class="sp-splash-ripples">
+        <div class="sp-ripple r1"></div>
+        <div class="sp-ripple r2"></div>
+        <div class="sp-ripple r3"></div>
+      </div>
+      
+      <!-- Animated Logo Icon -->
+      <div class="sp-splash-logo-wrap">
+        <img src="logo.svg" alt="Playify" class="sp-splash-logo-img">
+        <div class="sp-splash-logo-glow"></div>
+      </div>
+
+      <!-- Brand Title & Tagline -->
+      <div class="sp-splash-brand">
+        <h1 class="sp-splash-title">PLAYIFY</h1>
+        <div class="sp-splash-badge">320K ULTRA HD AUDIO</div>
+      </div>
+
+      <!-- Shimmer Loading Bar -->
+      <div class="sp-splash-loader-bar">
+        <div class="sp-splash-loader-fill"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="sp-app-layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sp-sidebar">
+      <div class="sp-sidebar-box sp-nav-box">
+        <div class="sp-logo" onclick="sp.navigate('home')">
+          <img src="logo.svg" alt="Playify Logo" class="playify-logo-icon">
+          <span class="playify-brand-name">Playify</span>
+          <span class="sp-badge-ultra">320K HD</span>
+        </div>
+
+        <nav class="sp-nav-menu">
+          <button class="sp-nav-item active" id="nav-home" onclick="sp.navigate('home')">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+          </button>
+          <button class="sp-nav-item" id="nav-search" onclick="sp.navigate('search')">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="sp-sidebar-box sp-library-box">
+        <div class="sp-library-header">
+          <button class="sp-lib-btn" onclick="sp.navigate('library')">
+            <i class="fa-solid fa-lines-leaning"></i>
+            <span>Your Library</span>
+          </button>
+          <div class="sp-lib-actions">
+            <button class="sp-icon-btn" title="Liked Songs" onclick="sp.openLikedSongs()"><i class="fa-solid fa-heart"></i></button>
+          </div>
+        </div>
+
+        <div class="sp-library-list" id="sidebar-library-list">
+          <div class="sp-lib-item" onclick="sp.openLikedSongs()">
+            <div class="sp-lib-cover liked-cover">
+              <i class="fa-solid fa-heart"></i>
+            </div>
+            <div class="sp-lib-meta">
+              <div class="sp-lib-title">Liked Songs</div>
+              <div class="sp-lib-sub"><i class="fa-solid fa-thumbtack pin-icon"></i> Playlist &bull; <span id="liked-count-sidebar">0</span> songs</div>
+            </div>
+          </div>
+          <div id="sp-sidebar-playlists-container"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN VIEWPORT -->
+    <main class="sp-main-view">
+      
+      <!-- TOP BAR -->
+      <header class="sp-top-bar">
+        <div class="sp-topbar-left">
+          <div class="sp-history-btns">
+            <button class="sp-hist-btn" onclick="sp.historyBack()" title="Go back"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="sp-hist-btn" onclick="sp.historyForward()" title="Go forward"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+
+          <div class="sp-search-bar" id="sp-search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="sp-global-search-input" placeholder="What do you want to play?" autocomplete="off">
+            <button class="sp-search-clear-btn" id="sp-search-clear" onclick="sp.clearSearch()"><i class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>
+
+        <div class="sp-topbar-right">
+          <button class="sp-top-icon-btn" title="Settings & Crossfade" onclick="sp.openSettingsModal()"><i class="fa-solid fa-gear"></i></button>
+          <button class="sp-top-icon-btn" title="Equalizer & Bass Boost" onclick="sp.openEqualizerModal()"><i class="fa-solid fa-sliders"></i></button>
+          <button class="sp-top-icon-btn" id="top-btn-sleeptimer" title="Sleep Timer" onclick="sp.openSleepTimerModal()"><i class="fa-solid fa-moon"></i><span class="sp-timer-badge" id="timer-badge" style="display:none">30m</span></button>
+          <button class="sp-top-icon-btn" title="Create Playlist" onclick="sp.openCreatePlaylistModal()"><i class="fa-solid fa-folder-plus"></i></button>
+          <button class="sp-btn-vip" onclick="sp.openEqualizerModal()"><i class="fa-solid fa-bolt"></i> 320K HD</button>
+        </div>
+      </header>
+
+      <!-- VIEWPORT SCROLL -->
+      <div class="sp-viewport" id="sp-viewport">
+
+        <!-- ================================================================
+             1. HOME VIEW
+             ================================================================ -->
+        <section class="sp-view-section active" id="view-home">
+          
+          <!-- Category Filter Pills -->
+          <div class="sp-category-pills">
+            <button class="sp-cat-pill active" onclick="sp.filterCategory('all', this)">All</button>
+            <button class="sp-cat-pill" onclick="sp.filterCategory('global', this)">Global Top 50 🌍</button>
+            <button class="sp-cat-pill" onclick="sp.filterCategory('bollywood', this)">Bollywood (Hindi) 🎭</button>
+            <button class="sp-cat-pill" onclick="sp.filterCategory('punjabi', this)">Punjabi Hits 🔥</button>
+            <button class="sp-cat-pill" onclick="sp.filterCategory('hiphop', this)">Hip-Hop & Rap 🎙️</button>
+            <button class="sp-cat-pill" onclick="sp.filterCategory('pop', this)">International Pop 🌟</button>
+            <button class="sp-cat-pill" onclick="sp.filterCategory('chill', this)">Romantic & Chill 🌙</button>
+            <button class="sp-cat-pill" onclick="sp.filterCategory('sidhu', this)">Sidhu Moose Wala</button>
+            <button class="sp-cat-pill" onclick="sp.filterCategory('karan', this)">Karan Aujla</button>
+          </div>
+
+          <!-- Dynamic Adaptive Hero Billboard (Updates as user listens) -->
+          <div class="sp-hero-billboard" id="sp-hero-billboard"></div>
+
+          <!-- Greeting Header -->
+          <h1 class="sp-greeting-title" id="sp-greeting-text">Good afternoon</h1>
+
+          <!-- Top 6 Quick Cards (2x3 Grid) -->
+          <div class="sp-quick-grid" id="sp-quick-grid"></div>
+
+          <!-- Adaptive "Jump Back In" Shelf (When user has history) -->
+          <div class="sp-shelf-section" id="shelf-jump-back-in" style="display:none;">
+            <div class="sp-shelf-header">
+              <h2 class="sp-shelf-title">Jump back in 🎧</h2>
+            </div>
+            <div class="sp-shelf-row" id="row-jump-back-in"></div>
+          </div>
+
+          <!-- Dynamic Music Shelves (Cards Rows) -->
+          <div class="sp-shelves-container" id="sp-shelves-container"></div>
+
+          <!-- Top 10 Tracklist Table -->
+          <div class="sp-shelf-section">
+            <div class="sp-shelf-header">
+              <div>
+                <h2 class="sp-shelf-title">Today's Biggest Hits</h2>
+                <p style="font-size:13px;color:var(--sp-text-subdued)">Top trending tracks in 320kbps Ultra HD</p>
+              </div>
+              <button class="sp-big-play-btn" style="width:44px;height:44px;font-size:16px" onclick="sp.playTopHitsAll()">
+                <i class="fa-solid fa-play"></i>
+              </button>
+            </div>
+            <div class="sp-tracklist-container" id="home-top-tracks-list"></div>
+          </div>
+
+        </section>
+
+        <!-- ================================================================
+             2. SEARCH VIEW (2-COLUMN GRID WITH TILTED ART)
+             ================================================================ -->
+        <section class="sp-view-section" id="view-search" style="display:none;">
+          <div class="sp-search-results-wrapper" id="sp-search-results-area" style="display:none;">
+            <div class="sp-search-top-grid">
+              <div class="sp-top-result-card" id="sp-top-result-box"></div>
+              <div class="sp-search-songs-column" id="sp-search-songs-list"></div>
+            </div>
+            <div class="sp-shelf-section" id="sp-search-artists-shelf">
+              <h2 class="sp-shelf-title">Artists</h2>
+              <div class="sp-shelf-row" id="sp-search-artists-row"></div>
+            </div>
+            <div class="sp-shelf-section" id="sp-search-albums-shelf">
+              <h2 class="sp-shelf-title">Albums</h2>
+              <div class="sp-shelf-row" id="sp-search-albums-row"></div>
+            </div>
+          </div>
+
+          <div class="sp-browse-all-container" id="sp-browse-all-area">
+            <h2 class="sp-browse-title">Browse all</h2>
+            <div class="sp-browse-grid" id="sp-browse-grid"></div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             3. YOUR LIBRARY VIEW (RICH SPOTIFY MOBILE & DESKTOP LIBRARY)
+             ================================================================ -->
+        <section class="sp-view-section" id="view-library" style="display:none;">
+          
+          <div class="sp-library-page-header">
+            <div class="sp-lib-title-row">
+              <h1 class="sp-greeting-title">Your Library</h1>
+              <button class="sp-icon-btn" onclick="sp.openLikedSongs()"><i class="fa-solid fa-heart" style="color:var(--sp-green)"></i></button>
+            </div>
+
+            <div class="sp-category-pills">
+              <button class="sp-cat-pill active" onclick="sp.filterLibraryPage('all', this)">All</button>
+              <button class="sp-cat-pill" onclick="sp.filterLibraryPage('playlists', this)">Playlists</button>
+              <button class="sp-cat-pill" onclick="sp.filterLibraryPage('artists', this)">Artists</button>
+              <button class="sp-cat-pill" onclick="sp.filterLibraryPage('albums', this)">Albums</button>
+              <button class="sp-cat-pill" id="lib-pill-downloads" onclick="sp.filterLibraryPage('downloads', this)"><i class="fa-solid fa-circle-down" style="margin-right:4px;color:var(--sp-green)"></i> Downloaded</button>
+            </div>
+          </div>
+
+          <!-- Pinned Big Cards (Liked Songs & History) -->
+          <div class="sp-lib-pinned-grid">
+            
+            <div class="sp-lib-card-pinned liked" onclick="sp.openLikedSongs()">
+              <div class="sp-pinned-icon"><i class="fa-solid fa-heart"></i></div>
+              <div>
+                <h2>Liked Songs</h2>
+                <p id="lib-page-liked-count">0 Liked Songs</p>
+              </div>
+            </div>
+
+            
+            <div class="sp-lib-card-pinned downloads" onclick="sp.openDownloadedSongsView()">
+              <div class="sp-pinned-icon download"><i class="fa-solid fa-circle-down"></i></div>
+              <div>
+                <h2>Downloaded Music</h2>
+                <p id="lib-page-downloads-count">0 Offline Songs</p>
+              </div>
+            </div>
+
+            <div class="sp-lib-card-pinned recent" onclick="sp.openRecentlyPlayed()">
+              <div class="sp-pinned-icon history"><i class="fa-solid fa-clock-rotate-left"></i></div>
+              <div>
+                <h2>Recently Played</h2>
+                <p id="lib-page-recent-count">Auto-Saved Tracks</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Library Grid Items (Curated Collections) -->
+          <div class="sp-shelves-container">
+            <div class="sp-shelf-section">
+              <h2 class="sp-shelf-title">Curated Playlists & Albums</h2>
+              <div class="sp-cards-grid" id="library-cards-grid"></div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ================================================================
+             4. ARTIST PROFILE VIEW
+             ================================================================ -->
+        <section class="sp-view-section" id="view-artist" style="display:none;">
+          <div class="sp-artist-hero" id="artist-hero-banner">
+            <div class="artist-hero-gradient"></div>
+            <div class="artist-hero-content">
+              <div class="verified-badge"><i class="fa-solid fa-circle-check"></i> Verified Artist</div>
+              <h1 class="artist-hero-name" id="artist-page-name">Artist Name</h1>
+              <div class="artist-listeners-count" id="artist-listeners-txt">18,420,910 monthly listeners</div>
+            </div>
+          </div>
+
+          <div class="sp-action-bar">
+            <button class="sp-big-play-btn" id="btn-play-artist" onclick="sp.playCurrentArtistAll()">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button class="sp-follow-btn" id="btn-follow-artist" onclick="sp.toggleFollowArtist()">Follow</button>
+          </div>
+
+          <div class="sp-artist-popular-section">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+              <h2 class="sp-section-heading" style="margin:0">Popular Tracks</h2>
+              <button class="sp-cat-pill" id="btn-toggle-artist-songs" onclick="sp.toggleArtistTracklistLimit()" style="font-size:12px;padding:6px 14px;cursor:pointer">See All Songs</button>
+            </div>
+            <div class="sp-tracks-table" id="artist-popular-tracks"></div>
+          </div>
+
+          <div class="sp-artist-discography-section">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+              <h2 class="sp-section-heading" style="margin:0">Discography</h2>
+              <div class="sp-category-pills" style="margin:0">
+                <button class="sp-cat-pill active" id="disco-pill-all" onclick="sp.filterArtistDiscography('all', this)">All Releases</button>
+                <button class="sp-cat-pill" id="disco-pill-albums" onclick="sp.filterArtistDiscography('albums', this)">Albums & EPs</button>
+                <button class="sp-cat-pill" id="disco-pill-singles" onclick="sp.filterArtistDiscography('singles', this)">Singles</button>
+              </div>
+            </div>
+            <div class="sp-shelf-row" id="artist-albums-row"></div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             5. ALBUM / PLAYLIST / LIKED SONGS VIEW (PERFECT SPOTIFY HEADER)
+             ================================================================ -->
+        <section class="sp-view-section" id="view-album" style="display:none;">
+          
+          <div class="sp-entity-hero" id="album-hero-header">
+            <div class="entity-cover-box" id="album-cover-box">
+              <img src="" alt="Cover" class="entity-cover-img" id="album-cover-img">
+            </div>
+            
+            <div class="entity-info-col">
+              <span class="entity-type-badge" id="album-type-badge">PLAYLIST</span>
+              <h1 class="entity-title" id="album-title-txt">Liked Songs</h1>
+              <div class="entity-meta-row">
+                <span class="entity-artist-name" id="album-artist-txt">Your Collection</span>
+                <span class="entity-dot">&bull;</span>
+                <span id="album-year-txt">2024</span>
+                <span class="entity-dot">&bull;</span>
+                <span id="album-song-count-txt">0 songs</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Bar -->
+          <div class="sp-action-bar">
+            <button class="sp-big-play-btn" id="btn-play-album" onclick="sp.playCurrentAlbumAll()">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button class="sp-icon-action-btn" id="btn-like-album" onclick="sp.toggleLikeCurrentAlbum()"><i class="fa-solid fa-heart" style="color:var(--sp-green)"></i></button>
+            <button class="sp-icon-action-btn" id="btn-download-album" title="Download Entire Album" onclick="sp.downloadCurrentAlbumAll()"><i class="fa-solid fa-circle-down"></i></button>
+          </div>
+
+          <!-- Tracklist Table -->
+          <div class="sp-tracklist-container">
+            <div class="sp-tracklist-header">
+              <span class="th-num">#</span>
+              <span class="th-title">Title</span>
+              <span class="th-album">Album</span>
+              <span class="th-duration"><i class="fa-regular fa-clock"></i></span>
+            </div>
+            <div class="sp-tracklist-body" id="album-tracklist-items"></div>
+          </div>
+
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- PERSISTENT SPOTIFY PLAYER BAR (ALWAYS 320KBPS) -->
+  <footer class="sp-player-bar" onclick="sp.handleMiniPlayerClick(event)">
+    <div class="sp-player-left">
+      <img id="player-thumb" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100" alt="Thumb" referrerpolicy="no-referrer">
+      <div class="sp-player-track-meta">
+        <div class="sp-player-song-title" id="player-song-title">Select a song to play</div>
+        <div class="sp-player-artist-name" id="player-artist-name" onclick="event.stopPropagation(); sp.openArtistFromPlayer()" title="View Artist Profile">Playify 320kbps HD</div>
+      </div>
+      <button class="sp-player-heart-btn" id="btn-player-like" onclick="event.stopPropagation(); sp.toggleLikeCurrentSong()"><i class="fa-regular fa-heart"></i></button>
+      <button class="sp-player-heart-btn" id="btn-player-download" title="Download 320kbps MP3" onclick="event.stopPropagation(); sp.downloadCurrentSong()"><i class="fa-solid fa-circle-down"></i></button>
+    </div>
+
+    <div class="sp-player-center">
+      <div class="sp-playback-controls">
+        <button class="sp-ctrl-btn" id="btn-shuffle" title="Shuffle" onclick="event.stopPropagation(); sp.toggleShuffle()"><i class="fa-solid fa-shuffle"></i></button>
+        <button class="sp-ctrl-btn" id="btn-prev" title="Previous" onclick="event.stopPropagation(); sp.prevSong()"><i class="fa-solid fa-backward-step"></i></button>
+        <button class="sp-play-pause-circle" id="btn-play-pause" title="Play/Pause" onclick="event.stopPropagation(); sp.togglePlay()"><i class="fa-solid fa-play"></i></button>
+        <button class="sp-ctrl-btn" id="btn-next" title="Next" onclick="event.stopPropagation(); sp.nextSong()"><i class="fa-solid fa-forward-step"></i></button>
+        <button class="sp-ctrl-btn" id="btn-repeat" title="Repeat" onclick="event.stopPropagation(); sp.toggleRepeat()"><i class="fa-solid fa-repeat"></i></button>
+      </div>
+
+      <div class="sp-progress-container" onclick="event.stopPropagation()">
+        <span class="sp-time-txt" id="time-current">0:00</span>
+        <div class="sp-progress-bar-wrapper" id="seek-bar-wrapper" onclick="sp.handleSeek(event)">
+          <div class="sp-progress-bar-fill" id="seek-bar-fill"></div>
+          <div class="sp-progress-handle" id="seek-handle"></div>
+        </div>
+        <span class="sp-time-txt" id="time-duration">0:00</span>
+      </div>
+    </div>
+
+    <div class="sp-player-right" onclick="event.stopPropagation()">
+      <span class="sp-badge-lossless" title="320kbps Lossless Ultra HD Audio"><i class="fa-solid fa-bolt"></i> 320K LOSSLESS</span>
+      <button class="sp-extra-btn" id="btn-download-320k" title="Download 320kbps MP3" onclick="sp.downloadCurrentSong()"><i class="fa-solid fa-circle-down"></i></button>
+      
+      <div class="sp-volume-box">
+        <button class="sp-vol-btn" id="btn-vol-icon" onclick="sp.toggleMute()"><i class="fa-solid fa-volume-high"></i></button>
+        <div class="sp-volume-bar-wrapper" id="vol-bar-wrapper" onclick="sp.handleVolume(event)">
+          <div class="sp-volume-bar-fill" id="vol-bar-fill" style="width: 80%;"></div>
+        </div>
+      </div>
+
+      <button class="sp-extra-btn" title="Fullscreen" onclick="sp.openFullscreenPlayer()"><i class="fa-solid fa-expand"></i></button>
+    </div>
+  </footer>
+
+  <!-- EXACT SPOTIFY MOBILE FULL-SCREEN PLAYER -->
+  <div class="sp-mobile-full-player" id="sp-fullscreen-player">
+    <div class="sp-mf-topbar">
+      <div class="sp-mf-top-left-actions">
+        <button class="sp-mf-nav-btn sp-mf-back-btn" onclick="sp.closeFullscreenPlayer()" title="Back / Minimize (Esc)">
+          <i class="fa-solid fa-chevron-down"></i>
+          <span>Back</span>
+        </button>
+        <button class="sp-mf-nav-btn sp-mf-home-btn" onclick="sp.closeFullscreenPlayer(); sp.navigate('home');" title="Back to Home">
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </button>
+      </div>
+      <div class="sp-mf-top-title-col">
+        <span class="sp-mf-playing-from" id="mf-playing-from">PLAYING FROM SEARCH</span>
+        <span class="sp-mf-playlist-name" id="mf-playlist-name">"Trending Hits" in Playify</span>
+      </div>
+      <div class="sp-mf-top-right-actions">
+        <button class="sp-mf-nav-btn sp-mf-more-btn" onclick="sp.downloadCurrentSong()" title="Download 320k MP3">
+          <i class="fa-solid fa-circle-down"></i>
+        </button>
+        <button class="sp-mf-nav-btn sp-mf-close-btn" onclick="sp.closeFullscreenPlayer()" title="Close Player (Esc)">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="sp-mf-scroll-content">
+      
+
+
+      <div class="sp-mf-artwork-box">
+        <img id="fs-cover-img" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" alt="Cover Artwork" referrerpolicy="no-referrer">
+      </div>
+
+      <!-- LIVE AUDIO SPECTRUM (TOGGLED VIA UTILITIES BAR) -->
+      <div class="sp-mf-visualizer-box" id="fs-visualizer-box" style="display: none;">
+        <canvas id="fs-visualizer-canvas"></canvas>
+      </div>
+
+      <div class="sp-mf-track-info-row">
+        <div class="sp-mf-meta-col">
+          <h1 class="sp-mf-song-title" id="fs-song-title">Song Title</h1>
+          <p class="sp-mf-artist-name" id="fs-artist-name" onclick="event.stopPropagation(); sp.openArtistFromPlayer()" title="View Artist Profile">Artist Name</p>
+        </div>
+        <button class="sp-mf-heart-btn" id="btn-fs-like" onclick="sp.toggleLikeCurrentSong()">
+          <i class="fa-regular fa-circle-plus"></i>
+        </button>
+      </div>
+
+      <div class="sp-mf-progress-zone">
+        <div class="sp-mf-seek-bar" id="fs-seek-bar" onclick="sp.handleFsSeek(event)">
+          <div class="sp-mf-seek-fill" id="fs-seek-fill"></div>
+          <div class="sp-mf-seek-handle" id="fs-seek-handle"></div>
+        </div>
+        <div class="sp-mf-time-labels">
+          <span id="fs-time-current">0:00</span>
+          <span id="fs-time-duration">0:00</span>
+        </div>
+      </div>
+
+      <div class="sp-mf-controls-row">
+        <button class="sp-mf-ctrl-btn" id="fs-btn-shuffle" onclick="sp.toggleShuffle()"><i class="fa-solid fa-shuffle"></i></button>
+        <button class="sp-mf-ctrl-btn step" onclick="sp.prevSong()"><i class="fa-solid fa-backward-step"></i></button>
+        <button class="sp-mf-big-play-pause" id="fs-btn-play-pause" onclick="sp.togglePlay()"><i class="fa-solid fa-play"></i></button>
+        <button class="sp-mf-ctrl-btn step" onclick="sp.nextSong()"><i class="fa-solid fa-forward-step"></i></button>
+        <button class="sp-mf-ctrl-btn" id="fs-btn-repeat" onclick="sp.toggleRepeat()"><i class="fa-solid fa-repeat"></i></button>
+      </div>
+
+      
+      <div class="sp-mf-utilities-row">
+        <button class="sp-mf-util-btn" title="Audio Equalizer" onclick="sp.openEqualizerModal()"><i class="fa-solid fa-sliders"></i></button>
+        <button class="sp-mf-util-btn" title="Sleep Timer" onclick="sp.openSleepTimerModal()"><i class="fa-solid fa-moon"></i></button>
+        <button class="sp-mf-util-btn" id="btn-fs-visualizer" title="Neon Spectrum Visualizer" onclick="sp.toggleVisualizerMode()"><i class="fa-solid fa-chart-simple"></i></button>
+        <div class="sp-mf-util-right">
+          <button class="sp-mf-util-btn" title="Add to Playlist" onclick="sp.openAddToPlaylistModal()"><i class="fa-solid fa-plus"></i></button>
+          <button class="sp-mf-util-btn" id="btn-download-fs" title="Download 320k MP3" onclick="sp.downloadCurrentSong()"><i class="fa-solid fa-circle-down"></i></button>
+          <button class="sp-mf-util-btn" title="Share" onclick="sp.shareSong()"><i class="fa-solid fa-share-nodes"></i></button>
+          <button class="sp-mf-util-btn" title="Up Next Queue" onclick="sp.openQueueDrawer()"><i class="fa-solid fa-bars-staggered"></i></button>
+        </div>
+      </div>
+
+
+      <div class="sp-mf-lyrics-card" id="fs-lyrics-card" onclick="sp.toggleExpandLyrics()">
+        <div class="sp-mf-lyrics-header">
+          <span class="lyrics-tag">Lyrics</span>
+          <div class="lyrics-actions">
+            <button><i class="fa-solid fa-language"></i></button>
+            <button><i class="fa-solid fa-share-nodes"></i></button>
+            <button><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
+          </div>
+        </div>
+        <div class="sp-mf-lyrics-lines" id="fs-lyrics-container">
+          <p class="mf-lyric active">320kbps Pure Studio Audio Stream</p>
+          <p class="mf-lyric">Enjoy real-time lyrics & music on Playify</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="sp-mobile-nav">
+    <button class="sp-mob-item active" id="mob-nav-home" onclick="sp.navigate('home')">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </button>
+    <button class="sp-mob-item" id="mob-nav-search" onclick="sp.navigate('search')">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <span>Search</span>
+    </button>
+    <button class="sp-mob-item" id="mob-nav-library" onclick="sp.navigate('library')">
+      <i class="fa-solid fa-lines-leaning"></i>
+      <span>Your Library</span>
+    </button>
+    <button class="sp-mob-item" id="mob-nav-liked" onclick="sp.openLikedSongs()">
+      <i class="fa-solid fa-heart"></i>
+      <span>Liked Songs</span>
+    </button>
+  </nav>
+
+  <audio id="sp-audio-engine" preload="auto" playsinline></audio>
+
+
+  <!-- ====================================================================
+       MODALS & DRAWERS (EQUALIZER, QUEUE, SLEEP TIMER, PLAYLISTS)
+       ==================================================================== -->
+
+  <!-- 1. UP NEXT QUEUE DRAWER -->
+  <div class="sp-drawer-backdrop" id="sp-queue-backdrop" onclick="sp.closeQueueDrawer()"></div>
+  <div class="sp-drawer" id="sp-queue-drawer">
+    <div class="sp-drawer-header">
+      <div>
+        <h2 class="sp-drawer-title">Play Queue</h2>
+        <span class="sp-drawer-subtitle" id="queue-count-subtitle">0 Tracks Upcoming</span>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="sp-drawer-action-btn" onclick="sp.clearUpcomingQueue()" title="Clear Queue"><i class="fa-solid fa-trash-can"></i></button>
+        <button class="sp-drawer-action-btn" onclick="sp.closeQueueDrawer()" title="Close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="sp-drawer-content">
+      <div class="sp-queue-section-label">NOW PLAYING</div>
+      <div class="sp-queue-now-playing" id="queue-now-playing-box"></div>
+      <div class="sp-queue-section-label" style="margin-top:20px;">NEXT IN QUEUE</div>
+      <div class="sp-queue-list" id="queue-upcoming-list"></div>
+    </div>
+  </div>
+
+  <!-- 2. STUDIO BASS EQUALIZER MODAL -->
+  <div class="sp-modal-backdrop" id="sp-equalizer-modal" onclick="if(event.target===this) sp.closeEqualizerModal()">
+    <div class="sp-modal-card">
+      <div class="sp-modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <i class="fa-solid fa-sliders" style="color:var(--sp-green);font-size:22px;"></i>
+          <h2 class="sp-modal-title">Studio Equalizer & Bass Boost</h2>
+        </div>
+        <button class="sp-modal-close" onclick="sp.closeEqualizerModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <p class="sp-modal-desc">Enhance your audio with real-time hardware-accelerated DSP filters.</p>
+      
+      <div class="sp-eq-presets-grid">
+        <button class="sp-eq-preset-btn active" id="eq-preset-flat" onclick="sp.setEqualizerPreset('flat')">
+          <i class="fa-solid fa-music"></i>
+          <span>Flat (Studio Pure)</span>
+        </button>
+        <button class="sp-eq-preset-btn" id="eq-preset-bass" onclick="sp.setEqualizerPreset('bass')">
+          <i class="fa-solid fa-drum"></i>
+          <span>Heavy Bass Boost 💥</span>
+        </button>
+        <button class="sp-eq-preset-btn" id="eq-preset-vocal" onclick="sp.setEqualizerPreset('vocal')">
+          <i class="fa-solid fa-microphone-lines"></i>
+          <span>Vocal & Acoustic 🎙️</span>
+        </button>
+        <button class="sp-eq-preset-btn" id="eq-preset-3d" onclick="sp.setEqualizerPreset('3d')">
+          <i class="fa-solid fa-headphones-simple"></i>
+          <span>3D Spatial Surround 🌌</span>
+        </button>
+        <button class="sp-eq-preset-btn" id="eq-preset-club" onclick="sp.setEqualizerPreset('club')">
+          <i class="fa-solid fa-compact-disc"></i>
+          <span>Club / EDM ⚡</span>
+        </button>
+      </div>
+
+      <div class="sp-eq-slider-box">
+        <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:8px;">
+          <span>Bass Gain (Low-End Punch)</span>
+          <span id="bass-gain-label">+0 dB</span>
+        </div>
+        <input type="range" class="sp-eq-range" id="bass-gain-range" min="0" max="15" step="1" value="0" oninput="sp.setBassGainManual(this.value)">
+      </div>
+
+      <div class="sp-eq-slider-box">
+        <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:8px;">
+          <span>Treble Clarity (High-End Crisp)</span>
+          <span id="treble-gain-label">+0 dB</span>
+        </div>
+        <input type="range" class="sp-eq-range" id="treble-gain-range" min="0" max="12" step="1" value="0" oninput="sp.setTrebleGainManual(this.value)">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. SLEEP TIMER MODAL -->
+  <div class="sp-modal-backdrop" id="sp-sleeptimer-modal" onclick="if(event.target===this) sp.closeSleepTimerModal()">
+    <div class="sp-modal-card">
+      <div class="sp-modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <i class="fa-solid fa-moon" style="color:#8e8ee5;font-size:22px;"></i>
+          <h2 class="sp-modal-title">Sleep Timer</h2>
+        </div>
+        <button class="sp-modal-close" onclick="sp.closeSleepTimerModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <p class="sp-modal-desc">Audio will smoothly fade out and pause when the timer expires.</p>
+
+      <div class="sp-timer-options-list">
+        <button class="sp-timer-opt-btn" onclick="sp.setSleepTimer(15)">15 Minutes</button>
+        <button class="sp-timer-opt-btn" onclick="sp.setSleepTimer(30)">30 Minutes</button>
+        <button class="sp-timer-opt-btn" onclick="sp.setSleepTimer(45)">45 Minutes</button>
+        <button class="sp-timer-opt-btn" onclick="sp.setSleepTimer(60)">1 Hour</button>
+        <button class="sp-timer-opt-btn" onclick="sp.setSleepTimer('end_of_track')">End of Current Song</button>
+        <button class="sp-timer-opt-btn turn-off" id="btn-cancel-timer" style="display:none;" onclick="sp.cancelSleepTimer()">Turn Off Timer</button>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- 5. PLAYBACK SETTINGS & AUDIO PREFERENCES MODAL -->
+  <div class="sp-modal-backdrop" id="sp-settings-modal" onclick="if(event.target===this) sp.closeSettingsModal()">
+    <div class="sp-modal-card">
+      <div class="sp-modal-header">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(30,215,96,0.15);display:flex;align-items:center;justify-content:center;">
+            <i class="fa-solid fa-sliders" style="color:var(--sp-green);font-size:18px;"></i>
+          </div>
+          <div>
+            <h2 class="sp-modal-title" style="margin:0;font-size:18px;">Playback & Audio Settings</h2>
+            <p class="sp-modal-desc" style="margin:2px 0 0 0;font-size:12px;color:var(--sp-text-subdued);">Fine-tune audio transitions, infinite radio, and visual effects</p>
+          </div>
+        </div>
+        <button class="sp-modal-close" onclick="sp.closeSettingsModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="sp-settings-list" style="margin-top:16px;">
+        <div class="sp-setting-row">
+          <div class="sp-setting-info">
+            <span class="sp-setting-title"><i class="fa-solid fa-shuffle" style="color:var(--sp-green);margin-right:8px;font-size:14px;"></i> Crossfade</span>
+            <span class="sp-setting-desc">Allows seamless audio overlap between tracks for smooth transitions.</span>
+          </div>
+          <select class="sp-setting-select" id="setting-crossfade-select" onchange="sp.setCrossfadeDuration(this.value)">
+            <option value="0">Off (Gapless)</option>
+            <option value="3" selected>3 Seconds (Default)</option>
+            <option value="5">5 Seconds (Smooth)</option>
+            <option value="8">8 Seconds (DJ Mix)</option>
+            <option value="12">12 Seconds (Long Mix)</option>
+          </select>
+        </div>
+
+        <div class="sp-setting-row">
+          <div class="sp-setting-info">
+            <span class="sp-setting-title"><i class="fa-solid fa-radio" style="color:var(--sp-green);margin-right:8px;font-size:14px;"></i> Automix & Smart Radio</span>
+            <span class="sp-setting-desc">Automatically play matching songs by same artist and genre when queue ends.</span>
+          </div>
+          <label class="sp-switch">
+            <input type="checkbox" id="setting-smart-radio" checked onchange="sp.toggleSmartRadio(this.checked)">
+            <span class="sp-slider-round"></span>
+          </label>
+        </div>
+
+        <div class="sp-setting-row">
+          <div class="sp-setting-info">
+            <span class="sp-setting-title"><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--sp-green);margin-right:8px;font-size:14px;"></i> Dynamic Ambient Glow</span>
+            <span class="sp-setting-desc">Immersive adaptive background lighting synchronized with album artwork.</span>
+          </div>
+          <label class="sp-switch">
+            <input type="checkbox" id="setting-ambient-glow" checked onchange="sp.toggleAmbientGlow(this.checked)">
+            <span class="sp-slider-round"></span>
+          </label>
+        </div>
+
+        <div class="sp-setting-row">
+          <div class="sp-setting-info">
+            <span class="sp-setting-title"><i class="fa-solid fa-chart-simple" style="color:var(--sp-green);margin-right:8px;font-size:14px;"></i> Live Audio Spectrum</span>
+            <span class="sp-setting-desc">Real-time frequency wavebars in fullscreen player (also toggled via player bar).</span>
+          </div>
+          <label class="sp-switch">
+            <input type="checkbox" id="setting-visualizer" onchange="sp.toggleVisualizerSetting(this.checked)">
+            <span class="sp-slider-round"></span>
+          </label>
+        </div>
+
+        <div class="sp-setting-row">
+          <div class="sp-setting-info">
+            <span class="sp-setting-title"><i class="fa-solid fa-sliders" style="color:var(--sp-green);margin-right:8px;font-size:14px;"></i> Streaming Quality</span>
+            <span class="sp-setting-desc">Pure studio master sound with background prefetching for zero stutter.</span>
+          </div>
+          <select id="setting-streaming-quality" class="sp-setting-select" onchange="sp.setStreamingQuality(this.value)">
+            <option value="320" selected>Ultra HD (320 kbps Extreme Studio Master)</option>
+            <option value="160">High (160 kbps Studio AAC)</option>
+            <option value="96">Data Saver (96 kbps)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. CUSTOM PLAYLIST CREATOR & ADD MODAL -->
+  <div class="sp-modal-backdrop" id="sp-playlist-modal" onclick="if(event.target===this) sp.closePlaylistModal()">
+    <div class="sp-modal-card">
+      <div class="sp-modal-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <i class="fa-solid fa-folder-plus" style="color:var(--sp-green);font-size:22px;"></i>
+          <h2 class="sp-modal-title" id="playlist-modal-title">Add to Playlist</h2>
+        </div>
+        <button class="sp-modal-close" onclick="sp.closePlaylistModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      
+      <div style="margin-bottom:16px;">
+        <input type="text" class="sp-modal-input" id="new-playlist-input" placeholder="Create new playlist name (e.g. Gym Mix, Night Drive)...">
+        <button class="sp-btn-play-now" style="width:100%;margin-top:10px;justify-content:center" onclick="sp.createNewPlaylistFromInput()">
+          <i class="fa-solid fa-plus"></i> Create New Playlist
+        </button>
+      </div>
+
+      <div class="sp-queue-section-label" style="margin-top:16px;">YOUR PLAYLISTS</div>
+      <div class="sp-playlist-pick-list" id="modal-user-playlists-list"></div>
+    </div>
+  </div>
+
+  <div class="sp-toast" id="sp-toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="sp-toast-msg">Action Completed!</span>
+  </div>
+
+  
+  <script src="charts_data.js?v=64.0"></script>
+  <script src="app.js?v=64.0"></script>
+  <script src="music_db_data.js?v=64.0" defer></script>
+
+  <!-- SERVICE WORKER REGISTRATION FOR 100% OFFLINE PLAYBACK -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then((reg) => console.log('Playify Offline Service Worker Registered:', reg.scope))
+          .catch((err) => console.warn('Service Worker registration note:', err));
+      });
+    }
+  </script>
+
+</body>
+</html>
