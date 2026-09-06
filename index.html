@@ -4,12 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#121212">
-  <title>Playify – Stream 320kbps Ultra HD Music</title>
+  <title>Playify – Web Player: Music for everyone</title>
   
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://aac.saavncdn.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
   <noscript>
@@ -17,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   </noscript>
   
-  <link rel="stylesheet" href="style.css?v=64.0">
+  <link rel="stylesheet" href="style.css?v=86.0">
 </head>
 <body>
 
@@ -54,7 +55,6 @@
       <!-- Brand Title & Tagline -->
       <div class="sp-splash-brand">
         <h1 class="sp-splash-title">PLAYIFY</h1>
-        <div class="sp-splash-badge">320K ULTRA HD AUDIO</div>
       </div>
 
       <!-- Shimmer Loading Bar -->
@@ -64,16 +64,26 @@
     </div>
   </div>
 
+  <script>
+    // Bulletproof splash screen auto-dismiss guarantee
+    setTimeout(function() {
+      var s = document.getElementById('sp-splash-screen');
+      if (s) {
+        s.classList.add('splash-hidden');
+        setTimeout(function() { if (s && s.parentNode) s.remove(); }, 350);
+      }
+    }, 1200);
+  </script>
+
 
   <div class="sp-app-layout">
 
     <!-- LEFT SIDEBAR -->
     <aside class="sp-sidebar">
       <div class="sp-sidebar-box sp-nav-box">
-        <div class="sp-logo" onclick="sp.navigate('home')">
+        <div class="sp-logo" onclick="sp.handleLogoTap()">
           <img src="logo.svg" alt="Playify Logo" class="playify-logo-icon">
           <span class="playify-brand-name">Playify</span>
-          <span class="sp-badge-ultra">320K HD</span>
         </div>
 
         <nav class="sp-nav-menu">
@@ -84,6 +94,11 @@
           <button class="sp-nav-item" id="nav-search" onclick="sp.navigate('search')">
             <i class="fa-solid fa-magnifying-glass"></i>
             <span>Search</span>
+          </button>
+          <button class="sp-nav-item" id="nav-jam" onclick="sp.openJamModal()">
+            <i class="fa-solid fa-users-rays"></i>
+            <span>Spotify Jam</span>
+            <span class="sp-jam-nav-dot" id="sp-jam-nav-dot" style="display:none;"></span>
           </button>
         </nav>
       </div>
@@ -133,11 +148,11 @@
         </div>
 
         <div class="sp-topbar-right">
+          <button class="sp-top-icon-btn" id="top-btn-jam" title="Spotify Jam (Listen Together)" onclick="sp.openJamModal()"><i class="fa-solid fa-users-rays"></i><span class="sp-jam-top-badge" id="jam-top-badge" style="display:none;"></span></button>
           <button class="sp-top-icon-btn" title="Settings & Crossfade" onclick="sp.openSettingsModal()"><i class="fa-solid fa-gear"></i></button>
           <button class="sp-top-icon-btn" title="Equalizer & Bass Boost" onclick="sp.openEqualizerModal()"><i class="fa-solid fa-sliders"></i></button>
           <button class="sp-top-icon-btn" id="top-btn-sleeptimer" title="Sleep Timer" onclick="sp.openSleepTimerModal()"><i class="fa-solid fa-moon"></i><span class="sp-timer-badge" id="timer-badge" style="display:none">30m</span></button>
           <button class="sp-top-icon-btn" title="Create Playlist" onclick="sp.openCreatePlaylistModal()"><i class="fa-solid fa-folder-plus"></i></button>
-          <button class="sp-btn-vip" onclick="sp.openEqualizerModal()"><i class="fa-solid fa-bolt"></i> 320K HD</button>
         </div>
       </header>
 
@@ -187,7 +202,7 @@
             <div class="sp-shelf-header">
               <div>
                 <h2 class="sp-shelf-title">Today's Biggest Hits</h2>
-                <p style="font-size:13px;color:var(--sp-text-subdued)">Top trending tracks in 320kbps Ultra HD</p>
+                <p style="font-size:13px;color:var(--sp-text-subdued)">The most played tracks right now</p>
               </div>
               <button class="sp-big-play-btn" style="width:44px;height:44px;font-size:16px" onclick="sp.playTopHitsAll()">
                 <i class="fa-solid fa-play"></i>
@@ -380,10 +395,10 @@
       <img id="player-thumb" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=100" alt="Thumb" referrerpolicy="no-referrer">
       <div class="sp-player-track-meta">
         <div class="sp-player-song-title" id="player-song-title">Select a song to play</div>
-        <div class="sp-player-artist-name" id="player-artist-name" onclick="event.stopPropagation(); sp.openArtistFromPlayer()" title="View Artist Profile">Playify 320kbps HD</div>
+        <div class="sp-player-artist-name" id="player-artist-name" onclick="event.stopPropagation(); sp.openArtistFromPlayer()" title="View Artist Profile">Playify</div>
       </div>
       <button class="sp-player-heart-btn" id="btn-player-like" onclick="event.stopPropagation(); sp.toggleLikeCurrentSong()"><i class="fa-regular fa-heart"></i></button>
-      <button class="sp-player-heart-btn" id="btn-player-download" title="Download 320kbps MP3" onclick="event.stopPropagation(); sp.downloadCurrentSong()"><i class="fa-solid fa-circle-down"></i></button>
+      <button class="sp-player-heart-btn" id="btn-player-download" title="Download Track" onclick="event.stopPropagation(); sp.downloadCurrentSong()"><i class="fa-solid fa-circle-down"></i></button>
     </div>
 
     <div class="sp-player-center">
@@ -406,8 +421,8 @@
     </div>
 
     <div class="sp-player-right" onclick="event.stopPropagation()">
-      <span class="sp-badge-lossless" title="320kbps Lossless Ultra HD Audio"><i class="fa-solid fa-bolt"></i> 320K LOSSLESS</span>
-      <button class="sp-extra-btn" id="btn-download-320k" title="Download 320kbps MP3" onclick="sp.downloadCurrentSong()"><i class="fa-solid fa-circle-down"></i></button>
+      <button class="sp-extra-btn" id="btn-jam-bar" title="Spotify Jam (Listen Together)" onclick="sp.openJamModal()"><i class="fa-solid fa-users-rays"></i><span class="sp-jam-bar-indicator" id="jam-bar-indicator" style="display:none;"></span></button>
+      <button class="sp-extra-btn" id="btn-download-320k" title="Download MP3" onclick="sp.downloadCurrentSong()"><i class="fa-solid fa-circle-down"></i></button>
       
       <div class="sp-volume-box">
         <button class="sp-vol-btn" id="btn-vol-icon" onclick="sp.toggleMute()"><i class="fa-solid fa-volume-high"></i></button>
@@ -423,84 +438,81 @@
   <!-- EXACT SPOTIFY MOBILE FULL-SCREEN PLAYER -->
   <div class="sp-mobile-full-player" id="sp-fullscreen-player">
     <div class="sp-mf-topbar">
-      <div class="sp-mf-top-left-actions">
-        <button class="sp-mf-nav-btn sp-mf-back-btn" onclick="sp.closeFullscreenPlayer()" title="Back / Minimize (Esc)">
-          <i class="fa-solid fa-chevron-down"></i>
-          <span>Back</span>
-        </button>
-        <button class="sp-mf-nav-btn sp-mf-home-btn" onclick="sp.closeFullscreenPlayer(); sp.navigate('home');" title="Back to Home">
-          <i class="fa-solid fa-house"></i>
-          <span>Home</span>
-        </button>
-      </div>
+      <button class="sp-mf-icon-btn" onclick="sp.closeFullscreenPlayer()" aria-label="Minimize" title="Minimize player">
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
       <div class="sp-mf-top-title-col">
-        <span class="sp-mf-playing-from" id="mf-playing-from">PLAYING FROM SEARCH</span>
-        <span class="sp-mf-playlist-name" id="mf-playlist-name">"Trending Hits" in Playify</span>
+        <span class="sp-mf-playing-from" id="mf-playing-from">PLAYING FROM PLAYLIST</span>
+        <span class="sp-mf-playlist-name" id="mf-playlist-name">Today's Top Hits</span>
       </div>
-      <div class="sp-mf-top-right-actions">
-        <button class="sp-mf-nav-btn sp-mf-more-btn" onclick="sp.downloadCurrentSong()" title="Download 320k MP3">
-          <i class="fa-solid fa-circle-down"></i>
-        </button>
-        <button class="sp-mf-nav-btn sp-mf-close-btn" onclick="sp.closeFullscreenPlayer()" title="Close Player (Esc)">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
+      <button class="sp-mf-icon-btn" onclick="sp.openQueueDrawer()" aria-label="Queue" title="Up Next Queue">
+        <i class="fa-solid fa-list-ul"></i>
+      </button>
     </div>
 
     <div class="sp-mf-scroll-content">
       
-
-
-      <div class="sp-mf-artwork-box">
-        <img id="fs-cover-img" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" alt="Cover Artwork" referrerpolicy="no-referrer">
-      </div>
-
-      <!-- LIVE AUDIO SPECTRUM (TOGGLED VIA UTILITIES BAR) -->
-      <div class="sp-mf-visualizer-box" id="fs-visualizer-box" style="display: none;">
-        <canvas id="fs-visualizer-canvas"></canvas>
-      </div>
-
-      <div class="sp-mf-track-info-row">
-        <div class="sp-mf-meta-col">
-          <h1 class="sp-mf-song-title" id="fs-song-title">Song Title</h1>
-          <p class="sp-mf-artist-name" id="fs-artist-name" onclick="event.stopPropagation(); sp.openArtistFromPlayer()" title="View Artist Profile">Artist Name</p>
+      <!-- 1. MAIN HERO TRACK SECTION (FILLS VIEWPORT - SONG BANNER & CONTROLS LIKE SPOTIFY) -->
+      <div class="sp-mf-player-main">
+        <div class="sp-mf-artwork-box">
+          <img id="fs-cover-img" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" alt="Cover Artwork" referrerpolicy="no-referrer">
         </div>
-        <button class="sp-mf-heart-btn" id="btn-fs-like" onclick="sp.toggleLikeCurrentSong()">
-          <i class="fa-regular fa-circle-plus"></i>
-        </button>
+
+        <!-- LIVE AUDIO SPECTRUM (TOGGLED VIA UTILITIES BAR) -->
+        <div class="sp-mf-visualizer-box" id="fs-visualizer-box" style="display: none;">
+          <canvas id="fs-visualizer-canvas"></canvas>
+        </div>
+
+        <div class="sp-mf-track-info-row">
+          <div class="sp-mf-meta-col">
+            <h1 class="sp-mf-song-title" id="fs-song-title">Song Title</h1>
+            <p class="sp-mf-artist-name" id="fs-artist-name" onclick="event.stopPropagation(); sp.openArtistFromPlayer()" title="View Artist Profile">Artist Name</p>
+          </div>
+          <button class="sp-mf-heart-btn" id="btn-fs-like" onclick="sp.toggleLikeCurrentSong()">
+            <i class="fa-regular fa-circle-plus"></i>
+          </button>
+        </div>
+
+        <div class="sp-mf-progress-zone">
+          <div class="sp-mf-seek-bar" id="fs-seek-bar" onclick="sp.handleFsSeek(event)">
+            <div class="sp-mf-seek-fill" id="fs-seek-fill"></div>
+            <div class="sp-mf-seek-handle" id="fs-seek-handle"></div>
+          </div>
+          <div class="sp-mf-time-labels">
+            <span id="fs-time-current">0:00</span>
+            <span id="fs-time-duration">0:00</span>
+          </div>
+        </div>
+
+        <div class="sp-mf-controls-row">
+          <button class="sp-mf-ctrl-btn" id="fs-btn-shuffle" onclick="sp.toggleShuffle()"><i class="fa-solid fa-shuffle"></i></button>
+          <button class="sp-mf-ctrl-btn step" onclick="sp.prevSong()"><i class="fa-solid fa-backward-step"></i></button>
+          <button class="sp-mf-big-play-pause" id="fs-btn-play-pause" onclick="sp.togglePlay()"><i class="fa-solid fa-play"></i></button>
+          <button class="sp-mf-ctrl-btn step" onclick="sp.nextSong()"><i class="fa-solid fa-forward-step"></i></button>
+          <button class="sp-mf-ctrl-btn" id="fs-btn-repeat" onclick="sp.toggleRepeat()"><i class="fa-solid fa-repeat"></i></button>
+        </div>
+
+        <div class="sp-mf-utilities-row">
+          <button class="sp-mf-util-btn" title="Audio Equalizer" onclick="sp.openEqualizerModal()"><i class="fa-solid fa-sliders"></i></button>
+          <button class="sp-mf-util-btn" title="Sleep Timer" onclick="sp.openSleepTimerModal()"><i class="fa-solid fa-moon"></i></button>
+          <button class="sp-mf-util-btn" id="btn-fs-visualizer" title="Neon Spectrum Visualizer" onclick="sp.toggleVisualizerMode()"><i class="fa-solid fa-chart-simple"></i></button>
+          <button class="sp-mf-util-btn" id="btn-fs-jam" title="Spotify Jam (Listen Together)" onclick="sp.openJamModal()"><i class="fa-solid fa-users-rays"></i><span class="sp-jam-dot-fs" id="jam-dot-fs" style="display:none;"></span></button>
+          <div class="sp-mf-util-right">
+            <button class="sp-mf-util-btn" title="Add to Playlist" onclick="sp.openAddToPlaylistModal()"><i class="fa-solid fa-plus"></i></button>
+            <button class="sp-mf-util-btn" id="btn-download-fs" title="Download Track" onclick="sp.downloadCurrentSong()"><i class="fa-solid fa-circle-down"></i></button>
+            <button class="sp-mf-util-btn" title="Share" onclick="sp.shareSong()"><i class="fa-solid fa-share-nodes"></i></button>
+            <button class="sp-mf-util-btn" title="Up Next Queue" onclick="sp.openQueueDrawer()"><i class="fa-solid fa-bars-staggered"></i></button>
+          </div>
+        </div>
+
+        <!-- LYRICS PEEK INDICATOR (SCROLL DOWN TO REVEAL FULL LYRICS) -->
+        <div class="sp-mf-lyrics-peek-hint" onclick="sp.scrollToLyrics()">
+          <i class="fa-solid fa-chevron-up"></i>
+          <span>Lyrics</span>
+        </div>
       </div>
 
-      <div class="sp-mf-progress-zone">
-        <div class="sp-mf-seek-bar" id="fs-seek-bar" onclick="sp.handleFsSeek(event)">
-          <div class="sp-mf-seek-fill" id="fs-seek-fill"></div>
-          <div class="sp-mf-seek-handle" id="fs-seek-handle"></div>
-        </div>
-        <div class="sp-mf-time-labels">
-          <span id="fs-time-current">0:00</span>
-          <span id="fs-time-duration">0:00</span>
-        </div>
-      </div>
-
-      <div class="sp-mf-controls-row">
-        <button class="sp-mf-ctrl-btn" id="fs-btn-shuffle" onclick="sp.toggleShuffle()"><i class="fa-solid fa-shuffle"></i></button>
-        <button class="sp-mf-ctrl-btn step" onclick="sp.prevSong()"><i class="fa-solid fa-backward-step"></i></button>
-        <button class="sp-mf-big-play-pause" id="fs-btn-play-pause" onclick="sp.togglePlay()"><i class="fa-solid fa-play"></i></button>
-        <button class="sp-mf-ctrl-btn step" onclick="sp.nextSong()"><i class="fa-solid fa-forward-step"></i></button>
-        <button class="sp-mf-ctrl-btn" id="fs-btn-repeat" onclick="sp.toggleRepeat()"><i class="fa-solid fa-repeat"></i></button>
-      </div>
-
-      
-      <div class="sp-mf-utilities-row">
-        <button class="sp-mf-util-btn" title="Audio Equalizer" onclick="sp.openEqualizerModal()"><i class="fa-solid fa-sliders"></i></button>
-        <button class="sp-mf-util-btn" title="Sleep Timer" onclick="sp.openSleepTimerModal()"><i class="fa-solid fa-moon"></i></button>
-        <button class="sp-mf-util-btn" id="btn-fs-visualizer" title="Neon Spectrum Visualizer" onclick="sp.toggleVisualizerMode()"><i class="fa-solid fa-chart-simple"></i></button>
-        <div class="sp-mf-util-right">
-          <button class="sp-mf-util-btn" title="Add to Playlist" onclick="sp.openAddToPlaylistModal()"><i class="fa-solid fa-plus"></i></button>
-          <button class="sp-mf-util-btn" id="btn-download-fs" title="Download 320k MP3" onclick="sp.downloadCurrentSong()"><i class="fa-solid fa-circle-down"></i></button>
-          <button class="sp-mf-util-btn" title="Share" onclick="sp.shareSong()"><i class="fa-solid fa-share-nodes"></i></button>
-          <button class="sp-mf-util-btn" title="Up Next Queue" onclick="sp.openQueueDrawer()"><i class="fa-solid fa-bars-staggered"></i></button>
-        </div>
-      </div>
+      <!-- 2. REAL-TIME SYNCED LYRICS CARD (BELOW THE FOLD - SCROLL TO VIEW) -->
 
 
       <div class="sp-mf-lyrics-card" id="fs-lyrics-card" onclick="sp.toggleExpandLyrics()">
@@ -513,8 +525,7 @@
           </div>
         </div>
         <div class="sp-mf-lyrics-lines" id="fs-lyrics-container">
-          <p class="mf-lyric active">320kbps Pure Studio Audio Stream</p>
-          <p class="mf-lyric">Enjoy real-time lyrics & music on Playify</p>
+          <p class="mf-lyric active">Enjoy synchronized lyrics on Playify</p>
         </div>
       </div>
     </div>
@@ -712,10 +723,10 @@
         <div class="sp-setting-row">
           <div class="sp-setting-info">
             <span class="sp-setting-title"><i class="fa-solid fa-sliders" style="color:var(--sp-green);margin-right:8px;font-size:14px;"></i> Streaming Quality</span>
-            <span class="sp-setting-desc">Pure studio master sound with background prefetching for zero stutter.</span>
+            <span class="sp-setting-desc">Highest audio quality with background prefetching for zero stutter.</span>
           </div>
           <select id="setting-streaming-quality" class="sp-setting-select" onchange="sp.setStreamingQuality(this.value)">
-            <option value="320" selected>Ultra HD (320 kbps Extreme Studio Master)</option>
+            <option value="320" selected>Very High (320 kbps Master - Default)</option>
             <option value="160">High (160 kbps Studio AAC)</option>
             <option value="96">Data Saver (96 kbps)</option>
           </select>
@@ -747,15 +758,162 @@
     </div>
   </div>
 
+  <!-- FLOATING SPOTIFY JAM STATUS PILL -->
+  <div class="sp-jam-floating-pill" id="sp-jam-floating-pill" style="display:none;" onclick="sp.openJamModal()">
+    <span class="sp-jam-pill-pulse"></span>
+    <i class="fa-solid fa-users-rays"></i>
+    <span id="sp-jam-pill-label">Jam Session Active</span>
+  </div>
+
+  <!-- ====================================================================
+       SPOTIFY JAM (LISTEN TOGETHER WITH 0 DELAY) MODAL
+       ==================================================================== -->
+  <div class="sp-modal-backdrop" id="sp-jam-modal" onclick="if(event.target===this) sp.closeJamModal()">
+    <div class="sp-modal-card sp-jam-card">
+      <div class="sp-modal-header">
+        <div class="sp-jam-header-title">
+          <div class="sp-jam-pulse-icon"><i class="fa-solid fa-users-rays"></i></div>
+          <div>
+            <h2 class="sp-modal-title">Spotify Jam</h2>
+            <span class="sp-jam-subtitle">Listen together in real-time with 0 delay</span>
+          </div>
+        </div>
+        <button class="sp-modal-close" onclick="sp.closeJamModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Navigation Tabs: Host / Active Session vs Join Session -->
+      <div class="sp-jam-nav-tabs">
+        <button class="sp-jam-tab active" id="jam-tab-session" onclick="sp.switchJamTab('session')">
+          <i class="fa-solid fa-tower-broadcast"></i> Current Session
+        </button>
+        <button class="sp-jam-tab" id="jam-tab-join" onclick="sp.switchJamTab('join')">
+          <i class="fa-solid fa-right-to-bracket"></i> Join a Jam
+        </button>
+      </div>
+
+      <!-- TAB 1: CURRENT SESSION (HOST OR ACTIVE GUEST) -->
+      <div class="sp-jam-tab-content active" id="jam-content-session">
+        
+        <!-- State A: Not In Jam (Start a Jam) -->
+        <div class="sp-jam-idle-view" id="jam-idle-view">
+          <div class="sp-jam-radar-circle">
+            <i class="fa-solid fa-headphones-simple"></i>
+          </div>
+          <h3>Start a Listening Session</h3>
+          <p>Invite friends to listen to your current music simultaneously on their phones, laptops, or speakers with 0 delay.</p>
+          <button class="sp-jam-cta-btn" onclick="sp.startJamSession()">
+            <i class="fa-solid fa-play"></i> Start a Jam
+          </button>
+        </div>
+
+        <!-- State B: Active Jam Session (Room Details, QR Code, Guest List) -->
+        <div class="sp-jam-active-view" id="jam-active-view" style="display: none;">
+          
+          <!-- Room Code & Sharing Card -->
+          <div class="sp-jam-code-box">
+            <div class="sp-jam-code-col">
+              <span class="sp-jam-code-label">ROOM PIN (4 DIGITS)</span>
+              <span class="sp-jam-room-code" id="jam-room-code-display">0000</span>
+            </div>
+            <div class="sp-jam-code-actions">
+              <button class="sp-jam-action-btn" onclick="sp.copyJamLink()" title="Copy invite link">
+                <i class="fa-solid fa-link"></i> <span>Copy Link</span>
+              </button>
+              <button class="sp-jam-action-btn" onclick="sp.shareJamSession()" title="Share via WhatsApp or Apps">
+                <i class="fa-solid fa-share-nodes"></i> <span>Share</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- QR Code Container -->
+          <div class="sp-jam-qr-wrapper">
+            <div class="sp-jam-qr-card">
+              <div id="sp-jam-qrcode-container" class="sp-jam-qrcode-container"></div>
+              <span class="sp-jam-qr-hint"><i class="fa-solid fa-qrcode"></i> Scan with phone camera to join instantly</span>
+            </div>
+          </div>
+
+          <!-- Host Settings & Sync Diagnostics -->
+          <div class="sp-jam-settings-card">
+            <div class="sp-jam-setting-row">
+              <div class="sp-jam-setting-info">
+                <span class="setting-title">Guests can control music</span>
+                <span class="setting-desc">Allow participants to play, pause, or change songs</span>
+              </div>
+              <label class="sp-switch">
+                <input type="checkbox" id="jam-toggle-guest-control" onchange="sp.toggleJamGuestControl(this.checked)" checked>
+                <span class="sp-slider round"></span>
+              </label>
+            </div>
+
+            <div class="sp-jam-sync-status-row">
+              <div class="sp-jam-status-indicator">
+                <span class="sp-jam-status-dot pulsing"></span>
+                <span id="jam-sync-status-text">Phase-locked sync (&lt;10ms)</span>
+              </div>
+              <button class="sp-jam-resync-btn" onclick="sp.forceJamResync()" title="Calibrate and resynchronize clocks">
+                <i class="fa-solid fa-arrows-rotate"></i> Re-Sync Now
+              </button>
+            </div>
+          </div>
+
+          <!-- Connected Devices Section -->
+          <div class="sp-jam-devices-section">
+            <div class="sp-jam-devices-header">
+              <h4>Connected Devices (<span id="jam-devices-count">1</span>)</h4>
+              <span class="sp-jam-live-badge"><i class="fa-solid fa-circle"></i> Live Sync</span>
+            </div>
+            <div class="sp-jam-devices-list" id="sp-jam-devices-list">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+
+          <!-- End / Leave Button -->
+          <div class="sp-jam-footer-actions">
+            <button class="sp-jam-leave-btn" id="jam-leave-btn" onclick="sp.leaveJamSession()">
+              <i class="fa-solid fa-right-from-bracket"></i> End Jam Session
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TAB 2: JOIN A JAM -->
+      <div class="sp-jam-tab-content" id="jam-content-join" style="display: none;">
+        <div class="sp-jam-join-card">
+          <div class="sp-jam-join-icon">
+            <i class="fa-solid fa-headphones-simple"></i>
+          </div>
+          <h3>Join a Friend's Jam</h3>
+          <p>Enter the 4-digit PIN shown on the host's screen to sync your audio with 0 delay.</p>
+          
+          <div class="sp-jam-input-group">
+            <input type="text" inputmode="numeric" pattern="[0-9]*" id="sp-jam-code-input" class="sp-jam-code-input-clean" placeholder="Enter 4-digit PIN (e.g. 5297)" maxlength="6" autocomplete="off" autocorrect="off">
+            <button class="sp-jam-join-submit-btn" onclick="sp.joinJamFromInput()">
+              <span>Join Jam Session</span> <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+          <div class="sp-jam-scan-tip">
+            <i class="fa-solid fa-camera"></i> Or simply scan the host's QR code using your phone camera.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <div class="sp-toast" id="sp-toast">
     <i class="fa-solid fa-circle-check"></i>
     <span id="sp-toast-msg">Action Completed!</span>
   </div>
 
   
-  <script src="charts_data.js?v=64.0"></script>
-  <script src="app.js?v=64.0"></script>
-  <script src="music_db_data.js?v=64.0" defer></script>
+  <script src="qrcode.min.js?v=80.0"></script>
+  <script src="charts_data.js?v=80.0"></script>
+  <script src="peerjs.min.js?v=83.0"></script>
+  <script src="app.js?v=86.0"></script>
+  <script src="music_db_data.js?v=83.0" defer></script>
 
   <!-- SERVICE WORKER REGISTRATION FOR 100% OFFLINE PLAYBACK -->
   <script>
