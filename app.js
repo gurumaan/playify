@@ -560,15 +560,14 @@ class PubNubJamRelay {
 class PlayifyEngine {
 
   async safeFetchJson(url) {
-    const isCloudflare = (typeof window !== 'undefined' && window.location && 
-      (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev')));
+    const isHttp = (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http'));
     const isFileScheme = (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:');
 
-    // 1. Cloudflare Edge API Proxy (when deployed on workers.dev / cloudflare)
-    if (isCloudflare) {
+    // 1. Universal Same-Origin Backend / Edge API Proxy (Works across Cloudflare, localhost, custom domains, Render, etc.)
+    if (isHttp) {
       try {
         const edgeProxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
-        const edgeRes = await fetch(edgeProxyUrl, { signal: AbortSignal.timeout(2500) });
+        const edgeRes = await fetch(edgeProxyUrl, { signal: AbortSignal.timeout(3500) });
         if (edgeRes.ok) {
           const data = await edgeRes.json();
           if (data && !data.error) return data;
@@ -582,11 +581,11 @@ class PlayifyEngine {
       if (res.ok) return await res.json();
     } catch(e) {}
 
-    // 3. Local PHP Proxy (works natively on XAMPP/Apache, skip if file:/// or workers.dev)
-    if (!isCloudflare && !isFileScheme) {
+    // 3. Local PHP Proxy (only if hosted on an Apache/PHP setup)
+    if (typeof window !== 'undefined' && window.location && window.location.pathname && window.location.pathname.endsWith('.php')) {
       try {
-        const origin = (typeof window !== 'undefined' && window.location && window.location.origin) ? window.location.origin : '';
-        const path = (typeof window !== 'undefined' && window.location && window.location.pathname) ? window.location.pathname : '';
+        const origin = window.location.origin || '';
+        const path = window.location.pathname || '';
         const dir = path.substring(0, path.lastIndexOf('/') + 1);
         const proxyUrl = `${origin}${dir}proxy.php?url=${encodeURIComponent(url)}`;
         const pRes = await fetch(proxyUrl, { signal: AbortSignal.timeout(2000) });
@@ -1452,10 +1451,9 @@ class PlayifyEngine {
       if (!playUrl) {
         try {
           const query = `${song.title} ${song.artist}`;
-          const isCloudflare = (typeof window !== 'undefined' && window.location && 
-            (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev')));
-          if (isCloudflare) {
-            const edgeRes = await fetch(`/api/search?q=${encodeURIComponent(query)}`, { signal: AbortSignal.timeout(2500) });
+          const isHttp = (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http'));
+          if (isHttp) {
+            const edgeRes = await fetch(`/api/search?q=${encodeURIComponent(query)}`, { signal: AbortSignal.timeout(3000) });
             if (edgeRes.ok) {
               const edgeData = await edgeRes.json();
               if (edgeData.songs && edgeData.songs.length > 0 && edgeData.songs[0].stream_url) {
@@ -2322,10 +2320,9 @@ class PlayifyEngine {
     const seenArtists = new Set();
     const seenAlbums = new Set();
 
-    const isCloudflare = (typeof window !== 'undefined' && window.location && 
-      (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev')));
+    const isHttp = (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http'));
 
-    if (isCloudflare) {
+    if (isHttp) {
       try {
         const edgeRes = await fetch(`/api/search?q=${encodeURIComponent(normalizedQuery)}`, { signal: AbortSignal.timeout(3500) });
         if (edgeRes.ok) {
@@ -2882,6 +2879,48 @@ class PlayifyEngine {
         }
       }
     }
+    if (cleanArtist.toLowerCase().includes('karan aujla')) {
+      const priorityAlbums = [
+        {
+          id: 'alb_aujla_szn_1',
+          title: 'AUJLA SZN 1',
+          subtitle: 'Karan Aujla &bull; 2026 EP',
+          artist: 'Karan Aujla',
+          image: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg',
+          isAlbum: true
+        },
+        {
+          id: '55544222',
+          title: 'Four Me',
+          subtitle: 'Karan Aujla &bull; EP',
+          artist: 'Karan Aujla',
+          image: 'https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg',
+          isAlbum: true
+        },
+        {
+          id: '62781248',
+          title: 'Four You',
+          subtitle: 'Karan Aujla, IKKY &bull; EP',
+          artist: 'Karan Aujla',
+          image: 'https://c.saavncdn.com/552/Four-You-Punjabi-2023-20230204151745-500x500.jpg',
+          isAlbum: true
+        },
+        {
+          id: '51761804',
+          title: 'Street Dreams',
+          subtitle: 'Karan Aujla, DIVINE &bull; Album',
+          artist: 'Karan Aujla',
+          image: 'https://c.saavncdn.com/505/Street-Dreams-Punjabi-2024-20240216134015-500x500.jpg',
+          isAlbum: true
+        }
+      ];
+      const seenA = new Set(artistAlbums.map(a => a.title.toLowerCase()));
+      for (let i = priorityAlbums.length - 1; i >= 0; i--) {
+        if (!seenA.has(priorityAlbums[i].title.toLowerCase())) {
+          artistAlbums.unshift(priorityAlbums[i]);
+        }
+      }
+    }
 
     this.currentArtistAllSongs = artistSongs;
     this.currentArtistAllAlbums = artistAlbums;
@@ -2896,12 +2935,11 @@ class PlayifyEngine {
 
     // 2. Client-Side + Native Bridge Full Dynamic Discography Fetch (Always gives 50+ songs and all albums)
     try {
-      const isCloudflare = (typeof window !== 'undefined' && window.location && 
-        (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev')));
+      const isHttp = (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http'));
 
-      if (isCloudflare) {
+      if (isHttp) {
         try {
-          const edgeRes = await fetch(`/api/artist?name=${encodeURIComponent(cleanArtist)}`, { signal: AbortSignal.timeout(3500) });
+          const edgeRes = await fetch(`/api/artist?name=${encodeURIComponent(cleanArtist)}&id=${encodeURIComponent(artistIdParam || '')}`, { signal: AbortSignal.timeout(4000) });
           if (edgeRes.ok) {
             const edgeArt = await edgeRes.json();
             if (edgeArt && edgeArt.status === 'success' && edgeArt.songs && edgeArt.songs.length > 0) {
@@ -3183,12 +3221,18 @@ class PlayifyEngine {
       songs = this.musicDB.filter(s => s.album && (s.album.toLowerCase() === albLower || s.album.toLowerCase().includes(albLower)));
     }
 
-    if (!songs.length) {
-      const isCloudflare = (typeof window !== 'undefined' && window.location && 
-        (window.location.hostname.includes('workers.dev') || window.location.hostname.includes('pages.dev')));
-      if (isCloudflare) {
+    const isHttp = (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http'));
+
+    // Special quick check for AUJLA SZN 1 & EPs
+    if (albLower.includes('aujla szn')) {
+      const epSongs = (this.musicDB || []).filter(s => s.album && s.album.toLowerCase().includes('aujla szn'));
+      if (epSongs.length) songs = epSongs;
+    }
+
+    if (!songs.length || (albLower.includes('four') && songs.length < 4)) {
+      if (isHttp) {
         try {
-          const edgeRes = await fetch(`/api/album?id=${encodeURIComponent(albumId || '')}&title=${encodeURIComponent(albumTitle)}`, { signal: AbortSignal.timeout(3500) });
+          const edgeRes = await fetch(`/api/album?id=${encodeURIComponent(albumId || '')}&title=${encodeURIComponent(albumTitle)}`, { signal: AbortSignal.timeout(4000) });
           if (edgeRes.ok) {
             const edgeAlb = await edgeRes.json();
             if (edgeAlb && edgeAlb.status === 'success' && edgeAlb.songs && edgeAlb.songs.length > 0) {

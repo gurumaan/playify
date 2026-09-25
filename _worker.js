@@ -88,7 +88,7 @@ function decryptSaavnUrl(enc) {
     for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
     const dec = desEngine.decryptECB(Array.from(bytes), desKey);
     const str = new TextDecoder().decode(new Uint8Array(dec));
-    return str ? str.replace('_96.mp4', '_320.mp4') : null;
+    return str ? str.replace('_96.mp4', '_320.mp4').replace('_160.mp4', '_320.mp4') : null;
   } catch(e) { return null; }
 }
 
@@ -99,12 +99,211 @@ const corsHeaders = {
   'Content-Type': 'application/json; charset=utf-8'
 };
 
+// In-memory Jam Session Store for real-time 0-delay multi-device synchronization
+const jamRooms = new Map();
+
+// Helper to clean up old rooms
+function cleanupJamRooms() {
+  const now = Date.now();
+  for (const [id, room] of jamRooms.entries()) {
+    if (now - room.updatedAt > 2 * 60 * 60 * 1000) {
+      jamRooms.delete(id);
+    }
+  }
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') {
       return new Response(null, { headers: corsHeaders });
+    }
+
+    // ==========================================
+    // SPOTIFY JAM REAL-TIME RELAY ENDPOINTS
+    // ==========================================
+
+    // High-Precision NTP Clock Sync
+    if (url.pathname === '/api/jam/time') {
+      return new Response(JSON.stringify({
+        status: 'success',
+        serverTime: Date.now()
+      }), { headers: corsHeaders });
+    }
+
+    // Create / Host Jam Room
+    if (url.pathname === '/api/jam/create' && request.method === 'POST') {
+      try {
+        cleanupJamRooms();
+        const data = await request.json();
+        const roomId = (data.roomId || '').toUpperCase().trim();
+        if (!roomId) return new Response(JSON.stringify({ error: 'Missing roomId' }), { status: 400, headers: corsHeaders });
+
+        const room = {
+          roomId,
+          hostId: data.hostId || 'host_' + Math.random().toString(36).substring(2, 8),
+          hostName: data.hostName || 'Host Device',
+          guestControl: data.guestControl !== undefined ? data.guestControl : true,
+          song: data.song || null,
+          position: data.position || 0,
+          isPlaying: !!data.isPlaying,
+          hostTime: data.hostTime || Date.now(),
+          serverTime: Date.now(),
+          scheduledTime: data.scheduledTime || 0,
+          action: data.action || 'INIT',
+          actionSeq: 1,
+          updatedAt: Date.now(),
+          guests: [{
+            id: data.hostId || 'host',
+            name: data.hostName || 'Host Device',
+            isHost: true,
+            lastSeen: Date.now()
+          }]
+        };
+        jamRooms.set(roomId, room);
+
+        return new Response(JSON.stringify({ status: 'success', room }), { headers: corsHeaders });
+      } catch(e) {
+        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: corsHeaders });
+      }
+    }
+
+    // Join Jam Room
+    if (url.pathname === '/api/jam/join' && request.method === 'POST') {
+      try {
+        cleanupJamRooms();
+        const data = await request.json();
+        const roomId = (data.roomId || '').toUpperCase().trim();
+        const room = jamRooms.get(roomId);
+
+        if (!room) {
+          return new Response(JSON.stringify({ status: 'error', message: 'Jam session not found. Please check room code.' }), { status: 404, headers: corsHeaders });
+        }
+
+        const guestId = data.guestId || 'guest_' + Math.random().toString(36).substring(2, 8);
+        const guestName = data.guestName || 'Guest Device';
+
+        // Add or update guest
+        const existingIdx = room.guests.findIndex(g => g.id === guestId);
+        const guestObj = {
+          id: guestId,
+          name: guestName,
+          isHost: guestId === room.hostId,
+          lastSeen: Date.now()
+        };
+
+        if (existingIdx >= 0) {
+          room.guests[existingIdx] = guestObj;
+        } else {
+          room.guests.push(guestObj);
+        }
+        room.updatedAt = Date.now();
+
+        return new Response(JSON.stringify({
+          status: 'success',
+          room: {
+            ...room,
+            serverTime: Date.now()
+          }
+        }), { headers: corsHeaders });
+      } catch(e) {
+        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: corsHeaders });
+      }
+    }
+
+    // Broadcast Jam State Update (Play, Pause, Seek, Next Track)
+    if (url.pathname === '/api/jam/state' && request.method === 'POST') {
+      try {
+        const data = await request.json();
+        const roomId = (data.roomId || '').toUpperCase().trim();
+        const room = jamRooms.get(roomId);
+
+        if (!room) {
+          return new Response(JSON.stringify({ status: 'error', message: 'Jam session expired or not found.' }), { status: 404, headers: corsHeaders });
+        }
+
+        // Check if sender is allowed (host or guest if guestControl is on)
+        const isHost = data.senderId === room.hostId;
+        if (!isHost && !room.guestControl) {
+          return new Response(JSON.stringify({ status: 'error', message: 'Host has disabled guest playback controls.' }), { status: 403, headers: corsHeaders });
+        }
+
+        if (data.song !== undefined) room.song = data.song;
+        if (data.position !== undefined) room.position = data.position;
+        if (data.isPlaying !== undefined) room.isPlaying = !!data.isPlaying;
+        if (data.guestControl !== undefined && isHost) room.guestControl = !!data.guestControl;
+        if (data.scheduledTime !== undefined) room.scheduledTime = data.scheduledTime;
+
+        room.action = data.action || 'UPDATE';
+        room.actionSeq = (room.actionSeq || 0) + 1;
+        room.hostTime = data.hostTime || Date.now();
+        room.serverTime = Date.now();
+        room.updatedAt = Date.now();
+
+        // Update sender last seen
+        const sender = room.guests.find(g => g.id === data.senderId);
+        if (sender) sender.lastSeen = Date.now();
+
+        return new Response(JSON.stringify({
+          status: 'success',
+          actionSeq: room.actionSeq,
+          serverTime: Date.now()
+        }), { headers: corsHeaders });
+      } catch(e) {
+        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: corsHeaders });
+      }
+    }
+
+    // Poll Jam Room State & Participants
+    if (url.pathname === '/api/jam/poll') {
+      const roomId = (url.searchParams.get('room') || '').toUpperCase().trim();
+      const participantId = url.searchParams.get('pid') || '';
+      const room = jamRooms.get(roomId);
+
+      if (!room) {
+        return new Response(JSON.stringify({ status: 'not_found' }), { status: 404, headers: corsHeaders });
+      }
+
+      // Update participant heartbeat
+      if (participantId) {
+        const participant = room.guests.find(g => g.id === participantId);
+        if (participant) {
+          participant.lastSeen = Date.now();
+        }
+      }
+
+      // Prune inactive guests (> 45s no heartbeat)
+      const now = Date.now();
+      room.guests = room.guests.filter(g => g.isHost || (now - g.lastSeen < 45000));
+
+      return new Response(JSON.stringify({
+        status: 'success',
+        room: {
+          ...room,
+          serverTime: Date.now()
+        }
+      }), { headers: corsHeaders });
+    }
+
+    // Leave Jam Room
+    if (url.pathname === '/api/jam/leave' && request.method === 'POST') {
+      try {
+        const data = await request.json();
+        const roomId = (data.roomId || '').toUpperCase().trim();
+        const room = jamRooms.get(roomId);
+
+        if (room) {
+          if (data.participantId === room.hostId) {
+            jamRooms.delete(roomId);
+          } else {
+            room.guests = room.guests.filter(g => g.id !== data.participantId);
+          }
+        }
+        return new Response(JSON.stringify({ status: 'success' }), { headers: corsHeaders });
+      } catch(e) {
+        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: corsHeaders });
+      }
     }
 
     // 0. UNIVERSAL FAST PROXY (Bypasses browser CORS with Cloudflare Edge)
@@ -296,6 +495,73 @@ export default {
           artistHeroImage = songs[0].image;
         }
 
+        // Prioritize Karan Aujla latest EPs & brand-new releases
+        if (resolvedName.toLowerCase().includes('karan aujla') || finalArtistId === '697691') {
+          const aujlaAlbums = [
+            {
+              id: 'alb_aujla_szn_1',
+              title: 'AUJLA SZN 1',
+              artist: 'Karan Aujla',
+              subtitle: 'Karan Aujla &bull; 2026 EP',
+              image: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg',
+              year: '2026',
+              isAlbum: true
+            },
+            {
+              id: '55544222',
+              title: 'Four Me',
+              artist: 'Karan Aujla',
+              subtitle: 'Karan Aujla &bull; EP',
+              image: 'https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg',
+              year: '2024',
+              isAlbum: true
+            },
+            {
+              id: '62781248',
+              title: 'Four You',
+              artist: 'Karan Aujla, IKKY',
+              subtitle: 'Karan Aujla &bull; EP',
+              image: 'https://c.saavncdn.com/552/Four-You-Punjabi-2023-20230204151745-500x500.jpg',
+              year: '2023',
+              isAlbum: true
+            },
+            {
+              id: '51761804',
+              title: 'Street Dreams',
+              artist: 'Karan Aujla, DIVINE',
+              subtitle: 'Karan Aujla &bull; Album',
+              image: 'https://c.saavncdn.com/505/Street-Dreams-Punjabi-2024-20240216134015-500x500.jpg',
+              year: '2024',
+              isAlbum: true
+            }
+          ];
+          const seenAlbTitles = new Set(albums.map(a => a.title.toLowerCase()));
+          for (let i = aujlaAlbums.length - 1; i >= 0; i--) {
+            if (!seenAlbTitles.has(aujlaAlbums[i].title.toLowerCase())) {
+              albums.unshift(aujlaAlbums[i]);
+            }
+          }
+
+          const topAujlaSongs = [
+            { id: "as1_ashke", title: "Ashke", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 185, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e6/a2/db/e6a2db50-284f-3526-475e-73a5c762c63d/mzaf_7442435484358512606.plus.aac.p.m4a" },
+            { id: "as1_realbadman", title: "Real Bad Man", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 192, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ae/68/c2/ae68c21b-8623-0adb-e6c4-3e084793a2a2/mzaf_16618887771889021143.plus.aac.p.m4a" },
+            { id: "as1_straightup", title: "Straight Up (feat. Azaad 4L)", artist: "Karan Aujla, Azaad 4L, MXRCI", album: "AUJLA SZN 1", duration: 204, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ae/26/1f/ae261f5f-775c-a306-3a81-0dcf16b90820/mzaf_15179278439491134182.plus.aac.p.m4a" },
+            { id: "as1_rapkilla", title: "Rap Killa", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 178, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ea/d4/93/ead493ba-dfb8-1973-a282-94989eea7b61/mzaf_15908514930796759960.plus.aac.p.m4a" },
+            { id: "as1_aujlaszn", title: "Aujla Szn", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 210, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ff/98/81/ff9881ba-7835-b8b7-aa27-362a3e7b7d08/mzaf_13248433516430929766.plus.aac.p.m4a" },
+            { id: "1azNm1cN", title: "IDK HOW", artist: "Karan Aujla", album: "Four Me", duration: 152, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/9656916646d0217382a081b1bfac7526_320.mp4" },
+            { id: "bYkVrmlH", title: "WHO THEY?", artist: "Karan Aujla, Yeah Proof", album: "Four Me", duration: 170, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/89ece46d37b9dffd524a37e8f736544d_320.mp4" },
+            { id: "OTmiAydz", title: "ANTIDOTE", artist: "Karan Aujla", album: "Four Me", duration: 187, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/0fb1a52161fbcab7c5703ab6db64a937_320.mp4" },
+            { id: "kOL57-FR", title: "Y.D.G", artist: "Karan Aujla", album: "Four Me", duration: 164, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/0a1d1cdc56a13e155fb6acdf387310a1_320.mp4" },
+            { id: "4nvYwtL_", title: "52 Bars", artist: "Karan Aujla, IKKY", album: "Four You", duration: 204, image: "https://c.saavncdn.com/552/Four-You-Punjabi-2023-20230204151745-500x500.jpg", stream_url: "https://aac.saavncdn.com/552/44035100d2aab3af5226718086f29523_320.mp4" }
+          ];
+          const seenSongIds = new Set(songs.map(s => s.id));
+          for (let i = topAujlaSongs.length - 1; i >= 0; i--) {
+            if (!seenSongIds.has(topAujlaSongs[i].id)) {
+              songs.unshift(topAujlaSongs[i]);
+            }
+          }
+        }
+
         return new Response(JSON.stringify({
           status: 'success',
           id: finalArtistId || 'art_' + Date.now(),
@@ -315,6 +581,60 @@ export default {
     if (url.pathname === '/api/album') {
       const albumId = url.searchParams.get('id') || '';
       const albumTitle = url.searchParams.get('title') || '';
+      const aLower = albumTitle.toLowerCase().trim();
+
+      if (albumId === 'alb_aujla_szn_1' || aLower.includes('aujla szn')) {
+        return new Response(JSON.stringify({
+          status: 'success',
+          id: 'alb_aujla_szn_1',
+          title: 'AUJLA SZN 1',
+          artist: 'Karan Aujla',
+          image: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg',
+          year: '2026',
+          songs: [
+            { id: "as1_ashke", title: "Ashke", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 185, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/e6/a2/db/e6a2db50-284f-3526-475e-73a5c762c63d/mzaf_7442435484358512606.plus.aac.p.m4a" },
+            { id: "as1_realbadman", title: "Real Bad Man", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 192, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ae/68/c2/ae68c21b-8623-0adb-e6c4-3e084793a2a2/mzaf_16618887771889021143.plus.aac.p.m4a" },
+            { id: "as1_straightup", title: "Straight Up (feat. Azaad 4L)", artist: "Karan Aujla, Azaad 4L, MXRCI", album: "AUJLA SZN 1", duration: 204, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ae/26/1f/ae261f5f-775c-a306-3a81-0dcf16b90820/mzaf_15179278439491134182.plus.aac.p.m4a" },
+            { id: "as1_rapkilla", title: "Rap Killa", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 178, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ea/d4/93/ead493ba-dfb8-1973-a282-94989eea7b61/mzaf_15908514930796759960.plus.aac.p.m4a" },
+            { id: "as1_aujlaszn", title: "Aujla Szn", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 210, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/ff/98/81/ff9881ba-7835-b8b7-aa27-362a3e7b7d08/mzaf_13248433516430929766.plus.aac.p.m4a" }
+          ]
+        }), { headers: corsHeaders });
+      }
+
+      if (albumId === '55544222' || (aLower.includes('four me') && !aLower.includes('four you'))) {
+        return new Response(JSON.stringify({
+          status: 'success',
+          id: '55544222',
+          title: 'Four Me',
+          artist: 'Karan Aujla',
+          image: 'https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg',
+          year: '2024',
+          songs: [
+            { id: "1azNm1cN", title: "IDK HOW", artist: "Karan Aujla", album: "Four Me", duration: 152, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/9656916646d0217382a081b1bfac7526_320.mp4" },
+            { id: "bYkVrmlH", title: "WHO THEY?", artist: "Karan Aujla, Yeah Proof", album: "Four Me", duration: 170, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/89ece46d37b9dffd524a37e8f736544d_320.mp4" },
+            { id: "OTmiAydz", title: "ANTIDOTE", artist: "Karan Aujla", album: "Four Me", duration: 187, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/0fb1a52161fbcab7c5703ab6db64a937_320.mp4" },
+            { id: "kOL57-FR", title: "Y.D.G", artist: "Karan Aujla", album: "Four Me", duration: 164, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/0a1d1cdc56a13e155fb6acdf387310a1_320.mp4" }
+          ]
+        }), { headers: corsHeaders });
+      }
+
+      if (albumId === '62781248' || aLower.includes('four you')) {
+        return new Response(JSON.stringify({
+          status: 'success',
+          id: '62781248',
+          title: 'Four You',
+          artist: 'Karan Aujla, IKKY',
+          image: 'https://c.saavncdn.com/552/Four-You-Punjabi-2023-20230204151745-500x500.jpg',
+          year: '2023',
+          songs: [
+            { id: "4nvYwtL_", title: "52 Bars", artist: "Karan Aujla, IKKY", album: "Four You", duration: 204, image: "https://c.saavncdn.com/552/Four-You-Punjabi-2023-20230204151745-500x500.jpg", stream_url: "https://aac.saavncdn.com/552/44035100d2aab3af5226718086f29523_320.mp4" },
+            { id: "4sVA2Cga", title: "Take It Easy", artist: "Karan Aujla, IKKY", album: "Four You", duration: 177, image: "https://c.saavncdn.com/552/Four-You-Punjabi-2023-20230204151745-500x500.jpg", stream_url: "https://aac.saavncdn.com/552/d682e2423780267d3d1a796d792de4cf_320.mp4" },
+            { id: "3SSUn4uf", title: "Fallin Apart", artist: "Karan Aujla, IKKY", album: "Four You", duration: 175, image: "https://c.saavncdn.com/552/Four-You-Punjabi-2023-20230204151745-500x500.jpg", stream_url: "https://aac.saavncdn.com/552/552a1830779ab0bb77f87185bc8fa9e0_320.mp4" },
+            { id: "2C0FpAOJ", title: "YEAH NAAH", artist: "Karan Aujla, IKKY", album: "Four You", duration: 184, image: "https://c.saavncdn.com/552/Four-You-Punjabi-2023-20230204151745-500x500.jpg", stream_url: "https://aac.saavncdn.com/552/b23c3b7375eb8510d537aed93af7e707_320.mp4" }
+          ]
+        }), { headers: corsHeaders });
+      }
+
       try {
         let songs = [];
         let albMeta = null;
