@@ -3,7 +3,7 @@
 // Guarantees zero "Web page not available" / ERR_INTERNET_DISCONNECTED
 // ==========================================================================
 
-const CACHE_NAME = 'playify-offline-cache-v87';
+const CACHE_NAME = 'playify-offline-cache-v88';
 
 const CORE_APP_SHELL = [
   '/',

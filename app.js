@@ -1346,6 +1346,11 @@ class PlayifyEngine {
       playUrl = playUrl.replace('_320_320', '_320');
       song.stream_url = playUrl;
     }
+    if (playUrl && playUrl.startsWith('audio/') && typeof window !== 'undefined' && window.location) {
+      if (window.location.protocol === 'file:') {
+        playUrl = 'https://guru4code.online/playify/' + playUrl;
+      }
+    }
 
     // Fast lookup from local database if missing
     if (!playUrl && this.musicDB && this.musicDB.length) {
