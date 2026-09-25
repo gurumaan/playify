@@ -617,7 +617,7 @@ class PlayifyEngine {
     if (typeof window !== 'undefined' && window.location && window.location.hostname && window.location.hostname.includes('workers.dev')) {
       return window.location.origin;
     }
-    return 'https://peaceful-davinci.meowing-dianella.workers.dev';
+    return 'https://peaceful-davinci.breezy-oregano.workers.dev';
   }
 
   setupNetworkListeners() {
@@ -1057,8 +1057,40 @@ class PlayifyEngine {
 
       // Load 2.2MB Music DB asynchronously in background without blocking UI thread or startup
       this.loadMusicDBInBackground();
+
+      // Automatically sync live 2026 Punjabi releases without blocking initial UI
+      setTimeout(() => {
+        this.fetchLivePunjabiTrending();
+      }, 1500);
     } catch(e) {
       console.warn('loadDatabaseAndCharts notice:', e);
+    }
+  }
+
+  async fetchLivePunjabiTrending() {
+    if (typeof navigator !== 'undefined' && !navigator.onLine) return;
+    try {
+      const apiBase = this.getApiBase();
+      const res = await fetch(`${apiBase}/api/punjabi/trending`, { signal: AbortSignal.timeout(4500) });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.status === 'success' && Array.isArray(data.songs) && data.songs.length > 0) {
+          if (!this.homeData) this.homeData = {};
+          if (!this.homeData.sections) this.homeData.sections = {};
+          
+          const existing = this.homeData.sections.trending_punjabi || this.homeData.trending_punjabi || [];
+          const seen = new Set(data.songs.map(s => s.id));
+          const merged = [...data.songs, ...existing.filter(s => !seen.has(s.id))];
+          
+          this.homeData.sections.trending_punjabi = merged;
+          this.homeData.trending_punjabi = merged;
+          
+          // Re-render home view with newly added live tracks
+          this.renderHomeViews();
+        }
+      }
+    } catch(e) {
+      console.warn('fetchLivePunjabiTrending notice:', e);
     }
   }
 
@@ -4996,46 +5028,97 @@ class PlayifyEngine {
       container.innerHTML = '<p class="mf-lyric active">Loading synchronized lyrics...</p>';
     }
 
-    try {
-      const cleanTitle = this.currentSong.title.replace(/\(.*?\)|\[.*?\]|feat\..*|ft\..*/gi, '').trim();
-      const cleanArtist = this.currentSong.artist.split(',')[0].trim();
-      
-      const res = await fetch(`https://lrclib.net/api/get?track_name=${encodeURIComponent(cleanTitle)}&artist_name=${encodeURIComponent(cleanArtist)}`);
-      if (res.ok) {
-        const data = await res.json();
-        const synced = data.syncedLyrics || '';
-        const plain = data.plainLyrics || '';
+    const parseLrc = (lrcText) => {
+      if (!lrcText) return [];
+      const lines = [];
+      const pattern = /\[(\d{2}):(\d{2})\.?(\d{2,3})?\](.*)/;
+      lrcText.split('\n').forEach(l => {
+        const m = pattern.exec(l.trim());
+        if (m) {
+          const mins = parseInt(m[1], 10);
+          const secs = parseInt(m[2], 10);
+          const msStr = m[3] || '0';
+          const ms = parseInt(msStr, 10);
+          const timeSec = mins * 60 + secs + (msStr.length === 2 ? ms / 100 : ms / 1000);
+          const txt = m[4].trim();
+          if (txt) lines.push({ time: Math.round(timeSec * 100) / 100, text: txt });
+        }
+      });
+      return lines;
+    };
 
-        if (synced) {
-          const lines = [];
-          const pattern = /\[(\d{2}):(\d{2})\.(\d{2,3})\](.*)/;
-          synced.split('\n').forEach(l => {
-            const m = pattern.exec(l.trim());
-            if (m) {
-              const mins = parseInt(m[1], 10);
-              const secs = parseInt(m[2], 10);
-              const ms = parseInt(m[3], 10);
-              const timeSec = mins * 60 + secs + (m[3].length === 2 ? ms / 100 : ms / 1000);
-              const txt = m[4].trim();
-              if (txt) lines.push({ time: Math.round(timeSec * 100) / 100, text: txt });
+    try {
+      // 1. Direct song embedded lyrics (Instant, offline & APK supported)
+      if (this.currentSong.synced_lyrics) {
+        this.currentLyrics = parseLrc(this.currentSong.synced_lyrics);
+      } else if (this.currentSong.lyrics) {
+        this.currentLyrics = this.currentSong.lyrics.split('\n').filter(l => l.trim()).map(l => ({ time: null, text: l.trim() }));
+      }
+
+      // 2. Multi-tier Cloudflare Edge / LRCLIB API Fetch
+      if (!this.currentLyrics || !this.currentLyrics.length) {
+        const cleanTitle = (this.currentSong.title || '').replace(/\(.*?\)|\[.*?\]|feat\..*|ft\..*/gi, '').trim();
+        const cleanArtist = (this.currentSong.artist || '').split(/[,&/]/)[0].trim();
+        const apiBase = this.getApiBase();
+
+        // 2a. Cloudflare Edge /api/lyrics (Has embedded Punjabi & Hindi lyrics dictionary)
+        try {
+          const edgeRes = await fetch(`${apiBase}/api/lyrics?id=${encodeURIComponent(this.currentSong.id || '')}&title=${encodeURIComponent(cleanTitle)}&artist=${encodeURIComponent(cleanArtist)}`, { signal: AbortSignal.timeout(3000) });
+          if (edgeRes.ok) {
+            const data = await edgeRes.json();
+            if (data.syncedLyrics) {
+              this.currentLyrics = parseLrc(data.syncedLyrics);
+            } else if (data.plainLyrics) {
+              this.currentLyrics = data.plainLyrics.split('\n').filter(l => l.trim()).map(l => ({ time: null, text: l.trim() }));
             }
-          });
-          this.currentLyrics = lines;
-        } else if (plain) {
-          this.currentLyrics = plain.split('\n').filter(l => l.trim()).map(l => ({ time: null, text: l.trim() }));
+          }
+        } catch(e) {}
+
+        // 2b. Direct LRCLIB exact get
+        if (!this.currentLyrics || !this.currentLyrics.length) {
+          try {
+            const res = await fetch(`https://lrclib.net/api/get?track_name=${encodeURIComponent(cleanTitle)}&artist_name=${encodeURIComponent(cleanArtist)}`, { signal: AbortSignal.timeout(2500) });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.syncedLyrics) {
+                this.currentLyrics = parseLrc(data.syncedLyrics);
+              } else if (data.plainLyrics) {
+                this.currentLyrics = data.plainLyrics.split('\n').filter(l => l.trim()).map(l => ({ time: null, text: l.trim() }));
+              }
+            }
+          } catch(e) {}
+        }
+
+        // 2c. LRCLIB search fallback
+        if (!this.currentLyrics || !this.currentLyrics.length) {
+          try {
+            const sRes = await fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(cleanTitle + ' ' + cleanArtist)}`, { signal: AbortSignal.timeout(2500) });
+            if (sRes.ok) {
+              const sList = await sRes.json();
+              if (Array.isArray(sList) && sList.length > 0) {
+                const best = sList[0];
+                if (best.syncedLyrics) {
+                  this.currentLyrics = parseLrc(best.syncedLyrics);
+                } else if (best.plainLyrics) {
+                  this.currentLyrics = best.plainLyrics.split('\n').filter(l => l.trim()).map(l => ({ time: null, text: l.trim() }));
+                }
+              }
+            }
+          } catch(e) {}
         }
       }
 
+      // Render lyrics in Fullscreen UI
       if (container) {
         if (this.currentLyrics && this.currentLyrics.length > 0) {
           container.innerHTML = this.currentLyrics.map((l, i) => `
-            <p class="mf-lyric ${i === 0 ? 'active' : ''}" id="lyric-line-${i}" ${l.time !== null ? `onclick="sp.seekToLyric(${l.time})"` : ''}>${l.text}</p>
+            <p class="mf-lyric ${i === 0 ? 'active' : ''}" id="lyric-line-${i}" ${l.time !== null ? `onclick="sp.seekToLyric(${l.time})"` : ''} style="cursor: ${l.time !== null ? 'pointer' : 'default'}">${l.text}</p>
           `).join('');
         } else {
           container.innerHTML = `
             <p class="mf-lyric active">♪ ${this.currentSong.title} ♪</p>
             <p class="mf-lyric">Artist: ${this.currentSong.artist}</p>
-            <p class="mf-lyric">Enjoy synchronized lyrics on Playify</p>
+            <p class="mf-lyric">Sing along on Playify</p>
           `;
         }
       }

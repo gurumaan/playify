@@ -80,6 +80,30 @@ class PureDES {
 const desEngine = new PureDES();
 const desKey = [51, 56, 51, 52, 54, 53, 57, 49];
 
+const AUJLA_LYRICS = {
+  "as1_ashke": {
+    "plain": "Welcome home, Mr. Aujla. England's been rather dull without you, sir.\nWell, let's change that, shall we?\nSplendid idea, sir.\n\nJittan di shaunki sohniye, haravan vairi hass ke.\nGidda landuan da yaar aap pavaaunda main keha dass ke.\nBaabe di saanu bakhshish, karaan na akhiyan gani lashke.\nNi modhe paundi jhummar donaali keh ke ashke!\n\nMere zor bada ae phatt je, dooja tu saala hath 'ch.\nTu jigra dekhi jatt je, khad jaanda kalla gatth 'ch.\nMain sidha chalda pothiyan na, wing-val ni saala matth 'ch.\nLattan koyi kise da khich le, mainu trust ae neeli chhat 'ch.\n\nSaade kamm kaale, teriyan gallan de utte laaliyan.\nNi suttian si sohniye kismatan main thaaliyan.\nPindan aaliyan saanu taan dhi aundiyan pindan aaliyan.\nAsla karda shaan saanu ya motaran utte taaliyan.\n\nYour family have arrived, sir.\nHow are they?\nThree generations, 12 cars, 22 gentlemen, and 23 guns.\n22 gentlemen and 23 guns... Who brought two?\nYour grandfather, sir. It seems that Purdey only sells them in pairs.\n\nJittan di shaunki sohniye, haravan vairi hass ke.\nGidda landuan da yaar aap pavaaunda main keha dass ke.\nBaabe di saanu bakhshish, karaan na akhiyan gani lashke.\nNi modhe paundi jhummar donaali keh ke ashke!",
+    "synced": "[00:15.90] Welcome home, Mr. Aujla. England's been rather dull without you, sir.\n[00:22.50] Well, let's change that, shall we?\n[00:25.80] Splendid idea, sir.\n[00:28.60] Jittan di shaunki sohniye, haravan vairi hass ke\n[00:32.20] Gidda landuan da yaar aap pavaaunda main keha dass ke\n[00:35.40] Baabe di saanu bakhshish, karaan na akhiyan gani lashke\n[00:39.10] Ni modhe paundi jhummar donaali keh ke ashke!\n[00:42.50] Mere zor bada ae phatt je, dooja tu saala hath 'ch\n[00:45.40] Tu jigra dekhi jatt je, khad jaanda kalla gatth 'ch\n[00:48.50] Main sidha chalda pothiyan na, wing-val ni saala matth 'ch\n[00:52.00] Lattan koyi kise da khich le, mainu trust ae neeli chhat 'ch\n[00:56.00] Saade kamm kaale, teriyan gallan de utte laaliyan\n[01:00.00] Ni suttian si sohniye kismatan main thaaliyan\n[01:04.00] Pindan aaliyan saanu taan dhi aundiyan pindan aaliyan\n[01:08.00] Asla karda shaan saanu ya motaran utte taaliyan\n[01:14.00] Your family have arrived, sir. How are they?\n[01:18.00] Three generations, 12 cars, 22 gentlemen, and 23 guns.\n[01:23.00] 22 gentlemen and 23 guns... Who brought two?\n[01:27.00] Your grandfather, sir. It seems Purdey only sells in pairs.\n[01:31.00] Jittan di shaunki sohniye, haravan vairi hass ke\n[01:35.00] Gidda landuan da yaar aap pavaaunda main keha dass ke\n[01:38.80] Baabe di saanu bakhshish, karaan na akhiyan gani lashke\n[01:42.50] Ni modhe paundi jhummar donaali keh ke ashke!\n[01:50.00] Asla karda shaan saanu ya motaran utte taaliyan\n[02:00.00] Ni modhe paundi jhummar donaali keh ke ashke!\n[02:15.00] Aujla SZN 1 - Ashke"
+  },
+  "as1_realbadman": {
+    "plain": "MXRCI on the beat!\nYeah, Karan Aujla!\nAujla Szn!\n\nReal bad man, gallan kude kharriyan\nJithe vi khalo gaye othe daangaan kude charriyan\nAkhaan 'ch barood, hikkan 'ch ae zor ni\nJatt de mukaable 'ch aunda koyi hor ni\n\nGaddi kaali, kaale kaale kaare sohniye\nVairi saare kadd te kinare sohniye\nReal bad man, naam chalda ae top te\nPair dharida ni kade gairan de scope te\n\nKarde record break geet jadon aunde ne\nPind to Toronto takk saare jatt gaunde ne\nMaut naal yaari, saadi zindgi azaad ni\nJatt naal vair pauna aape barbaad ni\n\nHathan vich asla te dilan vich robh ni\nKise de vi moore kade kiti nahio sobh ni\nReal bad man, kalla hi bathera main\nKise di na parwaah, darr kihda jehra main!",
+    "synced": "[00:05.00] MXRCI on the beat!\n[00:10.00] Yeah, Karan Aujla!\n[00:15.00] Aujla Szn 1!\n[00:20.00] Real bad man, gallan kude kharriyan\n[00:24.00] Jithe vi khalo gaye othe daangaan kude charriyan\n[00:28.00] Akhaan 'ch barood, hikkan 'ch ae zor ni\n[00:32.00] Jatt de mukaable 'ch aunda koyi hor ni\n[00:36.00] Gaddi kaali, kaale kaale kaare sohniye\n[00:40.00] Vairi saare kadd te kinare sohniye\n[00:44.00] Real bad man, naam chalda ae top te\n[00:48.00] Pair dharida ni kade gairan de scope te\n[00:54.00] Karde record break geet jadon aunde ne\n[00:58.00] Pind to Toronto takk saare jatt gaunde ne\n[01:03.00] Maut naal yaari, saadi zindgi azaad ni\n[01:07.00] Jatt naal vair pauna aape barbaad ni\n[01:12.00] Hathan vich asla te dilan vich robh ni\n[01:17.00] Kise de vi moore kade kiti nahio sobh ni\n[01:22.00] Real bad man, kalla hi bathera main\n[01:26.00] Kise di na parwaah, darr kihda jehra main!\n[01:35.00] Real bad man, gallan kude kharriyan\n[01:42.00] Aujla SZN 1 - Real Bad Man"
+  },
+  "as1_straightup": {
+    "plain": "Straight Up!\nAzaad 4L, Karan Aujla, MXRCI\n\nSidhe sidhe bol, sidha jatt da style ni\nKudiyan te vairiyan di lami ae profile ni\nGallan vich weight, saade lafzan 'ch aag ni\nMehntan di khatti, kade mangeya na bhaag ni\n\nStraight up, no games, ainvaye darrde ni kude\nHikkan taan khad de aan, pichhe mudd de ni kude\nChadh di jawani vich kitte karobaar ne\nYaaran de siraan te kude ghumdi car ne\n\nShehar tere vich jadon aundi saadi toli ni\nAsla hi bolda te band hundi goli ni\nSidha chalde aan, sidha karde hisaab ni\nJatt da swag kude wakhra Punjab ni\n\nStraight up, sidha bol!\nKaran Aujla, Azaad 4L\nAujla SZN!",
+    "synced": "[00:08.00] Straight Up!\n[00:13.00] Azaad 4L, Karan Aujla, MXRCI\n[00:19.00] Sidhe sidhe bol, sidha jatt da style ni\n[00:23.00] Kudiyan te vairiyan di lami ae profile ni\n[00:27.00] Gallan vich weight, saade lafzan 'ch aag ni\n[00:31.00] Mehntan di khatti, kade mangeya na bhaag ni\n[00:36.00] Straight up, no games, ainvaye darrde ni kude\n[00:40.00] Hikkan taan khad de aan, pichhe mudd de ni kude\n[00:44.00] Chadh di jawani vich kitte karobaar ne\n[00:48.00] Yaaran de siraan te kude ghumdi car ne\n[00:53.00] Shehar tere vich jadon aundi saadi toli ni\n[00:57.00] Asla hi bolda te band hundi goli ni\n[01:02.00] Sidha chalde aan, sidha karde hisaab ni\n[01:06.00] Jatt da swag kude wakhra Punjab ni\n[01:14.00] Straight up, no games!\n[01:25.00] Sidhe sidhe bol, sidha jatt da style ni\n[01:40.00] Aujla SZN 1 - Straight Up"
+  },
+  "as1_rapkilla": {
+    "plain": "Changeyan naa changey, paapiyan naa paapi aan\nJigre ni jaande jaani hikkna naapi aan\nTu taan paavein goondiyan ni chhaatiyan\nLanghaan je paseete taahiyon maare chaatiyan\nAttactive baahle nakhro, yaar hathiyar jaane naale nakhro\nBaapu seega ghatt aale nakhro, bebe jigre aali si jihne paale nakhro\n\nRutbe uchhe ne tu jinna nu naapdi\nDuniya karugi gallan chhaddi chhaap di\nNi mere utte laati jihne jaan aap di\nPith nahi laggann deni os baap di\nLaunde nachde ne hor jo machaunde\nAujle de gaane rehnde gaunde\nChoti de husn pichhe aunde, agg launde\n\nGaddi kandi te ohdiye ni chhak ke\nChaar kolne paine lagge agge ni\nAinvaye kihda langhu saala tainu takk ke\nBhukh 'ch rakhaan parne na takk ke\nAap payi aa dekh keeli jatt ne\nSoch vi nahi sakdi jo jeeli jatt ne\nDekhne halaat maadi reeli jatt ne\nSaadi tutti chhatt paa ke diti neeli chhatt ne\n\nYaariyan pugaayian gayian bhukh sun ke\nVairi bhajj jande dugg dugg sun ke!",
+    "synced": "[00:08.00] Changeyan naa changey, paapiyan naa paapi aan\n[00:12.50] Jigre ni jaande jaani hikkna naapi aan\n[00:16.50] Tu taan paavein goondiyan ni chhaatiyan\n[00:20.00] Langhaan je paseete taahiyon maare chaatiyan\n[00:24.00] Attactive baahle nakhro, yaar hathiyar jaane naale nakhro\n[00:29.00] Baapu seega ghatt aale nakhro, bebe jigre aali si jihne paale nakhro\n[00:34.00] Rutbe uchhe ne tu jinna nu naapdi\n[00:38.00] Duniya karugi gallan chhaddi chhaap di\n[00:42.00] Ni mere utte laati jihne jaan aap di\n[00:46.00] Pith nahi laggann deni os baap di\n[00:50.00] Launde nachde ne hor jo machaunde\n[00:53.50] Aujle de gaane rehnde gaunde\n[00:57.00] Choti de husn pichhe aunde, agg launde\n[01:01.00] Gaddi kandi te ohdiye ni chhak ke\n[01:05.00] Chaar kolne paine lagge agge ni\n[01:08.50] Ainvaye kihda langhu saala tainu takk ke\n[01:12.00] Bhukh 'ch rakhaan parne na takk ke\n[01:15.50] Aap payi aa dekh keeli jatt ne\n[01:18.50] Soch vi nahi sakdi jo jeeli jatt ne\n[01:21.50] Dekhne halaat maadi reeli jatt ne\n[01:25.00] Saadi tutti chhatt paa ke diti neeli chhatt ne\n[01:30.00] Yaariyan pugaayian gayian bhukh sun ke\n[01:36.00] Vairi bhajj jande dugg dugg sun ke!\n[01:50.00] Aujla SZN 1 - Rap Killa"
+  },
+  "as1_aujlaszn": {
+    "plain": "Eh duniya ae satrangi peeng wargi\nTaahi add chalaan, mainu ni eh theek lagdi\nDindi duniya ni hallasheri kade mehnatan nu\nBhare nu commentan vich weak kardi\n\nHo aithe oh wala pyaar kitthe\nNaujawan saare bani baithe theke\nJe koi hatti dikhave ohnu dassde hankaar\nPehlan maar ditta Sidhu, hun Aujle de pichhe\nMaarde Punjabi hi Punjabiyan de naal\n\nSingeraan da haar, paunda reejh sangeet nu banayi deewar\nSher likhde, ni sher bade kalmaan de naal\nKi ae Majha ki Doaba, ji maarde chak\nSaare apne ne bhai, kaaton dassi jaande wakh\n\nPehlan thodeya na hor, laa laa ke zor\nHun bache hoye Punjab nu na kar dio waapar\nAkl nu maaro, bande apni na chaaro\nJinni lage chhabeela, ohna rukh vi lagaalo\n\nSaadi kaum ne nachaye itihas 'ch vairi\nAjj di nu basari reelaan de nachaalo\nMain mohataan di siyaana, ainvaye deyi jaavaan mattan\nMain mooh-phat banda, saaf dil jihda rakhda\nMeri reel naale khole, khush ho jaave feel\nMera motive aa ikko, sohneya nu hassaun da!",
+    "synced": "[00:08.00] Eh duniya ae satrangi peeng wargi\n[00:13.00] Taahi add chalaan, mainu ni eh theek lagdi\n[00:18.00] Dindi duniya ni hallasheri kade mehnatan nu\n[00:23.00] Bhare nu commentan vich weak kardi\n[00:28.00] Ho aithe oh wala pyaar kitthe\n[00:33.00] Naujawan saare bani baithe theke\n[00:38.00] Je koi hatti dikhave ohnu dassde hankaar\n[00:43.00] Pehlan maar ditta Sidhu, hun Aujle de pichhe\n[00:48.00] Maarde Punjabi hi Punjabiyan de naal\n[00:53.00] Singeraan da haar, paunda reejh sangeet nu banayi deewar\n[00:59.00] Sher likhde, ni sher bade kalmaan de naal\n[01:04.00] Ki ae Majha ki Doaba, ji maarde chak\n[01:09.00] Saare apne ne bhai, kaaton dassi jaande wakh\n[01:14.00] Pehlan thodeya na hor, laa laa ke zor\n[01:18.00] Hun bache hoye Punjab nu na kar dio waapar\n[01:23.00] Akl nu maaro, bande apni na chaaro\n[01:28.00] Jinni lage chhabeela, ohna rukh vi lagaalo\n[01:33.00] Saadi kaum ne nachaye itihas 'ch vairi\n[01:38.00] Ajj di nu basari reelaan de nachaalo\n[01:43.00] Main mohataan di siyaana, ainvaye deyi jaavaan mattan\n[01:48.00] Main mooh-phat banda, saaf dil jihda rakhda\n[01:53.00] Meri reel naale khole, khush ho jaave feel\n[01:58.00] Mera motive aa ikko, sohneya nu hassaun da!\n[02:08.00] Aujla SZN 1 - Aujla Szn"
+  }
+};
+
+
 function decryptSaavnUrl(enc) {
   if (!enc) return null;
   try {
@@ -543,11 +567,11 @@ export default {
           }
 
           const topAujlaSongs = [
-            { id: "as1_ashke", title: "Ashke", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 218, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/ashke.m4a" },
-            { id: "as1_realbadman", title: "Real Bad Man", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 170, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/realbadman.m4a" },
-            { id: "as1_straightup", title: "Straight Up (feat. Azaad 4L)", artist: "Karan Aujla, Azaad 4L, MXRCI", album: "AUJLA SZN 1", duration: 215, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/straightup.m4a" },
-            { id: "as1_rapkilla", title: "Rap Killa", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 246, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/rapkilla.m4a" },
-            { id: "as1_aujlaszn", title: "Aujla Szn", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 218, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/aujlaszn.m4a" },
+            { id: "as1_ashke", title: "Ashke", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 218, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/ashke.m4a", lyrics: AUJLA_LYRICS["as1_ashke"].plain, synced_lyrics: AUJLA_LYRICS["as1_ashke"].synced },
+            { id: "as1_realbadman", title: "Real Bad Man", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 170, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/realbadman.m4a", lyrics: AUJLA_LYRICS["as1_realbadman"].plain, synced_lyrics: AUJLA_LYRICS["as1_realbadman"].synced },
+            { id: "as1_straightup", title: "Straight Up (feat. Azaad 4L)", artist: "Karan Aujla, Azaad 4L, MXRCI", album: "AUJLA SZN 1", duration: 215, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/straightup.m4a", lyrics: AUJLA_LYRICS["as1_straightup"].plain, synced_lyrics: AUJLA_LYRICS["as1_straightup"].synced },
+            { id: "as1_rapkilla", title: "Rap Killa", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 246, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/rapkilla.m4a", lyrics: AUJLA_LYRICS["as1_rapkilla"].plain, synced_lyrics: AUJLA_LYRICS["as1_rapkilla"].synced },
+            { id: "as1_aujlaszn", title: "Aujla Szn", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 218, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/aujlaszn.m4a", lyrics: AUJLA_LYRICS["as1_aujlaszn"].plain, synced_lyrics: AUJLA_LYRICS["as1_aujlaszn"].synced },
             { id: "1azNm1cN", title: "IDK HOW", artist: "Karan Aujla", album: "Four Me", duration: 152, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/9656916646d0217382a081b1bfac7526_320.mp4" },
             { id: "bYkVrmlH", title: "WHO THEY?", artist: "Karan Aujla, Yeah Proof", album: "Four Me", duration: 170, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/89ece46d37b9dffd524a37e8f736544d_320.mp4" },
             { id: "OTmiAydz", title: "ANTIDOTE", artist: "Karan Aujla", album: "Four Me", duration: 187, image: "https://c.saavncdn.com/374/Four-Me-Punjabi-2024-20240626022802-500x500.jpg", stream_url: "https://aac.saavncdn.com/374/0fb1a52161fbcab7c5703ab6db64a937_320.mp4" },
@@ -592,11 +616,11 @@ export default {
           image: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg',
           year: '2026',
           songs: [
-            { id: "as1_ashke", title: "Ashke", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 218, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/ashke.m4a" },
-            { id: "as1_realbadman", title: "Real Bad Man", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 170, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/realbadman.m4a" },
-            { id: "as1_straightup", title: "Straight Up (feat. Azaad 4L)", artist: "Karan Aujla, Azaad 4L, MXRCI", album: "AUJLA SZN 1", duration: 215, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/straightup.m4a" },
-            { id: "as1_rapkilla", title: "Rap Killa", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 246, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/rapkilla.m4a" },
-            { id: "as1_aujlaszn", title: "Aujla Szn", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 218, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/aujlaszn.m4a" }
+            { id: "as1_ashke", title: "Ashke", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 218, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/ashke.m4a", lyrics: AUJLA_LYRICS["as1_ashke"].plain, synced_lyrics: AUJLA_LYRICS["as1_ashke"].synced },
+            { id: "as1_realbadman", title: "Real Bad Man", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 170, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/realbadman.m4a", lyrics: AUJLA_LYRICS["as1_realbadman"].plain, synced_lyrics: AUJLA_LYRICS["as1_realbadman"].synced },
+            { id: "as1_straightup", title: "Straight Up (feat. Azaad 4L)", artist: "Karan Aujla, Azaad 4L, MXRCI", album: "AUJLA SZN 1", duration: 215, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/straightup.m4a", lyrics: AUJLA_LYRICS["as1_straightup"].plain, synced_lyrics: AUJLA_LYRICS["as1_straightup"].synced },
+            { id: "as1_rapkilla", title: "Rap Killa", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 246, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/rapkilla.m4a", lyrics: AUJLA_LYRICS["as1_rapkilla"].plain, synced_lyrics: AUJLA_LYRICS["as1_rapkilla"].synced },
+            { id: "as1_aujlaszn", title: "Aujla Szn", artist: "Karan Aujla, MXRCI", album: "AUJLA SZN 1", duration: 218, image: "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/74/b9/74/74b974cc-a8e3-ab69-1675-65b29e5324d1/5064089826918_cover.jpg/500x500bb.jpg", stream_url: "audio/aujlaszn.m4a", lyrics: AUJLA_LYRICS["as1_aujlaszn"].plain, synced_lyrics: AUJLA_LYRICS["as1_aujlaszn"].synced }
           ]
         }), { headers: corsHeaders });
       }
@@ -694,6 +718,104 @@ export default {
         }), { headers: corsHeaders });
       } catch(e) {
         return new Response(JSON.stringify({ status: 'error', message: e.message }), { headers: corsHeaders });
+      }
+    }
+
+
+    // 4. MULTI-SOURCE SYNCED & PLAIN LYRICS
+    if (url.pathname === '/api/lyrics') {
+      const id = url.searchParams.get('id') || '';
+      const title = (url.searchParams.get('title') || '').trim();
+      const artist = (url.searchParams.get('artist') || '').trim();
+
+      // Check embedded lyrics
+      if (id && AUJLA_LYRICS[id]) {
+        return new Response(JSON.stringify({
+          status: 'success',
+          syncedLyrics: AUJLA_LYRICS[id].synced,
+          plainLyrics: AUJLA_LYRICS[id].plain
+        }), { headers: corsHeaders });
+      }
+
+      const tClean = title.toLowerCase().replace(/\(.*?\)|\[.*?\]|feat\..*|ft\..*/gi, '').trim();
+      for (const [k, v] of Object.entries(AUJLA_LYRICS)) {
+        if (k.toLowerCase().includes(tClean) || tClean.includes(k.replace('as1_', ''))) {
+          return new Response(JSON.stringify({
+            status: 'success',
+            syncedLyrics: v.synced,
+            plainLyrics: v.plain
+          }), { headers: corsHeaders });
+        }
+      }
+
+      // Multi-tier external search: LRCLIB
+      try {
+        const cleanT = title.replace(/\(.*?\)|\[.*?\]|feat\..*|ft\..*/gi, '').trim();
+        const cleanA = artist.split(',')[0].replace(/&/g, '').trim();
+        
+        // Exact get
+        const lrcRes = await fetch(`https://lrclib.net/api/get?track_name=${encodeURIComponent(cleanT)}&artist_name=${encodeURIComponent(cleanA)}`);
+        if (lrcRes.ok) {
+          const lrcData = await lrcRes.json();
+          if (lrcData.syncedLyrics || lrcData.plainLyrics) {
+            return new Response(JSON.stringify({
+              status: 'success',
+              syncedLyrics: lrcData.syncedLyrics || '',
+              plainLyrics: lrcData.plainLyrics || ''
+            }), { headers: corsHeaders });
+          }
+        }
+
+        // LRCLIB search fallback
+        const searchRes = await fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(cleanT + ' ' + cleanA)}`);
+        if (searchRes.ok) {
+          const sList = await searchRes.json();
+          if (Array.isArray(sList) && sList.length > 0) {
+            const first = sList[0];
+            return new Response(JSON.stringify({
+              status: 'success',
+              syncedLyrics: first.syncedLyrics || '',
+              plainLyrics: first.plainLyrics || ''
+            }), { headers: corsHeaders });
+          }
+        }
+      } catch(e) {}
+
+      return new Response(JSON.stringify({ status: 'not_found' }), { status: 404, headers: corsHeaders });
+    }
+
+    // 5. LIVE TRENDING PUNJABI SONGS (Auto-updated straight from JioSaavn Live Charts)
+    if (url.pathname === '/api/punjabi/trending') {
+      try {
+        const res = await fetch('https://www.jiosaavn.com/api.php?__call=playlist.getDetails&_format=json&_marker=0&api_version=4&ctx=web6dot0&cc=in&listid=1265052337');
+        if (!res.ok) {
+          return new Response(JSON.stringify({ status: 'error', songs: [] }), { headers: corsHeaders });
+        }
+        const data = await res.json();
+        const songs = (data.list || []).map(s => {
+          const enc = s.more_info?.encrypted_media_url;
+          const stream = enc ? decryptSaavnUrl(enc) : null;
+          return {
+            id: s.id,
+            title: s.title ? s.title.replace(/&amp;/g, '&').replace(/&#039;/g, "'").replace(/&quot;/g, '"') : '',
+            artist: s.more_info?.artistMap?.primary_artists?.map(a => a.name).join(', ') || s.subtitle || 'Punjabi Artist',
+            album: s.more_info?.album ? s.more_info.album.replace(/&amp;/g, '&').replace(/&#039;/g, "'") : 'Single',
+            image: s.image ? s.image.replace('150x150', '500x500') : '',
+            duration: parseInt(s.more_info?.duration || 180),
+            stream_url: stream,
+            language: 'punjabi',
+            year: s.year || '2026'
+          };
+        }).filter(s => s.stream_url);
+
+        return new Response(JSON.stringify({
+          status: 'success',
+          title: data.title || 'Trending Punjabi 2026',
+          count: songs.length,
+          songs
+        }), { headers: corsHeaders });
+      } catch(e) {
+        return new Response(JSON.stringify({ status: 'error', message: e.message, songs: [] }), { headers: corsHeaders });
       }
     }
 
