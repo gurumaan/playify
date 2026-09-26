@@ -1,5 +1,1975 @@
 [
   {
+    "id": "uSfIZCBM",
+    "title": "Hukkush Phukkush (From \"Bhool Bhulaiyaa 3\")",
+    "artist": "Sonu Nigam",
+    "album": "Trending Triptii Dimri Mixes",
+    "image": "https://c.saavncdn.com/997/Trending-Triptii-Dimri-Mixes-Hindi-2024-20250926131210-500x500.jpg",
+    "duration": 224,
+    "stream_url": "https://aac.saavncdn.com/997/1e07021aed9bb746bd71f5d83e282b23_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "OUpWoiJm",
+    "title": "Mere Dholna 3.0  (Sonu Nigam Version) [From \"Bhool Bhulaiyaa 3\"] [From \"Mere Dholna 3.0  (Sonu Nigam Version) [From \"Bhool Bhulaiyaa 3\"]\"]",
+    "artist": "Pritam, Sonu Nigam",
+    "album": "Trending Triptii Dimri Mixes",
+    "image": "https://c.saavncdn.com/997/Trending-Triptii-Dimri-Mixes-Hindi-2024-20250926131210-500x500.jpg",
+    "duration": 266,
+    "stream_url": "https://aac.saavncdn.com/997/4c4abec285287e679ec30d3fc8bb615f_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "Fz3kTCGs",
+    "title": "Beiraada (From \"Bhool Bhulaiyaa 3\")",
+    "artist": "Sachet Tandon, Parampara Tandon",
+    "album": "Trending Triptii Dimri Mixes",
+    "image": "https://c.saavncdn.com/997/Trending-Triptii-Dimri-Mixes-Hindi-2024-20250926131210-500x500.jpg",
+    "duration": 199,
+    "stream_url": "https://aac.saavncdn.com/997/ca4198d8066705947d55b83ca950afe2_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "gmOkRuhE",
+    "title": "Ami Je Tomar 3.0 (From \"Bhool Bhulaiyaa 3\")",
+    "artist": "Pritam, Shreya Ghoshal, Amaal Mallik, Sameer",
+    "album": "World Music Day",
+    "image": "https://c.saavncdn.com/495/World-Music-Day-Hindi-2025-20260217171350-500x500.jpg",
+    "duration": 315,
+    "stream_url": "https://aac.saavncdn.com/495/6e89a679f932daa3e616e452fa50e51b_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "HuRUR_6t",
+    "title": "Jaana Samjho Na (From \"Bhool Bhulaiyaa 3\")",
+    "artist": "Aditya Rikhari, Tulsi Kumar, Lijo George-Dj Chetas",
+    "album": "Jaana Samjho Na (From \"Bhool Bhulaiyaa 3\")",
+    "image": "https://c.saavncdn.com/427/Jaana-Samjho-Na-From-Bhool-Bhulaiyaa-3-Hindi-2024-20241108131016-500x500.jpg",
+    "duration": 212,
+    "stream_url": "https://aac.saavncdn.com/427/e4716b8e35b5a2efbfeb62fadb389f58_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "ZmPH5pEB",
+    "title": "Bhool Bhulaiyaa 3 - Title Track (From \"Bhool Bhulaiyaa 3\")",
+    "artist": "Dhrruv Yogi, Sameer, Pitbull, Tanishk Bagchi, Pritam, Diljit Dosanjh, Neeraj Shridhar",
+    "album": "Dil Se Diljit",
+    "image": "https://c.saavncdn.com/064/Dil-Se-Diljit-Hindi-2024-20260525141056-500x500.jpg",
+    "duration": 230,
+    "stream_url": "https://aac.saavncdn.com/064/bf3a89f9f96a5d922a3bd368981d97e1_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "-4bab05N",
+    "title": "Hukkush Phukkush",
+    "artist": "Tanishk Bagchi, Sonu Nigam, Som",
+    "album": "Bhool Bhulaiyaa 3",
+    "image": "https://c.saavncdn.com/443/Bhool-Bhulaiyaa-3-Hindi-2024-20250430161035-500x500.jpg",
+    "duration": 224,
+    "stream_url": "https://aac.saavncdn.com/443/a32502852eb3c485893b7042fdb84b78_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "cirGmmBV",
+    "title": "Beiraada",
+    "artist": "Sachet Tandon, Parampara Tandon, Rashmi-Virag",
+    "album": "Bhool Bhulaiyaa 3",
+    "image": "https://c.saavncdn.com/443/Bhool-Bhulaiyaa-3-Hindi-2024-20250430161035-500x500.jpg",
+    "duration": 199,
+    "stream_url": "https://aac.saavncdn.com/443/ed2dc860cb67c240c30d760dd99e5f21_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "qe0lBhnc",
+    "title": "Mere Dholna 3.0 (Sonu Nigam Version) [From \"Bhool Bhulaiyaa 3\"]",
+    "artist": "Pritam, Amaal Mallik, Sonu Nigam, Sameer",
+    "album": "Mere Dholna 3.0 (Sonu Nigam Version) [From \"Bhool Bhulaiyaa 3\"]",
+    "image": "https://c.saavncdn.com/713/Mere-Dholna-3-0-Sonu-Nigam-Version-From-Bhool-Bhulaiyaa-3-Hindi-2024-20250430161101-500x500.jpg",
+    "duration": 266,
+    "stream_url": "https://aac.saavncdn.com/713/6f93ba7ebfe8ecf564e81bca5f5f12db_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "qDW33O3y",
+    "title": "Ami Je Tomar 3.0",
+    "artist": "Pritam, Amaal Mallik, Shreya Ghoshal, Sameer",
+    "album": "Bhool Bhulaiyaa 3",
+    "image": "https://c.saavncdn.com/443/Bhool-Bhulaiyaa-3-Hindi-2024-20250430161035-500x500.jpg",
+    "duration": 315,
+    "stream_url": "https://aac.saavncdn.com/443/a852d618fa668280b031631e1f01d5c0_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "fYqyeO16",
+    "title": "Saiyaara - LoFi Mix (From \"Ek Tha Tiger\")",
+    "artist": "Sohail Sen, Mohit Chauhan, Tarannum Malik Jain, Kausar Munir",
+    "album": "Study and Unwind",
+    "image": "https://c.saavncdn.com/838/Study-and-Unwind-Hindi-2025-20250313055545-500x500.jpg",
+    "duration": 195,
+    "stream_url": "https://aac.saavncdn.com/838/e635101f23980b99d3c8c85446325a96_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "TGywmUzp",
+    "title": "Saiyaara (From \"Ek Tha Tiger\")",
+    "artist": "Sohail Sen, Mohit Chauhan, Taraannum Mallik, Kausar Munir",
+    "album": "YRF Spy Universe",
+    "image": "https://c.saavncdn.com/903/YRF-Spy-Universe-Hindi-2023-20231215063656-500x500.jpg",
+    "duration": 251,
+    "stream_url": "https://aac.saavncdn.com/903/3b9e433ff72c5f3ae72107a24eab2e16_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "bYiJ0NHH",
+    "title": "Apna Bana Le Lofi Mix by Artist L3AD",
+    "artist": "Sachin-Jigar, Arijit Singh",
+    "album": "Apna Bana Le Lofi Mix by Artist L3AD",
+    "image": "https://c.saavncdn.com/709/Apna-Bana-Le-Lofi-Mix-by-Artist-L3AD-Hindi-2023-20231018174428-500x500.jpg",
+    "duration": 271,
+    "stream_url": "https://aac.saavncdn.com/709/0794ede6b17a2f7ce09abb10bdeff22b_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "-1SyiQS8",
+    "title": "Apna Bana Le",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Arijit Singh",
+    "album": "Hot Hits Bollywood",
+    "image": "https://c.saavncdn.com/013/Hot-Hits-Bollywood-Hindi-2026-20260603175919-500x500.jpg",
+    "duration": 261,
+    "stream_url": "https://aac.saavncdn.com/013/bf5607afdc99d0b6ac8fef1785b5bd7a_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "dgg6UoT4",
+    "title": "Lutt Putt Gaya (From \"Dunki\")",
+    "artist": "Pritam, Arijit Singh, Swanand Kirkire, IP Singh",
+    "album": "Lutt Putt Gaya (From \"Dunki\")",
+    "image": "https://c.saavncdn.com/265/Lutt-Putt-Gaya-From-Dunki-Hindi-2023-20231211171015-500x500.jpg",
+    "duration": 222,
+    "stream_url": "https://aac.saavncdn.com/265/e19a411ae8c1d43b024dd2a5eb56fa78_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "9phZa6Mc",
+    "title": "Lutt Putt Gaya",
+    "artist": "Pritam, Arijit Singh, Swanand Kirkire, IP Singh",
+    "album": "Dunki",
+    "image": "https://c.saavncdn.com/139/Dunki-Hindi-2023-20231220211003-500x500.jpg",
+    "duration": 222,
+    "stream_url": "https://aac.saavncdn.com/139/872431d8e48775ca35d30e2d6ee79f5d_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "iKB6BGsb",
+    "title": "Chaleiya Na Chara Mitran",
+    "artist": "Ranjit Sidhu",
+    "album": "Jawani",
+    "image": "https://c.saavncdn.com/100/Jawani-Punjabi-2008-500x500.jpg",
+    "duration": 310,
+    "stream_url": "https://aac.saavncdn.com/100/1b706b386f9238e846501a5d974157e1_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "OVSpZUL7",
+    "title": "Kyon Karda Ae Maan Jawani Da",
+    "artist": "Semual Moman",
+    "album": "Suli Te Charh Chaleya",
+    "image": "https://c.saavncdn.com/015/Suli-Te-Charh-Chaleya-Punjabi-2023-20230426190038-500x500.jpg",
+    "duration": 348,
+    "stream_url": "https://aac.saavncdn.com/015/b35f59be91f72106a8f1ae8ce30996e7_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "lJDAq5c-",
+    "title": "Chaleya Arabic Version (From \"Jawan\")",
+    "artist": "Grini, Jamila El Badaoui",
+    "album": "The Anirudh Saga",
+    "image": "https://c.saavncdn.com/115/The-Anirudh-Saga-Hindi-2024-20241130171008-500x500.jpg",
+    "duration": 200,
+    "stream_url": "https://aac.saavncdn.com/115/2fd351e70885c6fda946d1a079e3d224_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "oux_u4tp",
+    "title": "Chaleya Arabic Version",
+    "artist": "Anirudh Ravichander, Grini, Jamila El Badaoui",
+    "album": "Jawan",
+    "image": "https://c.saavncdn.com/047/Jawan-Hindi-2023-20230921190854-500x500.jpg",
+    "duration": 200,
+    "stream_url": "https://aac.saavncdn.com/047/3096073d7f8395a6c1394671459eeda5_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "HrTbqrtG",
+    "title": "Vida Karo - Lofi",
+    "artist": "Vikash Singh 1n, Arijit Singh",
+    "album": "Open Stage X Vikash Singh 1n Vol 1",
+    "image": "https://c.saavncdn.com/217/Open-Stage-X-Vikash-Singh-1n-Vol-1-Hindi-2024-20240731103735-500x500.jpg",
+    "duration": 146,
+    "stream_url": "https://aac.saavncdn.com/217/b3e4f9336128208c0633f5992bd074fa_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "0KTPcOXW",
+    "title": "Vida Karo - Lofi Flip",
+    "artist": "Shubhadip Dey, Arijit Singh, Jonita Gandhi",
+    "album": "Vida Karo - Lofi Flip",
+    "image": "https://c.saavncdn.com/288/Vida-Karo-Lofi-Flip-Hindi-2024-20241217104243-500x500.jpg",
+    "duration": 181,
+    "stream_url": "https://aac.saavncdn.com/288/f31d23fd7bbbfa7a79f858658fa97dfc_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "b7q2oN33",
+    "title": "Vida Karo Eclipsa Audio",
+    "artist": "Arijit Singh, Jonita Gandhi, A.R. Rahman, Irshad Kamil",
+    "album": "Vida Karo Eclipsa Audio",
+    "image": "https://c.saavncdn.com/175/Vida-Karo-Eclipsa-Audio-Hindi-2026-20260824083806-500x500.jpg",
+    "duration": 269,
+    "stream_url": "https://aac.saavncdn.com/175/9c022a34151a08059aa49ccbff773da3_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "IwbJMvUS",
+    "title": "Chak Doon Ghade Ton",
+    "artist": "Amar Singh Chamkila, Amarjot, K.S. Narula",
+    "album": "Sada Punjab - Adiye Da Nasha Amar Singh Chamkila",
+    "image": "https://c.saavncdn.com/351/Sada-Punjab-Adiye-Da-Nasha-Amar-Singh-Chamkila-Punjabi-2012-500x500.jpg",
+    "duration": 272,
+    "stream_url": "https://aac.saavncdn.com/351/7488d7f4c2af5f49565abe9bcf82e599_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "gpUwY32i",
+    "title": "Gaddi Te Likha Le Mera Naa",
+    "artist": "Amar Singh Chamkila, Amarjot, Charanjit Ahuja",
+    "album": "Mehkma Driveran Da",
+    "image": "https://c.saavncdn.com/043/Mehkma-Driveran-Da-Punjabi-2004-500x500.jpg",
+    "duration": 192,
+    "stream_url": "https://aac.saavncdn.com/043/467c595c3060d8a48eb3d1d0f12f6062_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "vGhXss3X",
+    "title": "Babe Tera Jawai",
+    "artist": "Amar Singh Chamkila, Amar Jot",
+    "album": "Chamkila Remix 5",
+    "image": "https://c.saavncdn.com/281/Chamkila-Remix-5-1970-500x500.jpg",
+    "duration": 164,
+    "stream_url": "https://aac.saavncdn.com/281/f934a41fe8834fe241be65865930395c_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "EY3WQ5mR",
+    "title": "Babe Tera Jawai - Remix",
+    "artist": "Amar Singh Chamkila, Amarjot, Joy",
+    "album": "Sada Punjab - Pehle Lalkare Naal",
+    "image": "https://c.saavncdn.com/221/Sada-Punjab-Pehle-Lalkare-Naal-Punjabi-2011-500x500.jpg",
+    "duration": 163,
+    "stream_url": "https://aac.saavncdn.com/221/60be219ec6f8b60307f22ed0867a8da8_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "pXxD7eHI",
+    "title": "Put Bana Ke Chada Ge",
+    "artist": "Amar Singh Chamkila",
+    "album": "Chamkila Remix 5",
+    "image": "https://c.saavncdn.com/281/Chamkila-Remix-5-1970-500x500.jpg",
+    "duration": 219,
+    "stream_url": "https://aac.saavncdn.com/281/d8eff6c07fa6e180a8c1aa41daf8719b_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "ruMpyH1c",
+    "title": "Koi Hath Pher Jau Tere Te - Remix",
+    "artist": "Amar Singh Chamkila, Amarjot, Joy",
+    "album": "Sada Punjab - Pehle Lalkare Naal",
+    "image": "https://c.saavncdn.com/221/Sada-Punjab-Pehle-Lalkare-Naal-Punjabi-2011-500x500.jpg",
+    "duration": 233,
+    "stream_url": "https://aac.saavncdn.com/221/b0b5a5e6b6ad445ef7a44e7b319c822b_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "rcvFqTpR",
+    "title": "Daru Tan Naal Jatt De (feat. Amarjot & Maan Music)",
+    "artist": "Amar Singh Chamkila",
+    "album": "Daru Tan Naal Jatt De (feat. Amarjot & Maan Music)",
+    "image": "https://c.saavncdn.com/661/Daru-Tan-Naal-Jatt-De-feat-Amarjot-Maan-Music-Punjabi-2022-20221102001630-500x500.jpg",
+    "duration": 181,
+    "stream_url": "https://aac.saavncdn.com/661/2f22b7db642263a72e679146c4654dc6_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "4GdsnAkh",
+    "title": "Amli De Larh Lake - Remix",
+    "artist": "Amar Singh Chamkila, Amarjot, Joy",
+    "album": "Chamkila Remix Vol. 4",
+    "image": "https://c.saavncdn.com/781/Chamkila-Remix-Vol-4-Punjabi-1999-500x500.jpg",
+    "duration": 215,
+    "stream_url": "https://aac.saavncdn.com/781/d2259148753abbba17babb6f6eb963a2_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "9GZBuMW9",
+    "title": "Jeth Mere Da Chal Gaya Sika",
+    "artist": "Amar Jot, Amar Singh Chamkila",
+    "album": "Chamkila Remix 5",
+    "image": "https://c.saavncdn.com/281/Chamkila-Remix-5-1970-500x500.jpg",
+    "duration": 429,
+    "stream_url": "https://aac.saavncdn.com/281/f1793af0b17cccd4659f5cc21593669f_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "EWsaSqzA",
+    "title": "Kal Bhaven Jind Kadh Layen",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Bhul Gai Main Ghund Kadna",
+    "image": "https://c.saavncdn.com/081/Bhul-Gai-Main-Ghund-Kadna-1980-500x500.jpg",
+    "duration": 208,
+    "stream_url": "https://aac.saavncdn.com/081/c290ed52fca8d094b7f641972d5502fd_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "U3s0OhRP",
+    "title": "Chharde Jeth Ne Chakki",
+    "artist": "Surinder Shinda, Surinder Sonia, Ram Saran Das",
+    "album": "Ik Mahina Jeth Da",
+    "image": "https://c.saavncdn.com/838/Ik-Mahina-Jeth-Da-Punjabi-1999-500x500.jpg",
+    "duration": 174,
+    "stream_url": "https://aac.saavncdn.com/838/ef7f253fb6b83338055953ca7972e743_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "zqGOvie6",
+    "title": "Pult Bana Ke Chnadange",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Bhul Gai Main Ghund Kadna",
+    "image": "https://c.saavncdn.com/081/Bhul-Gai-Main-Ghund-Kadna-1980-500x500.jpg",
+    "duration": 220,
+    "stream_url": "https://aac.saavncdn.com/081/0d7725f3c206ecf815f8621c6d437824_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "Xmzw_Qcr",
+    "title": "Jihne Lal Pari Na Piti",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Bhul Gai Main Ghund Kadna",
+    "image": "https://c.saavncdn.com/081/Bhul-Gai-Main-Ghund-Kadna-1980-500x500.jpg",
+    "duration": 252,
+    "stream_url": "https://aac.saavncdn.com/081/9ad61d572eb10c1424ec3f4fbc708a1c_sar_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "rGCsVNTR",
+    "title": "Kan Kar Gal Sun Makhna",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Sweet Teri Smile - Womens Day Special",
+    "image": "https://c.saavncdn.com/276/Sweet-Teri-Smile-Womens-Day-Special-Punjabi-2023-20230223103204-500x500.jpg",
+    "duration": 236,
+    "stream_url": "https://aac.saavncdn.com/276/ce1c5aa1207cdbacb8f31316b1c16e7d_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "A4faa2hZ",
+    "title": "Mitran Main Khand Ban Gaye",
+    "artist": "Amar Singh Chamkila, Amarjot, Charanjit Ahuja, S.N. Gulati",
+    "album": "Bapu Sada Gum Ho Gaya",
+    "image": "https://c.saavncdn.com/828/Bapu-Sada-Gum-Ho-Gaya-Punjabi-2011-500x500.jpg",
+    "duration": 184,
+    "stream_url": "https://aac.saavncdn.com/828/4c8dc86c9d5874f708f1febfacbc6947_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "pB8HKqR3",
+    "title": "Gora Gora Rang",
+    "artist": "UPINDER, Amar Singh Chamkila, Amarjot",
+    "album": "Gora Gora Rang",
+    "image": "https://c.saavncdn.com/960/Gora-Gora-Rang-Punjabi-2021-20240517083548-500x500.jpg",
+    "duration": 192,
+    "stream_url": "https://aac.saavncdn.com/960/099baab32586d6ca422461a4d25cce44_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "mWm_vb4n",
+    "title": "Sautan Ne Pai Pherri",
+    "artist": "Amar Singh Chamkila, Amarjot, Charanjit Ahuja, S.N. Gulati",
+    "album": "Bapu Sada Gum Ho Gaya",
+    "image": "https://c.saavncdn.com/828/Bapu-Sada-Gum-Ho-Gaya-Punjabi-2011-500x500.jpg",
+    "duration": 182,
+    "stream_url": "https://aac.saavncdn.com/828/12729e80941e8e964a435bd51a31dd1f_sar_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "eSbHcBs1",
+    "title": "Kukar Wang Dhon",
+    "artist": "Amar Singh Chamkila, Amarjot, Joy",
+    "album": "Sada Punjab - Pehle Lalkare Naal",
+    "image": "https://c.saavncdn.com/221/Sada-Punjab-Pehle-Lalkare-Naal-Punjabi-2011-500x500.jpg",
+    "duration": 259,
+    "stream_url": "https://aac.saavncdn.com/221/d843f2fb3142c18b0da1ab98761109d4_sar_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "Grv93PGB",
+    "title": "Bhul Gai Main Ghund Kadna",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Bhul Gai Main Ghund Kadna",
+    "image": "https://c.saavncdn.com/081/Bhul-Gai-Main-Ghund-Kadna-1980-500x500.jpg",
+    "duration": 213,
+    "stream_url": "https://aac.saavncdn.com/081/c06e8528efd35b5a1620e978fa1afa26_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "otw6EaJN",
+    "title": "Lak Mera Kach Varga",
+    "artist": "Amar Singh Chamkila, Amarjot, Charanjit Ahuja, S.N. Gulati",
+    "album": "Bapu Sada Gum Ho Gaya",
+    "image": "https://c.saavncdn.com/828/Bapu-Sada-Gum-Ho-Gaya-Punjabi-2011-500x500.jpg",
+    "duration": 199,
+    "stream_url": "https://aac.saavncdn.com/828/080c334db78c84bb4adcc3542b7269a7_sar_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "1HjIddNQ",
+    "title": "Sharbat Wango Ghut Bhar Lai",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Sweet Teri Smile - Womens Day Special",
+    "image": "https://c.saavncdn.com/276/Sweet-Teri-Smile-Womens-Day-Special-Punjabi-2023-20230223103204-500x500.jpg",
+    "duration": 264,
+    "stream_url": "https://aac.saavncdn.com/276/2ca96b515e115c12651e09cf11083d8d_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "zVhBbWt4",
+    "title": "Aaj Chakka Jam Karata",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Desi Rakaad",
+    "image": "https://c.saavncdn.com/632/Desi-Rakaad-Punjabi-2004-20200924103933-500x500.jpg",
+    "duration": 267,
+    "stream_url": "https://aac.saavncdn.com/632/01086e501a3260d54b52128fd728a0d3_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "HJKOUhqL",
+    "title": "Deora Ve Tavitan Walia",
+    "artist": "Amar Singh Chamkila, Amarjot, Charanjit Ahuja",
+    "album": "Sada Punjab - Pehle Lalkare Naal",
+    "image": "https://c.saavncdn.com/221/Sada-Punjab-Pehle-Lalkare-Naal-Punjabi-2011-500x500.jpg",
+    "duration": 160,
+    "stream_url": "https://aac.saavncdn.com/221/4c11a76e0b751cee1266d238c31e17c6_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "lBbi7hZ4",
+    "title": "Lalkara (feat. Amarjot)",
+    "artist": "Amar Singh Chamkila",
+    "album": "Lalkara (feat. Amarjot)",
+    "image": "https://c.saavncdn.com/012/Lalkara-feat-Amarjot-Punjabi-2022-20221028032608-500x500.jpg",
+    "duration": 232,
+    "stream_url": "https://aac.saavncdn.com/012/39cbb56664adf4ae1a0679fec5459e3f_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "q28l1HTv",
+    "title": "Jija Lak Minle - Remix",
+    "artist": "Amar Singh Chamkila, Amarjot, Charanjit Ahuja, Joy",
+    "album": "Sada Punjab - Pehle Lalkare Naal",
+    "image": "https://c.saavncdn.com/221/Sada-Punjab-Pehle-Lalkare-Naal-Punjabi-2011-500x500.jpg",
+    "duration": 162,
+    "stream_url": "https://aac.saavncdn.com/221/f8a723363baf536e4b5b28132ddced19_sar_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "nwL1ENTx",
+    "title": "Main Kurhian De Naal Jandi Si",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Bhul Gai Main Ghund Kadna",
+    "image": "https://c.saavncdn.com/081/Bhul-Gai-Main-Ghund-Kadna-1980-500x500.jpg",
+    "duration": 205,
+    "stream_url": "https://aac.saavncdn.com/081/28221bf0708ca96578506b99575a9279_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "mygWwFVV",
+    "title": "Mera Viyah Karvan Nu Jee Karda",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Desi Rakaad",
+    "image": "https://c.saavncdn.com/632/Desi-Rakaad-Punjabi-2004-20200924103933-500x500.jpg",
+    "duration": 194,
+    "stream_url": "https://aac.saavncdn.com/632/52df244646abedbd3cfb99a0bce1cd1c_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "JGgxSpRX",
+    "title": "Bapu Sada Gum Ho Gaya",
+    "artist": "Amar Singh Chamkila, Amarjot, Charanjit Ahuja, S.N. Gulati",
+    "album": "Bapu Sada Gum Ho Gaya",
+    "image": "https://c.saavncdn.com/828/Bapu-Sada-Gum-Ho-Gaya-Punjabi-2011-500x500.jpg",
+    "duration": 190,
+    "stream_url": "https://aac.saavncdn.com/828/39d0911e92be16d69068b8373425ffe3_sar_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "jqUa2jKL",
+    "title": "Kach De Glass Wich",
+    "artist": "Amar Singh Chamkila",
+    "album": "Chamkila Remix 5",
+    "image": "https://c.saavncdn.com/281/Chamkila-Remix-5-1970-500x500.jpg",
+    "duration": 253,
+    "stream_url": "https://aac.saavncdn.com/281/4fa4f91d4b6725ad0d3e003f12d61b42_sar_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "oKlCtEqi",
+    "title": "Aate Wangu Gun Tee Bagane Put Ne",
+    "artist": "Amar Singh Chamkila, Surinder Sonia, Charanjit Ahuja, S.N. Gulati",
+    "album": "Bapu Sada Gum Ho Gaya",
+    "image": "https://c.saavncdn.com/828/Bapu-Sada-Gum-Ho-Gaya-Punjabi-2011-500x500.jpg",
+    "duration": 179,
+    "stream_url": "https://aac.saavncdn.com/828/05f6ab21802d440eed24700eae53ec2b_sar_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "dHpvlRG8",
+    "title": "Mera Jee Karda",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Desi Rakaad",
+    "image": "https://c.saavncdn.com/632/Desi-Rakaad-Punjabi-2004-20200924103933-500x500.jpg",
+    "duration": 271,
+    "stream_url": "https://aac.saavncdn.com/632/652f51c585de659e771be55d1bb0524a_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "lqYpi5ND",
+    "title": "Do Koh To Purje",
+    "artist": "Amar Singh Chamkila, Amarjot, Joy",
+    "album": "Sada Punjab - Pehle Lalkare Naal",
+    "image": "https://c.saavncdn.com/221/Sada-Punjab-Pehle-Lalkare-Naal-Punjabi-2011-500x500.jpg",
+    "duration": 185,
+    "stream_url": "https://aac.saavncdn.com/221/b7d56ff4cd594d3d0039aefe19a625f5_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "7iYBSNL9",
+    "title": "Pehle Lalkare Naal Main Dar Gai",
+    "artist": "Amar Singh Chamkila, Amarjot",
+    "album": "Desi Rakaad",
+    "image": "https://c.saavncdn.com/632/Desi-Rakaad-Punjabi-2004-20200924103933-500x500.jpg",
+    "duration": 211,
+    "stream_url": "https://aac.saavncdn.com/632/777648d794210e6114c683be7ec879ff_sar_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "rQw7vvHC",
+    "title": "Jo Tum Mere Ho X Talha Anjum (Mashup)",
+    "artist": "Beatz Boy",
+    "album": "Jo Tum Mere Ho X Talha Anjum (Mashup)",
+    "image": "https://c.saavncdn.com/364/Jo-Tum-Mere-Ho-X-Talha-Anjum-Mashup-Hindi-2026-20260612102227-500x500.jpg",
+    "duration": 281,
+    "stream_url": "https://aac.saavncdn.com/364/0f8500fd2f2fbcfad64328a230aeb294_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "a1yV7PMh",
+    "title": "Let Her Go x Husn (Slowed & Reverb)",
+    "artist": "babygirl69",
+    "album": "Let Her Go x Husn",
+    "image": "https://c.saavncdn.com/867/Let-Her-Go-x-Husn-Hindi-2026-20260411235134-500x500.jpg",
+    "duration": 428,
+    "stream_url": "https://aac.saavncdn.com/867/d28a4952811128e2c1dc6b6f47e7b5a9_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "UpewGbcY",
+    "title": "Let Her Go x Husn (Sped Up Nightcore)",
+    "artist": "babygirl69",
+    "album": "Let Her Go x Husn",
+    "image": "https://c.saavncdn.com/867/Let-Her-Go-x-Husn-Hindi-2026-20260411235134-500x500.jpg",
+    "duration": 214,
+    "stream_url": "https://aac.saavncdn.com/867/b4810bc7b529d9d04b34d30d517e2e20_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "pdAQnMhS",
+    "title": "Soulmate",
+    "artist": "Badshah, Arijit Singh",
+    "album": "Arijit Singh X Badshah The Biggest Songs 2024",
+    "image": "https://c.saavncdn.com/638/Arijit-Singh-X-Badshah-The-Biggest-Songs-2024-Hindi-2024-20240410215733-500x500.jpg",
+    "duration": 214,
+    "stream_url": "https://aac.saavncdn.com/638/08cb70c425edf660ceb4b372f29578f4_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "uGS9AbWR",
+    "title": "Arjan Vailly (From \"ANIMAL\")",
+    "artist": "Manan Bhardwaj, Bhupinder Babbal",
+    "album": "Arjan Vailly (From \"ANIMAL\")",
+    "image": "https://c.saavncdn.com/862/Arjan-Vailly-From-ANIMAL-Hindi-2023-20231118001003-500x500.jpg",
+    "duration": 182,
+    "stream_url": "https://aac.saavncdn.com/862/5e7d506b3bcb81fb90913dc52eb1ef87_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "zH46xvkA",
+    "title": "Satranga (Stripped)",
+    "artist": "Shreyas Puranik, Siddharth-Garima",
+    "album": "ANIMAL (Deluxe Edition Album)",
+    "image": "https://c.saavncdn.com/196/ANIMAL-Deluxe-Edition-Album-Hindi-2024-20240129171041-500x500.jpg",
+    "duration": 194,
+    "stream_url": "https://aac.saavncdn.com/196/949292f15f0c71512107ce3e55cff9b5_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "XbCbadfz",
+    "title": "Marham (Pehle Bhi Main)",
+    "artist": "Vishal Mishra, Raj Shekhar",
+    "album": "ANIMAL (Deluxe Edition Album)",
+    "image": "https://c.saavncdn.com/196/ANIMAL-Deluxe-Edition-Album-Hindi-2024-20240129171041-500x500.jpg",
+    "duration": 113,
+    "stream_url": "https://aac.saavncdn.com/196/64cd9176243af8a7e61e4129d10dff7f_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "HsUUHVk_",
+    "title": "Animal (Alice)",
+    "artist": "Feña Loyola",
+    "album": "Animal",
+    "image": "https://c.saavncdn.com/342/Animal-Instrumental-2022-20220331090817-500x500.jpg",
+    "duration": 631,
+    "stream_url": "https://aac.saavncdn.com/342/2152eb942adddada0b684f91fd95b5aa_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "OrzUrGZB",
+    "title": "Heading To Scotland",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "ANIMAL (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/172/ANIMAL-Hindi-2024-20240123131002-500x500.jpg",
+    "duration": 78,
+    "stream_url": "https://aac.saavncdn.com/172/b030f9741f2aed78fc22ecd067872713_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "fZ6nDfAl",
+    "title": "Tabbar Brothers Unite",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "ANIMAL (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/172/ANIMAL-Hindi-2024-20240123131002-500x500.jpg",
+    "duration": 98,
+    "stream_url": "https://aac.saavncdn.com/172/ab9f41c3ab7e08b9b7b9523df57ca16c_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "lWVwphwC",
+    "title": "Nude Walk",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "ANIMAL (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/172/ANIMAL-Hindi-2024-20240123131002-500x500.jpg",
+    "duration": 116,
+    "stream_url": "https://aac.saavncdn.com/172/621de995cd6c978f596ca4a0fbdeabdc_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "IXEKHzLd",
+    "title": "Thayi Jasu Animal",
+    "artist": "Ravi Khoraj, Jitu Prajapati",
+    "album": "Thayi Jasu Animal",
+    "image": "https://c.saavncdn.com/048/Thayi-Jasu-Animal-Gujarati-2023-20231220181042-500x500.jpg",
+    "duration": 334,
+    "stream_url": "https://aac.saavncdn.com/048/5c980a4e3d6e8a50950b1bbe5f1dcd62_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "2BgNOiOK",
+    "title": "Pogaadhe (From \"Animal\")",
+    "artist": "Karthik, Shreyas Puranik, Mohan Rajan",
+    "album": "Neeye Neeye Oli - Women's Day - Kollywood Musical Melody",
+    "image": "https://c.saavncdn.com/457/Neeye-Neeye-Oli-Women-s-Day-Kollywood-Musical-Melody-Tamil-2026-20260307191039-500x500.jpg",
+    "duration": 271,
+    "stream_url": "https://aac.saavncdn.com/457/0dfc4aa1e0eba1d7271cc1386c0a6373_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "-IBoW7TX",
+    "title": "Range Rover Entry",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "ANIMAL (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/172/ANIMAL-Hindi-2024-20240123131002-500x500.jpg",
+    "duration": 84,
+    "stream_url": "https://aac.saavncdn.com/172/7c91dd219b1f0c21362f0cf353e95c7b_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "N7A4fhZ7",
+    "title": "Yaalo Yaalaa (Extended Film Version) [From \"ANIMAL\"]",
+    "artist": "Jaani, Anurag Kulkarni, Anantha Sriram",
+    "album": "Yaalo Yaalaa (Extended Film Version) [From \"ANIMAL\"]",
+    "image": "https://c.saavncdn.com/369/Yaalo-Yaalaa-Extended-Film-Version-From-ANIMAL-Telugu-2023-20231223011008-500x500.jpg",
+    "duration": 348,
+    "stream_url": "https://aac.saavncdn.com/369/418003b74f70baac77391912fc8cc679_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "g27mPrkU",
+    "title": "Killing Jeeja",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "ANIMAL (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/172/ANIMAL-Hindi-2024-20240123131002-500x500.jpg",
+    "duration": 64,
+    "stream_url": "https://aac.saavncdn.com/172/df85fe65340261fe3a728dfe829d2e65_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "Ou-sEEKV",
+    "title": "Aziz's Introduction",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "ANIMAL (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/172/ANIMAL-Hindi-2024-20240123131002-500x500.jpg",
+    "duration": 248,
+    "stream_url": "https://aac.saavncdn.com/172/5a1a34e3888bc141fa533ac54b736bf6_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "WMC1DqGo",
+    "title": "Saari Duniya Jalaa Denge (Extended Film Version) [From \"ANIMAL\"]",
+    "artist": "Jaani, B Praak",
+    "album": "Saari Duniya Jalaa Denge (Extended Film Version) [From \"ANIMAL\"]",
+    "image": "https://c.saavncdn.com/352/Saari-Duniya-Jalaa-Denge-Extended-Film-Version-From-ANIMAL-Hindi-2023-20231222191004-500x500.jpg",
+    "duration": 348,
+    "stream_url": "https://aac.saavncdn.com/352/fe211977fa1c7f88aed42768c27a22ed_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "o4TD1vv6",
+    "title": "Pogaadhe (From \"ANIMAL\") - Tamil",
+    "artist": "Karthik, Shreyas Puranik, Mohan Rajan",
+    "album": "Pogaadhe (From \"ANIMAL\") - Tamil",
+    "image": "https://c.saavncdn.com/439/Pogaadhe-From-ANIMAL-Tamil-Tamil-2023-20231027131016-500x500.jpg",
+    "duration": 271,
+    "stream_url": "https://aac.saavncdn.com/439/8d75951e0b640866cb0532889071a665_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "yXAasilI",
+    "title": "Evarevaro (Soul Version) [From \"ANIMAL\"]",
+    "artist": "Vishal Mishra, Anantha Sriram",
+    "album": "Evarevaro (Soul Version) [From \"ANIMAL\"]",
+    "image": "https://c.saavncdn.com/420/Evarevaro-Soul-Version-From-ANIMAL-Telugu-2023-20231223151007-500x500.jpg",
+    "duration": 113,
+    "stream_url": "https://aac.saavncdn.com/420/e57c28864dad5ceaecf7f34375e82b30_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "V5iXI-5l",
+    "title": "Animal",
+    "artist": "BAGI MUNDA, Jaskaran, Dox",
+    "album": "Animal",
+    "image": "https://c.saavncdn.com/446/Animal-Punjabi-2025-20250313211257-500x500.jpg",
+    "duration": 189,
+    "stream_url": "https://aac.saavncdn.com/446/5a8f707edcdc1b922602e444a1eb49f1_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "K6XjiVaA",
+    "title": "Ranvijay's Entry Medley (From \"ANIMAL\")",
+    "artist": "A.R. Rahman, Threeory Band",
+    "album": "Ranvijay's Entry Medley (From \"ANIMAL\")",
+    "image": "https://c.saavncdn.com/723/Ranvijay-s-Entry-Medley-From-ANIMAL-Hindi-2023-20231214141003-500x500.jpg",
+    "duration": 218,
+    "stream_url": "https://aac.saavncdn.com/723/21882a1ce4d186dc29888c56d35114c1_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "n70g8LJw",
+    "title": "Haiwaan",
+    "artist": "Ashim Kemson",
+    "album": "ANIMAL",
+    "image": "https://c.saavncdn.com/092/ANIMAL-Hindi-2023-20260724191152-500x500.jpg",
+    "duration": 162,
+    "stream_url": "https://aac.saavncdn.com/092/ca935922c85cfc0c332a7ea52ab77d72_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "rcn1c_PH",
+    "title": "Kashmir",
+    "artist": "Shreya Ghoshal, Manan Bhardwaj",
+    "album": "ANIMAL",
+    "image": "https://c.saavncdn.com/092/ANIMAL-Hindi-2023-20260724191152-500x500.jpg",
+    "duration": 216,
+    "stream_url": "https://aac.saavncdn.com/092/4804695e422e212d9892bfe2cc358d23_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "FRWALnsL",
+    "title": "ANIMAL Meeting ANIMAL",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "ANIMAL (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/172/ANIMAL-Hindi-2024-20240123131002-500x500.jpg",
+    "duration": 52,
+    "stream_url": "https://aac.saavncdn.com/172/cd5989b3fa90cbfc45f8c325ccc72363_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "K4Nkmr0K",
+    "title": "Nanna Nuv Naa Pranam (From \"ANIMAL\") - TELUGU",
+    "artist": "Sonu Nigam, Harshavardhan Rameshwar, Anantha Sriram",
+    "album": "Nanna Nuv Naa Pranam (From \"ANIMAL\") -TELUGU",
+    "image": "https://c.saavncdn.com/466/Nanna-Nuv-Naa-Pranam-From-ANIMAL-TELUGU-Telugu-2023-20231114011010-500x500.jpg",
+    "duration": 321,
+    "stream_url": "https://aac.saavncdn.com/466/7a6b737b7c7f82fc6d52fd9c38c6691c_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "bguNYi0n",
+    "title": "Animal Bgm Mashup(Remix By Kedrock)",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "Animal Bgm Mashup",
+    "image": "https://c.saavncdn.com/138/Animal-Bgm-Mashup-Hindi-2025-20250821191007-500x500.jpg",
+    "duration": 178,
+    "stream_url": "https://aac.saavncdn.com/138/cf2a80253935d75184b0546e5454b7ba_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "bLsC56nu",
+    "title": "Ney Veyrey (From \"ANIMAL\") - Telugu",
+    "artist": "Karthik, Shreyas Puranik, Anantha Sriram",
+    "album": "Ney Veyrey (From \"ANIMAL\") - Telugu",
+    "image": "https://c.saavncdn.com/422/Ney-Veyrey-From-ANIMAL-Telugu-Telugu-2023-20231027131009-500x500.jpg",
+    "duration": 271,
+    "stream_url": "https://aac.saavncdn.com/422/dce4f8773d9245c7d541d64e7a39d749_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "DyHGTRu9",
+    "title": "Ney Veyrey (From \"Animal\")",
+    "artist": "Karthik, Shreyas Puranik, Anantha Sriram",
+    "album": "Needhe Katha - Women's Day - Tollywood Musical Melody",
+    "image": "https://c.saavncdn.com/440/Needhe-Katha-Women-s-Day-Tollywood-Musical-Melody-Telugu-2026-20260307191012-500x500.jpg",
+    "duration": 271,
+    "stream_url": "https://aac.saavncdn.com/440/4ad410c84fd41fa923b4a1ae19bf054a_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "W0epqHVj",
+    "title": "Animal X Kabir Singh Mashup(Remix By Dj Rik,Dj Jits)",
+    "artist": "Arijit Singh, B Praak, Akhil Sachdeva, Tulsi Kumar, Vishal Mishra, Mithoon, Shreyas Puranik, Jaani",
+    "album": "Animal X Kabir Singh Mashup",
+    "image": "https://c.saavncdn.com/532/Animal-X-Kabir-Singh-Mashup-Hindi-2024-20240710191134-500x500.jpg",
+    "duration": 329,
+    "stream_url": "https://aac.saavncdn.com/532/75fc0112ba10fd655b9cade50bd7f8d7_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "m6kttHYV",
+    "title": "Papa Meri Jaan",
+    "artist": "Sonu Nigam, Harshavardhan Rameshwar, Raj Shekhar",
+    "album": "ANIMAL",
+    "image": "https://c.saavncdn.com/092/ANIMAL-Hindi-2023-20260724191152-500x500.jpg",
+    "duration": 321,
+    "stream_url": "https://aac.saavncdn.com/092/5bd1bc57cbd565f2cd2630b74071cb5d_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "f7lm7odd",
+    "title": "Hua Main",
+    "artist": "Pritam, Raghav Chaitanya, Manoj Muntashir",
+    "album": "ANIMAL",
+    "image": "https://c.saavncdn.com/092/ANIMAL-Hindi-2023-20260724191152-500x500.jpg",
+    "duration": 277,
+    "stream_url": "https://aac.saavncdn.com/092/0af07042ccc5e0f273f20d4d75e9eac9_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "pn0aq27z",
+    "title": "Arjan Vailly",
+    "artist": "Bhupinder Babbal, Manan Bhardwaj",
+    "album": "ANIMAL",
+    "image": "https://c.saavncdn.com/092/ANIMAL-Hindi-2023-20260724191152-500x500.jpg",
+    "duration": 182,
+    "stream_url": "https://aac.saavncdn.com/092/52f3f74bcb4295cde59e44ac020d0126_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "ZU5hrNU2",
+    "title": "Abrar’s Entry Jamal Kudu (From \"ANIMAL\")",
+    "artist": "Harshavardhan Rameshwar, Choir",
+    "album": "Abrar’s Entry Jamal Kudu (From \"ANIMAL\")",
+    "image": "https://c.saavncdn.com/624/Abrar-s-Entry-Jamal-Kudu-From-ANIMAL-Hindi-2023-20231206121002-500x500.jpg",
+    "duration": 134,
+    "stream_url": "https://aac.saavncdn.com/624/a8ab17b5b7eacb61a8d755b3629810a8_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "siHl_nXR",
+    "title": "ANIMAL Title Music",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "ANIMAL (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/172/ANIMAL-Hindi-2024-20240123131002-500x500.jpg",
+    "duration": 82,
+    "stream_url": "https://aac.saavncdn.com/172/22ff29af8fea36223c9c8286bd546677_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "NYTPuCr1",
+    "title": "ANIMAL Theme",
+    "artist": "Harshavardhan Rameshwar",
+    "album": "ANIMAL (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/172/ANIMAL-Hindi-2024-20240123131002-500x500.jpg",
+    "duration": 80,
+    "stream_url": "https://aac.saavncdn.com/172/2975d3a87ca15b0cd6c956100a1de15b_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "wwcRw0il",
+    "title": "Animal Instinct",
+    "artist": "Anirudh Ravichander",
+    "album": "Madharaasi (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/071/Madharaasi-Original-Motion-Picture-Soundtrack-Tamil-2025-20250830012902-500x500.jpg",
+    "duration": 37,
+    "stream_url": "https://aac.saavncdn.com/071/8261461bd1b7a6d0cae72cde1b856c97_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "jrxwYoya",
+    "title": "Ammayi (From \"ANIMAL\") [Telugu]",
+    "artist": "Raghav Chaitanya, Anantha Sriram, Pritam, Kaushik-Aakash-Guddu (KAG) for JAM8",
+    "album": "Ammayi (From \"ANIMAL\") [Telugu]",
+    "image": "https://c.saavncdn.com/565/Ammayi-From-ANIMAL-Telugu-Telugu-2023-20231011081003-500x500.jpg",
+    "duration": 275,
+    "stream_url": "https://aac.saavncdn.com/565/a091b6d33bf519fa9a7a22a901181fb3_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "XVErYK4p",
+    "title": "Stress Management Part - 2 Speech",
+    "artist": "Swami Sukhabodhananda",
+    "album": "Stress Management Swami Sukhab",
+    "image": "https://c.saavncdn.com/406/Stress-Management-Swami-Sukhab-Tamil-1999-20201008164026-500x500.jpg",
+    "duration": 1442,
+    "stream_url": "https://aac.saavncdn.com/406/58a342851eb1da965ad01b5eeb5120dc_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "imnNSpwB",
+    "title": "Shami Stree Pala Gaan, Pt. 02",
+    "artist": "Sefali sarker",
+    "album": "Jiboner Sera Gaan",
+    "image": "https://c.saavncdn.com/039/Jiboner-Sera-Gaan-Bengali-2025-20250606082830-500x500.jpg",
+    "duration": 307,
+    "stream_url": "https://aac.saavncdn.com/039/5a2a7f20151fc6d3f2a72876198b7d61_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "66jrWvm6",
+    "title": "Itne Bade Jahan Mein 2",
+    "artist": "Suman Kalyanpur",
+    "album": "Dark Street",
+    "image": "https://c.saavncdn.com/568/Dark-Street-Hindi-1961-20230509153507-500x500.jpg",
+    "duration": 203,
+    "stream_url": "https://aac.saavncdn.com/568/44ada1e40a116e79b7f2514344d2839f_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "RgBJpt1k",
+    "title": "Casino Street Zone Act 2",
+    "artist": "Good Knight Productions",
+    "album": "Sonic the Hedgehog 4 Collection",
+    "image": "https://c.saavncdn.com/172/Sonic-the-Hedgehog-4-Collection-Instrumental-2020-20210930073609-500x500.jpg",
+    "duration": 109,
+    "stream_url": "https://aac.saavncdn.com/172/f877f1f68435cc327eb4b1d2e694ee33_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "P41GaefB",
+    "title": "STREET FUSION Pt. 2 (Mixed)",
+    "artist": "DJ Fortune",
+    "album": "STREET FUSION SERIES Mix",
+    "image": "https://c.saavncdn.com/623/STREET-FUSION-SERIES-Mix-Instrumental-2025-20251230091040-500x500.jpg",
+    "duration": 361,
+    "stream_url": "https://aac.saavncdn.com/623/e4ebc69b9880d4a1936ed1f066f71c13_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "PXIqIG7V",
+    "title": "Beside the Stream, Pt. 2",
+    "artist": "Samplehound",
+    "album": "Atmospheres",
+    "image": "https://c.saavncdn.com/289/Atmospheres-Instrumental-2022-20230201145808-500x500.jpg",
+    "duration": 238,
+    "stream_url": "https://aac.saavncdn.com/289/9c9f587b41770bcd5acf3f1dd413b82a_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "IOXPUUUi",
+    "title": "2g Swami Ku 5g Stree",
+    "artist": "S Jitu",
+    "album": "2g Swami Ku 5g Stree",
+    "image": "https://c.saavncdn.com/033/2g-Swami-Ku-5g-Stree-Oriya-2025-20251201000000-500x500.jpg",
+    "duration": 311,
+    "stream_url": "https://aac.saavncdn.com/033/028dae446211640d9862f00563feef5c_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "IO3yKLZt",
+    "title": "Ganga Je Deshe Bahe (Part 2)",
+    "artist": "Nirmala Mishra",
+    "album": "Stree",
+    "image": "https://c.saavncdn.com/430/Stree-Oriya-1968-20220502083556-500x500.jpg",
+    "duration": 188,
+    "stream_url": "https://aac.saavncdn.com/430/013e4898c7e974eb90f1c61d6d1f1f79_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "5YxMbgvU",
+    "title": "Street Soja, Pt. 2",
+    "artist": "Varna TG",
+    "album": "Soul Of Anamika",
+    "image": "https://c.saavncdn.com/536/Soul-Of-Anamika-Malayalam-2020-20220506190059-500x500.jpg",
+    "duration": 244,
+    "stream_url": "https://aac.saavncdn.com/536/25b12c4743c7e0439c1b49774af28a8e_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "l6bfMggr",
+    "title": "Gravity Falls 2",
+    "artist": "Nightdrive",
+    "album": "Street Dance",
+    "image": "https://c.saavncdn.com/224/Street-Dance-Instrumental-2020-20221224032923-500x500.jpg",
+    "duration": 309,
+    "stream_url": "https://aac.saavncdn.com/224/7cfb43391290715a4ab2525caaa3f76e_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "TnbQig_0",
+    "title": "Data Stream 2",
+    "artist": "Karim Younouss",
+    "album": "Digital Veins",
+    "image": "https://c.saavncdn.com/720/Digital-Veins-Instrumental-2025-20250515104335-500x500.jpg",
+    "duration": 134,
+    "stream_url": "https://aac.saavncdn.com/720/0d196a5d01c4f28a0351e7c37cf08937_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "N3qT4wsn",
+    "title": "Street Cred 2",
+    "artist": "Michael Corn",
+    "album": "Peach Zebra, Set 2",
+    "image": "https://c.saavncdn.com/229/Peach-Zebra-Set-2-Instrumental-2021-20220225151327-500x500.jpg",
+    "duration": 130,
+    "stream_url": "https://aac.saavncdn.com/229/4a77dec12e8fef23b5d821b8c6690bb0_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "TDxSCKUd",
+    "title": "Gathering Strength 2",
+    "artist": "Storyteller",
+    "album": "Fragile",
+    "image": "https://c.saavncdn.com/614/Fragile-Instrumental-2026-20260403163249-500x500.jpg",
+    "duration": 172,
+    "stream_url": "https://aac.saavncdn.com/614/ad7a46f3c09f7fce6d02eae39701d4d6_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "ikSWtEZC",
+    "title": "Hay Hay Hay Kori Ki Upay, Pt. 2 (Stree)",
+    "artist": "Runa Laila",
+    "album": "Stree",
+    "image": "https://c.saavncdn.com/014/Stree-Bengali-2025-20260730222025-500x500.jpg",
+    "duration": 56,
+    "stream_url": "https://aac.saavncdn.com/014/73b42dcc6b4db4597a6ae7e06d466645_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "MrB-ocP-",
+    "title": "Koto Je Shopno Chilo, Pt. 2 (Stree)",
+    "artist": "Sabina Yasmin",
+    "album": "Stree",
+    "image": "https://c.saavncdn.com/014/Stree-Bengali-2025-20260730222025-500x500.jpg",
+    "duration": 53,
+    "stream_url": "https://aac.saavncdn.com/014/c9ad1707adf9f1eb5b97dda421c25be1_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "YaCFv7MG",
+    "title": "Ei Din Chirodin Jibone, Pt. 2 (Stree)",
+    "artist": "Sabina Yasmin",
+    "album": "Stree",
+    "image": "https://c.saavncdn.com/014/Stree-Bengali-2025-20260730222025-500x500.jpg",
+    "duration": 54,
+    "stream_url": "https://aac.saavncdn.com/014/a50d674f360ec0006b13306f24b4a61c_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "DboCgmHn",
+    "title": "Jemon Sapinike Posh Manay Ojha,Pt. 2",
+    "artist": "Manna Dey",
+    "album": "Stree",
+    "image": "https://c.saavncdn.com/046/Stree-Bengali-1972-20200918163952-500x500.jpg",
+    "duration": 188,
+    "stream_url": "https://aac.saavncdn.com/046/6ba1f748199a5a0131aebb52b3e890d0_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "_MGwOx7W",
+    "title": "Tumi Chilena Jakhon - Version 2",
+    "artist": "Mahtim Shakib",
+    "album": "Stree",
+    "image": "https://c.saavncdn.com/126/Stree-Bengali-2021-20241107051641-500x500.jpg",
+    "duration": 236,
+    "stream_url": "https://aac.saavncdn.com/126/d8a4057389f41fc24c8445d62ee75deb_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "jzr2lw8m",
+    "title": "Tumi Chilena Jokhon, Pt. 2 (Stree)",
+    "artist": "Runa Laila",
+    "album": "Stree",
+    "image": "https://c.saavncdn.com/014/Stree-Bengali-2025-20260730222025-500x500.jpg",
+    "duration": 55,
+    "stream_url": "https://aac.saavncdn.com/014/b9332eb04a7d0ef3ee8ad38c57438485_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "5_3GPLXz",
+    "title": "Streetlight 2",
+    "artist": "M. Rimon Ahamed",
+    "album": "Gun Shot",
+    "image": "https://c.saavncdn.com/073/Gun-Shot-Instrumental-2025-20251203162802-500x500.jpg",
+    "duration": 176,
+    "stream_url": "https://aac.saavncdn.com/073/fe79f301a3f30acd643f2cb8407faee6_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "-fgqes4S",
+    "title": "Vyasa Mahabharathada Stree Patragala Parichaya, Pt. 2",
+    "artist": "Purusha Saraswathi Shatavadhani Dr. R. Ganesh",
+    "album": "Vyasa Mahabharathada Stree Patragala Parichaya",
+    "image": "https://c.saavncdn.com/421/Vyasa-Mahabharathada-Stree-Patragala-Parichaya-Kannada-2022-20220513224814-500x500.jpg",
+    "duration": 672,
+    "stream_url": "https://aac.saavncdn.com/421/7e135ad1a235855f5b2bd8f49c2081c3_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "nM3ZTcDf",
+    "title": "Lagdi Lahore Di (From \"Street Dancer 3D\")",
+    "artist": "Guru Randhawa, Tulsi Kumar",
+    "album": "Hits Of Tulsi Kumar Vol-2",
+    "image": "https://c.saavncdn.com/888/Hits-Of-Tulsi-Kumar-Vol-2-Hindi-2020-20250909131127-500x500.jpg",
+    "duration": 215,
+    "stream_url": "https://aac.saavncdn.com/888/f54fa3e3db5c498e389aa11bd860479e_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "5uFGe0o1",
+    "title": "Milegi Milegi (From \"Stree\")",
+    "artist": "Sachin-Jigar, Mika Singh",
+    "album": "Bollywood Best Party Songs 2018",
+    "image": "https://c.saavncdn.com/862/Bollywood-Best-Party-Songs-2018-Hindi-2018-20181030231536-500x500.jpg",
+    "duration": 153,
+    "stream_url": "https://aac.saavncdn.com/862/6e78fc5f0942acb9c45e19c519ddd125_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "GprpDO4B",
+    "title": "Sitar for Deep Stress Detox",
+    "artist": "Zen Aura",
+    "album": "Sitar for Mental Health Vol. 2",
+    "image": "https://c.saavncdn.com/407/Sitar-for-Mental-Health-Vol-2-Hindi-2026-20260507113517-500x500.jpg",
+    "duration": 229,
+    "stream_url": "https://aac.saavncdn.com/407/ea987c20deaf86aa6877ae69fa28c0bb_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "jH3uu38s",
+    "title": "Rigveda Mantra - 2",
+    "artist": "Dr. Shri Balaji Tambe, Shri Balkrishna Pujari, Shri Vilas Dixit, Shri Mandar Khaladkar",
+    "album": "Stree Santulan",
+    "image": "https://c.saavncdn.com/291/Stree-Santulan-Sanskrit-2008-20190221172318-500x500.jpg",
+    "duration": 786,
+    "stream_url": "https://aac.saavncdn.com/291/de1c191f4b7ce627f1720906e022d128_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "a4RJC4Wo",
+    "title": "Kamariya (From \"Stree\")",
+    "artist": "Aastha Gill, Sachin Sanghvi, Divya Kumar, Jigar Saraiya",
+    "album": "Bollywood Best Party Songs 2018",
+    "image": "https://c.saavncdn.com/862/Bollywood-Best-Party-Songs-2018-Hindi-2018-20181030231536-500x500.jpg",
+    "duration": 187,
+    "stream_url": "https://aac.saavncdn.com/862/5356a639e0a0f28ef4fc0582e13cf116_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "B_8jKYGE",
+    "title": "Khoobsurat (From \"Stree 2\")",
+    "artist": "Sachin-Jigar, Vishal Mishra",
+    "album": "Khoobsurat (From \"Stree 2\")",
+    "image": "https://c.saavncdn.com/344/Khoobsurat-From-Stree-2-Hindi-2024-20250305173304-500x500.jpg",
+    "duration": 244,
+    "stream_url": "https://aac.saavncdn.com/344/f990e544b36ac3d86de08cd2cbd29854_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "ZqMoefNX",
+    "title": "Aayi Nai (From \"Stree 2\")",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Pawan Singh, Simran Choudhary, Divya Kumar",
+    "album": "Aayi Nai (From \"Stree 2\")",
+    "image": "https://c.saavncdn.com/256/Aayi-Nai-From-Stree-2-Hindi-2024-20250305173303-500x500.jpg",
+    "duration": 178,
+    "stream_url": "https://aac.saavncdn.com/256/4f8de2286478f066aab2d96f9905b4fe_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "yxXGru6g",
+    "title": "Stree 2 (Bhojpuri)",
+    "artist": "Parthiv Arya",
+    "album": "Stree 2 (Bhojpuri)",
+    "image": "https://c.saavncdn.com/397/Stree-2-Bhojpuri-Bhojpuri-2024-20240829071035-500x500.jpg",
+    "duration": 281,
+    "stream_url": "https://aac.saavncdn.com/397/75fa74f106f87c51fcc4c56efc2ce149_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "0m1KIvNi",
+    "title": "Tumhare Hi Rahenge Hum (From \"Stree 2\")",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Varun Jain, Shilpa Rao",
+    "album": "Tumhare Hi Rahenge Hum (From \"Stree 2\")",
+    "image": "https://c.saavncdn.com/277/Tumhare-Hi-Rahenge-Hum-From-Stree-2-Hindi-2024-20250305173304-500x500.jpg",
+    "duration": 230,
+    "stream_url": "https://aac.saavncdn.com/277/f4508e8761241e7d2045af0734ffccb6_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "_KQJlsPS",
+    "title": "Stree 2 - Mashup",
+    "artist": "DJ BASQUE, Sachin-Jigar, Divya Kumar, Pawan Singh, Madhubanti Bagchi, Vishal Mishra, Shilpa Rao, Varun Jain, Simran Choudhary",
+    "album": "Stree 2 - Mashup",
+    "image": "https://c.saavncdn.com/426/Stree-2-Mashup-Hindi-2026-20260317083343-500x500.jpg",
+    "duration": 223,
+    "stream_url": "https://aac.saavncdn.com/426/7471b47efa9d2c14a587df4fc4864c12_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "Vq112z6X",
+    "title": "Aaj Ki Raat (From \"Stree 2\")",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Madhubanti Bagchi, Divya Kumar",
+    "album": "Aaj Ki Raat (From \"Stree 2\")",
+    "image": "https://c.saavncdn.com/094/Aaj-Ki-Raat-From-Stree-2-Hindi-2024-20250305173303-500x500.jpg",
+    "duration": 228,
+    "stream_url": "https://aac.saavncdn.com/094/812cfa7501e465aaf48fb380d9dfc111_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "OLR5vaQP",
+    "title": "Khoobsurat",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Vishal Mishra",
+    "album": "Stree 2",
+    "image": "https://c.saavncdn.com/373/Stree-2-Hindi-2024-20240828083834-500x500.jpg",
+    "duration": 244,
+    "stream_url": "https://aac.saavncdn.com/373/6fceb8fe15f321872661c0835b6303b3_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "ZsGGaRro",
+    "title": "Aayi Nai",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Pawan Singh, Simran Choudhary, Divya Kumar",
+    "album": "Stree 2",
+    "image": "https://c.saavncdn.com/373/Stree-2-Hindi-2024-20240828083834-500x500.jpg",
+    "duration": 178,
+    "stream_url": "https://aac.saavncdn.com/373/9a3ad2173b2e80bc6f9655d1da7c8f27_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "3r4R_yeL",
+    "title": "Tumhare Hi Rahenge Hum",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Varun Jain, Shilpa Rao",
+    "album": "Stree 2",
+    "image": "https://c.saavncdn.com/373/Stree-2-Hindi-2024-20240828083834-500x500.jpg",
+    "duration": 230,
+    "stream_url": "https://aac.saavncdn.com/373/a0958d974322de810950840344956818_320.mp4",
+    "language": "hindi"
+  },
+  {
+    "id": "jrzchK4Q",
+    "title": "Top x Karan Aujla",
+    "artist": "iamnjandu",
+    "album": "Top x Karan Aujla",
+    "image": "https://c.saavncdn.com/573/Top-x-Karan-Aujla-Punjabi-2024-20241025003343-500x500.jpg",
+    "duration": 313,
+    "stream_url": "https://aac.saavncdn.com/573/a095b2cec8991f0f8f2d198a11558145_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "9QK5wxWQ",
+    "title": "Nanak Niva Jo Challe Karan Aujla",
+    "artist": "Bobby Sandhu",
+    "album": "Nanak Niva Jo Challe",
+    "image": "https://c.saavncdn.com/236/Nanak-Niva-Jo-Challe-Punjabi-2020-20211026150547-500x500.jpg",
+    "duration": 36,
+    "stream_url": "https://aac.saavncdn.com/236/30b19cb73fc0012a9b2b208e2e4b73f0_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "qjl-vz-o",
+    "title": "Karan Aujla’s Mixtape",
+    "artist": "Karan Aujla",
+    "album": "Karan Aujla’s Mixtape",
+    "image": "https://c.saavncdn.com/274/Karan-Aujlas-Mixtape-Punjabi-2019-20190823144544-500x500.jpg",
+    "duration": 155,
+    "stream_url": "https://aac.saavncdn.com/274/ac5abd7468b5b78704cd658a4e8d70eb_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "zMccpI8B",
+    "title": "Snitch (feat. Karan Aujla)",
+    "artist": "Elly Mangat",
+    "album": "YEA Babby",
+    "image": "https://c.saavncdn.com/177/YEA-Babby-English-2019-20190516153508-500x500.jpg",
+    "duration": 217,
+    "stream_url": "https://aac.saavncdn.com/177/e3f4b5b59a87a72f20e75e2fb93e807e_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "tUjrQD2O",
+    "title": "Daku (feat. Karan Aujla)",
+    "artist": "Elly Mangat",
+    "album": "YEA Babby",
+    "image": "https://c.saavncdn.com/177/YEA-Babby-English-2019-20190516153508-500x500.jpg",
+    "duration": 227,
+    "stream_url": "https://aac.saavncdn.com/177/abae39e3ae25633b4ac829810b9a5a34_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "17En43ut",
+    "title": "Graribaaz (feat. Karan Aujla)",
+    "artist": "Navjeet Kahlon",
+    "album": "Graribaaz (feat. Karan Aujla)",
+    "image": "https://c.saavncdn.com/663/Graribaaz-feat-Karan-Aujla-Punjabi-2026-20260502043131-500x500.jpg",
+    "duration": 206,
+    "stream_url": "https://aac.saavncdn.com/663/bf3d330d9482248e8451dfa5253f81cf_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "lUVPKaM3",
+    "title": "Tauba Tauba Eclipsa Audio",
+    "artist": "Karan Aujla, Mr Tuomo KORANDER, Mr Tommi VATANEN",
+    "album": "Tauba Tauba Eclipsa Audio",
+    "image": "https://c.saavncdn.com/284/Tauba-Tauba-Eclipsa-Audio-Hindi-2026-20260910073950-500x500.jpg",
+    "duration": 207,
+    "stream_url": "https://aac.saavncdn.com/284/ac1fcd2d6027309e2c60abb700d1e90b_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "PGnLlPyD",
+    "title": "Awaaz",
+    "artist": "Kamal Khan",
+    "album": "Qismat",
+    "image": "https://c.saavncdn.com/552/Qismat-Punjabi-2018-20181018-500x500.jpg",
+    "duration": 282,
+    "stream_url": "https://aac.saavncdn.com/552/a9774592735544848316c8d331e53caf_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "iRj6bO4G",
+    "title": "Bijliaan",
+    "artist": "B Praak",
+    "album": "Badnaam (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/791/Badnaam-Original-Motion-Picture-Soundtrack-Punjabi-2026-20260514143351-500x500.jpg",
+    "duration": 178,
+    "stream_url": "https://aac.saavncdn.com/791/f7fb73d5c7fbeb18a0eaaac7eb1359ff_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "RqRHgSKw",
+    "title": "Mohabbat",
+    "artist": "B Praak, Amrit Dhillon, Avvy Sra",
+    "album": "Ishqa'n De Lekhe (Original Motion Picture Soundtrack)",
+    "image": "https://c.saavncdn.com/372/Ishqa-n-De-Lekhe-Original-Motion-Picture-Soundtrack-Punjabi-2026-20260307003612-500x500.jpg",
+    "duration": 201,
+    "stream_url": "https://aac.saavncdn.com/372/6f3c4d01d4e45be272566a7b23d514b1_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "6Q3938VR",
+    "title": "Mal Mal",
+    "artist": "B Praak, Jaani",
+    "album": "Mal Mal",
+    "image": "https://c.saavncdn.com/192/Mal-Mal-Punjabi-2023-20231019053531-500x500.jpg",
+    "duration": 273,
+    "stream_url": "https://aac.saavncdn.com/192/879dd7ab83b0e69b08dad216b8045d6d_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "T2F1R-eu",
+    "title": "Jaani & B Praak (Live)",
+    "artist": "Jaani, B Praak",
+    "album": "Jaani & B Praak (Live)",
+    "image": "https://c.saavncdn.com/334/Jaani-B-Praak-Live-Punjabi-2018-20180131-500x500.jpg",
+    "duration": 297,
+    "stream_url": "https://aac.saavncdn.com/334/53835ce726a6c2d00ff38dd771d0ef25_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "3xe6HqPs",
+    "title": "Laare - New",
+    "artist": "Maninder Buttar",
+    "album": "Laare - New",
+    "image": "https://c.saavncdn.com/436/Laare-New-Punjabi-2020-20260401032208-500x500.jpg",
+    "duration": 267,
+    "stream_url": "https://aac.saavncdn.com/436/d5c9185d789f9ce3910f214656f39dfc_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "pwwHrRhf",
+    "title": "Laare",
+    "artist": "Maninder Buttar",
+    "album": "Punjabi Vibes Only",
+    "image": "https://c.saavncdn.com/475/Punjabi-Vibes-Only-Punjabi-2026-20260813132444-500x500.jpg",
+    "duration": 270,
+    "stream_url": "https://aac.saavncdn.com/475/7d00cb1bdf32eaa5d1d8c8a836427ec1_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "BjjOXrhW",
+    "title": "Fight",
+    "artist": "Jordan Sandhu, K.S Makhan, Avvy Sra",
+    "album": "Fight",
+    "image": "https://c.saavncdn.com/645/Fight-Punjabi-2023-20231007150624-500x500.jpg",
+    "duration": 184,
+    "stream_url": "https://aac.saavncdn.com/645/8cf6dafe7fab136358ca2618b056a167_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "bQ9qhL78",
+    "title": "Defend",
+    "artist": "Jordan Sandhu",
+    "album": "Defend",
+    "image": "https://c.saavncdn.com/268/Defend-Punjabi-2020-20200716102357-500x500.jpg",
+    "duration": 173,
+    "stream_url": "https://aac.saavncdn.com/268/dcf5fcb8c109cab45b0c045fd27b376a_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "Wzl_TOMU",
+    "title": "Jodhpur",
+    "artist": "Dilpreet Dhillon, Jordan Sandhu, Hashneen Chauhan",
+    "album": "Next Chapter",
+    "image": "https://c.saavncdn.com/083/Next-Chapter-Punjabi-2021-20210624122208-500x500.jpg",
+    "duration": 212,
+    "stream_url": "https://aac.saavncdn.com/083/aa2dd93a3d4bfa8a227058473f36b11e_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "3S41oiZy",
+    "title": "Muchh Phut Gabhru",
+    "artist": "Jordan Sandhu",
+    "album": "Muchh Phut Gabhru",
+    "image": "https://c.saavncdn.com/962/Muchh-Phut-Gabhru-Punjabi-2015-500x500.jpg",
+    "duration": 206,
+    "stream_url": "https://aac.saavncdn.com/962/74190c9e9d4bdf0ac416faaf2e9348dd_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "4kAyO3Xe",
+    "title": "Talk",
+    "artist": "Jordan Sandhu",
+    "album": "Never Before",
+    "image": "https://c.saavncdn.com/801/Never-Before-Punjabi-2023-20230424135618-500x500.jpg",
+    "duration": 171,
+    "stream_url": "https://aac.saavncdn.com/801/f7e69bf5f70d25e1ef3d7a60902a985a_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "pk7yJ61E",
+    "title": "Mashoor Ho Giya",
+    "artist": "Jordan Sandhu",
+    "album": "Mashoor Ho Giya",
+    "image": "https://c.saavncdn.com/938/Mashoor-Ho-Giya-Punjabi-2020-20200131215355-500x500.jpg",
+    "duration": 234,
+    "stream_url": "https://aac.saavncdn.com/938/14e3f7b8110edbac4fc180754eefc6a9_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "FaFIwbtS",
+    "title": "Shohrat",
+    "artist": "Jordan Sandhu",
+    "album": "Shohrat",
+    "image": "https://c.saavncdn.com/711/Shohrat-Punjabi-2023-20240828060801-500x500.jpg",
+    "duration": 219,
+    "stream_url": "https://aac.saavncdn.com/711/bb64c14f7dce32cf3066398b738ce984_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "fqNk4DJf",
+    "title": "Info",
+    "artist": "Jordan Sandhu, Gurlej Akhtar",
+    "album": "Info",
+    "image": "https://c.saavncdn.com/485/Info-Punjabi-2020-20201103132610-500x500.jpg",
+    "duration": 200,
+    "stream_url": "https://aac.saavncdn.com/485/edda7cf161fc405ac839174970b1b5ee_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "i6TgFiIZ",
+    "title": "Rank 1",
+    "artist": "Jordan Sandhu",
+    "album": "Jordan Sandhu Hits",
+    "image": "https://c.saavncdn.com/624/Jordan-Sandhu-Hits-Punjabi-2023-20230525162554-500x500.jpg",
+    "duration": 179,
+    "stream_url": "https://aac.saavncdn.com/624/2322716b6d2e897a183c91ecd82349ff_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "3KgoNKfx",
+    "title": "Botal Free",
+    "artist": "Jordan Sandhu",
+    "album": "Botal Free",
+    "image": "https://c.saavncdn.com/311/Botal-Free-Punjabi-2020-20241115051256-500x500.jpg",
+    "duration": 213,
+    "stream_url": "https://aac.saavncdn.com/311/e13d965c701b0fea2546adb8ce74965f_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "Ps-auvGk",
+    "title": "Do Vaari Jatt",
+    "artist": "Jordan Sandhu",
+    "album": "Do Vaari Jatt",
+    "image": "https://c.saavncdn.com/967/Do-Vaari-Jatt-Punjabi-2021-20260901133317-500x500.jpg",
+    "duration": 163,
+    "stream_url": "https://aac.saavncdn.com/967/4a8b6b9ddb45455370604b2a83bac997_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "PAtCunvC",
+    "title": "Gutt",
+    "artist": "Arjan Dhillon",
+    "album": "Gutt",
+    "image": "https://c.saavncdn.com/371/Gutt-Punjabi-2021-20231007154057-500x500.jpg",
+    "duration": 219,
+    "stream_url": "https://aac.saavncdn.com/371/6a25948ef4cdc74ad26279a0a47bc085_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "Oo6uGjd5",
+    "title": "3 Shaukk (From \"De De Pyaar De 2\")",
+    "artist": "Jaani, Karan Aujla, Avvy Sra",
+    "album": "3 Shaukk (From \"De De Pyaar De 2\")",
+    "image": "https://c.saavncdn.com/335/3-Shaukk-From-De-De-Pyaar-De-2-Hindi-2025-20251103131003-500x500.jpg",
+    "duration": 180,
+    "stream_url": "https://aac.saavncdn.com/335/c2bef3b1cf6387e7fb357d10bd2d5c56_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "6XYqLnmx",
+    "title": "Haan Haige Aa",
+    "artist": "Karan Aujla, Gurlej Akhtar",
+    "album": "Haan Haige Aa",
+    "image": "https://c.saavncdn.com/798/Haan-Haige-Aa-Punjabi-2020-20200727145456-500x500.jpg",
+    "duration": 241,
+    "stream_url": "https://aac.saavncdn.com/798/eee37428321c9cb76711a41e6a7841d7_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "LQRWCV01",
+    "title": "God Damn",
+    "artist": "Badshah, Karan Aujla, Hiten",
+    "album": "God Damn",
+    "image": "https://c.saavncdn.com/990/God-Damn-Punjabi-2024-20240404152527-500x500.jpg",
+    "duration": 167,
+    "stream_url": "https://aac.saavncdn.com/990/a70f4942ad3374f7d3153f1c946506a0_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "s-Lt9wFL",
+    "title": "Don't Look",
+    "artist": "Karan Aujla",
+    "album": "Don't Look",
+    "image": "https://c.saavncdn.com/014/Don-t-Look-Punjabi-2020-20260609210609-500x500.jpg",
+    "duration": 186,
+    "stream_url": "https://aac.saavncdn.com/014/e36c5ffd4343037dc04ead0fdfc3b779_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "cRuFRkDP",
+    "title": "Players",
+    "artist": "Badshah, Karan Aujla",
+    "album": "Players",
+    "image": "https://c.saavncdn.com/843/Players-Hindi-2022-20221220210631-500x500.jpg",
+    "duration": 171,
+    "stream_url": "https://aac.saavncdn.com/843/2b84943438d47dd6bdb3fa077e3d8943_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "VD-330VU",
+    "title": "Straight Up",
+    "artist": "Karan Aujla, MXRCI",
+    "album": "AUJLA SZN 1",
+    "image": "https://c.saavncdn.com/918/AUJLA-SZN-1-Punjabi-2026-20260925122119-500x500.jpg",
+    "duration": 214,
+    "stream_url": "https://aac.saavncdn.com/918/d79edf9713bb539908aef701832acbca_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "LlO6tbaL",
+    "title": "Sheeshe Wali Chunni (From \"Glory\")",
+    "artist": "Yo Yo Honey Singh, Girik Aman, Kartavya, Khaab, KD DESIROCK, Leo Grewal",
+    "album": "Yo Yo's Beat Drop",
+    "image": "https://c.saavncdn.com/694/Yo-Yo-s-Beat-Drop-Hindi-2025-20251211161314-500x500.jpg",
+    "duration": 189,
+    "stream_url": "https://aac.saavncdn.com/694/f76ab80378dc26c24596f56f40e6d818_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "2XpbHZY3",
+    "title": "Maniac - Bonus Track [From \"Glory\"] (From \"Maniac - Bonus Track [From \"Glory\"]\")",
+    "artist": "Yo Yo Honey Singh, Ragini Vishwakarma, Arjun Ajnabee",
+    "album": "World Music Day",
+    "image": "https://c.saavncdn.com/495/World-Music-Day-Hindi-2025-20260217171350-500x500.jpg",
+    "duration": 173,
+    "stream_url": "https://aac.saavncdn.com/495/1c86083bb11a0a24f234dfc9da18c384_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "d9wkirN3",
+    "title": "Jatt Mehkma (From \"Glory\")",
+    "artist": "Yo Yo Honey Singh, Leo Grewal",
+    "album": "The Party Mix 2024",
+    "image": "https://c.saavncdn.com/110/The-Party-Mix-2024-Hindi-2024-20251203181833-500x500.jpg",
+    "duration": 195,
+    "stream_url": "https://aac.saavncdn.com/110/8c06a1c21a8eeb03f879cfc8f4f1bbef_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "dKZddsxY",
+    "title": "Millionaire (From \"Glory\")",
+    "artist": "Yo Yo Honey Singh, Leo Grewal",
+    "album": "The Party Mix 2024",
+    "image": "https://c.saavncdn.com/110/The-Party-Mix-2024-Hindi-2024-20251203181833-500x500.jpg",
+    "duration": 199,
+    "stream_url": "https://aac.saavncdn.com/110/a32204c266d97d4348d4585cafd84c6b_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "gYEmpuzC",
+    "title": "Payal (From \"Glory\")",
+    "artist": "Yo Yo Honey Singh, Paradox",
+    "album": "Nora's Global Grooves",
+    "image": "https://c.saavncdn.com/652/Nora-s-Global-Grooves-Hindi-2025-20250207121050-500x500.jpg",
+    "duration": 226,
+    "stream_url": "https://aac.saavncdn.com/652/0bda417ea2321452b95ecf94d2126c51_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "MCryivgC",
+    "title": "Down Let Me Down",
+    "artist": "AP Dhillon",
+    "album": "Down Let Me Down",
+    "image": "https://c.saavncdn.com/311/Down-Let-Me-Down-Instrumental-2023-20230111185513-500x500.jpg",
+    "duration": 118,
+    "stream_url": "https://aac.saavncdn.com/311/09354027964afe1f19877a3bcd13f50d_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "9D5z9xyx",
+    "title": "Deadly",
+    "artist": "AP Dhillon, Gminxr",
+    "album": "Deadly",
+    "image": "https://c.saavncdn.com/810/Deadly-Unknown-2020-20200808102020-500x500.jpg",
+    "duration": 158,
+    "stream_url": "https://aac.saavncdn.com/810/fa60369f8058942de246eb9d71a0b4e9_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "YCTnxVKc",
+    "title": "Fake",
+    "artist": "AP Dhillon, Gminxr",
+    "album": "Fake",
+    "image": "https://c.saavncdn.com/089/Fake-Unknown-2019-20200807101544-500x500.jpg",
+    "duration": 205,
+    "stream_url": "https://aac.saavncdn.com/089/fc0a26aa22582f0334ab21cdd82660aa_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "a18yXlfo",
+    "title": "Hills",
+    "artist": "AP Dhillon",
+    "album": "Two Hearts Never Break The Same",
+    "image": "https://c.saavncdn.com/070/Two-Hearts-Never-Break-The-Same-Punjabi-2022-20240704060923-500x500.jpg",
+    "duration": 160,
+    "stream_url": "https://aac.saavncdn.com/070/3ffa9ba24f5adc023a1817ec8ba7a4dc_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "AZ64caza",
+    "title": "AGAINST ALL ODDS",
+    "artist": "AP Dhillon, Gurinder Gill, Gminxr, Shinda Kahlon",
+    "album": "HIDDEN GEMS",
+    "image": "https://c.saavncdn.com/678/HIDDEN-GEMS-Punjabi-2021-20220110194642-500x500.jpg",
+    "duration": 171,
+    "stream_url": "https://aac.saavncdn.com/678/1d228e825dc07e8e333f44594c7ac035_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "nhfDj8e9",
+    "title": "Most Wanted",
+    "artist": "AP Dhillon, Gurinder Gill, Gminxr",
+    "album": "Most Wanted",
+    "image": "https://c.saavncdn.com/747/Most-Wanted-Unknown-2020-20200822214420-500x500.jpg",
+    "duration": 184,
+    "stream_url": "https://aac.saavncdn.com/747/1177641a1cd25e2f5df2358551e5c70e_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "a4orROWh",
+    "title": "Top Boy",
+    "artist": "AP Dhillon",
+    "album": "Top Boy",
+    "image": "https://c.saavncdn.com/089/Top-Boy-Unknown-2019-20200807101439-500x500.jpg",
+    "duration": 137,
+    "stream_url": "https://aac.saavncdn.com/089/10db752927880d47b247e8285582e728_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "F46V7upc",
+    "title": "Final Thoughts",
+    "artist": "AP Dhillon, Shinda Kahlon, Gminxr",
+    "album": "Two Hearts Never Break The Same",
+    "image": "https://c.saavncdn.com/070/Two-Hearts-Never-Break-The-Same-Punjabi-2022-20240704060923-500x500.jpg",
+    "duration": 192,
+    "stream_url": "https://aac.saavncdn.com/070/3f7e0a6ef440dae7c9bbba5e33808362_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "G3mCKakA",
+    "title": "GALLAN",
+    "artist": "AP Dhillon",
+    "album": "GALLAN",
+    "image": "https://c.saavncdn.com/298/GALLAN-Hindi-2024-20240514133749-500x500.jpg",
+    "duration": 127,
+    "stream_url": "https://aac.saavncdn.com/298/9566af16409fc7e2451118731859338f_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "qD2kiJ7t",
+    "title": "WAR",
+    "artist": "AP Dhillon, Gurinder Gill",
+    "album": "HIDDEN GEMS",
+    "image": "https://c.saavncdn.com/678/HIDDEN-GEMS-Punjabi-2021-20220110194642-500x500.jpg",
+    "duration": 222,
+    "stream_url": "https://aac.saavncdn.com/678/01d3e712ca8684828e1fd34a431de549_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "ZYfrYYS4",
+    "title": "Crazy in Love",
+    "artist": "Srmn",
+    "album": "Crazy in Love",
+    "image": "https://c.saavncdn.com/576/Crazy-in-Love-English-2023-20231227172211-500x500.jpg",
+    "duration": 206,
+    "stream_url": "https://aac.saavncdn.com/576/89075bbd1606457d3e96f5da058da8eb_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "mmalib2B",
+    "title": "NEVER LET YOU GO",
+    "artist": "AP Dhillon, Omah lay, Steel Banglez",
+    "album": "NEVER LET YOU GO",
+    "image": "https://c.saavncdn.com/670/NEVER-LET-YOU-GO-Punjabi-2025-20250312152242-500x500.jpg",
+    "duration": 191,
+    "stream_url": "https://aac.saavncdn.com/670/80f3b44750fe657bab56a37b0a214b97_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "cOKnAIb2",
+    "title": "Real Talk",
+    "artist": "AP Dhillon, Shinda Kahlon",
+    "album": "Real Talk",
+    "image": "https://c.saavncdn.com/569/Real-Talk-Punjabi-2024-20240308080937-500x500.jpg",
+    "duration": 158,
+    "stream_url": "https://aac.saavncdn.com/569/c121b39765e7e7ffc99dd64226d26265_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "_J39PskF",
+    "title": "Feels",
+    "artist": "AP Dhillon, Gurinder Gill, Gminxr",
+    "album": "Feels",
+    "image": "https://c.saavncdn.com/415/Feels-Unknown-2020-20200807101204-500x500.jpg",
+    "duration": 151,
+    "stream_url": "https://aac.saavncdn.com/415/ce5ef8e984fed564c421245f9ed6fced_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "IElSchxb",
+    "title": "Sleepless",
+    "artist": "AP Dhillon",
+    "album": "Sleepless",
+    "image": "https://c.saavncdn.com/375/Sleepless-Punjabi-2023-20230709131540-500x500.jpg",
+    "duration": 156,
+    "stream_url": "https://aac.saavncdn.com/375/076f460fdf851c96ad84d6a114fa16fa_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "vTmj8Asw",
+    "title": "Problems Over Peace",
+    "artist": "AP Dhillon, Stormzy",
+    "album": "Problems Over Peace",
+    "image": "https://c.saavncdn.com/798/Problems-Over-Peace-Punjabi-2024-20240402091124-500x500.jpg",
+    "duration": 158,
+    "stream_url": "https://aac.saavncdn.com/798/4802d6469effec130ff165da7af24a50_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "pP1ja9XV",
+    "title": "All Night (Live)",
+    "artist": "AP Dhillon, Shinda Kahlon",
+    "album": "Two Hearts Never Break The Same",
+    "image": "https://c.saavncdn.com/070/Two-Hearts-Never-Break-The-Same-Punjabi-2022-20240704060923-500x500.jpg",
+    "duration": 230,
+    "stream_url": "https://aac.saavncdn.com/070/7133fab6231593c65343918ef9255eec_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "2j8tvXP-",
+    "title": "MAJHE AALE",
+    "artist": "AP Dhillon, Shinda Kahlon, Gurinder Gill, Gminxr",
+    "album": "HIDDEN GEMS",
+    "image": "https://c.saavncdn.com/678/HIDDEN-GEMS-Punjabi-2021-20220110194642-500x500.jpg",
+    "duration": 171,
+    "stream_url": "https://aac.saavncdn.com/678/7d6ae4688b21f803a64be5c51a98951e_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "qyBYf1rk",
+    "title": "Lifestyle",
+    "artist": "AP Dhillon, Shinda Kahlon",
+    "album": "First of a Kind (From the Amazon Original Series)",
+    "image": "https://c.saavncdn.com/671/First-of-a-Kind-From-the-Amazon-Original-Series-Punjabi-2023-20230904091351-500x500.jpg",
+    "duration": 165,
+    "stream_url": "https://aac.saavncdn.com/671/138a39bad0482cd4cb158c2e7a8948d4_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "4l8YmBGp",
+    "title": "Faraar",
+    "artist": "Gurinder Gill, Shinda Kahlon, AP Dhillon",
+    "album": "Faraar",
+    "image": "https://c.saavncdn.com/860/Faraar-Unknown-2019-20200807101453-500x500.jpg",
+    "duration": 130,
+    "stream_url": "https://aac.saavncdn.com/860/0e5e8877211491f919570ad0f9741892_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "-zgaZsDg",
+    "title": "Ishq Di Baajiyaan",
+    "artist": "Diljit Dosanjh, Shankar-Ehsaan-Loy",
+    "album": "Soorma",
+    "image": "https://c.saavncdn.com/193/Soorma-Hindi-2018-20180702111043-500x500.jpg",
+    "duration": 287,
+    "stream_url": "https://aac.saavncdn.com/193/e46c53330475f09cb10b80c6a98ce998_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "yWIzzs8Z",
+    "title": "5 Taara",
+    "artist": "Diljit Dosanjh, Jatinder Shah",
+    "album": "5 Taara",
+    "image": "https://c.saavncdn.com/003/5-Taara-Punjabi-2015-500x500.jpg",
+    "duration": 148,
+    "stream_url": "https://aac.saavncdn.com/003/5b8ed0419bc878fbdc9c615a0a915e65_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "vqUWRoDB",
+    "title": "Ud-daa Punjab",
+    "artist": "Amit Trivedi, Vishal Dadlani",
+    "album": "Josh High. Game On - Bollywood Energy",
+    "image": "https://c.saavncdn.com/133/Josh-High-Game-On-Bollywood-Energy-Hindi-2026-20260619182728-500x500.jpg",
+    "duration": 274,
+    "stream_url": "https://aac.saavncdn.com/133/8511d3170149cee571cdb3b75f09ad2d_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "OHNvAKso",
+    "title": "0 To 100",
+    "artist": "Sidhu Moose Wala",
+    "album": "No Name",
+    "image": "https://c.saavncdn.com/448/No-Name-Punjabi-2022-20260626154650-500x500.jpg",
+    "duration": 108,
+    "stream_url": "https://aac.saavncdn.com/448/c97464265832e3328fa1c77e4ec81d37_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "WYxrP6O7",
+    "title": "Lock",
+    "artist": "Sidhu Moose Wala, The Kidd",
+    "album": "Lock",
+    "image": "https://c.saavncdn.com/101/Lock-Punjabi-2025-20260626153045-500x500.jpg",
+    "duration": 175,
+    "stream_url": "https://aac.saavncdn.com/101/a98c7fd7a889291f84becffa381feb14_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "LJKemRYq",
+    "title": "Game",
+    "artist": "Shooter Kahlon, Sidhu Moose Wala",
+    "album": "Game",
+    "image": "https://c.saavncdn.com/438/Game-Punjabi-2020-20200902131151-500x500.jpg",
+    "duration": 274,
+    "stream_url": "https://aac.saavncdn.com/438/3d382fe30e30c4d5ba6c44ebc8894698_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "aN4w2mP4",
+    "title": "B-Town",
+    "artist": "Sidhu Moose Wala",
+    "album": "B-Town",
+    "image": "https://c.saavncdn.com/612/B-Town-Punjabi-2019-20191004113158-500x500.jpg",
+    "duration": 182,
+    "stream_url": "https://aac.saavncdn.com/612/75cb353237f9b9a8c6662abe3a3f9a32_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "Up7mzwxZ",
+    "title": "Sohne Lagde",
+    "artist": "Sidhu Moose Wala",
+    "album": "Sohne Lagde",
+    "image": "https://c.saavncdn.com/019/Sohne-Lagde-Punjabi-2019-20190711123648-500x500.jpg",
+    "duration": 209,
+    "stream_url": "https://aac.saavncdn.com/019/2c7594980ce1b69a2f4132526cf576cb_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "NGYebw-i",
+    "title": "Badfella",
+    "artist": "Sidhu Moose Wala",
+    "album": "Pbx 1",
+    "image": "https://c.saavncdn.com/588/Pbx-1-Punjabi-2018-20181018-500x500.jpg",
+    "duration": 218,
+    "stream_url": "https://aac.saavncdn.com/588/76bb023318861f903ccad6e78cc23540_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "IVtCu-7Z",
+    "title": "Dollar",
+    "artist": "Sidhu Moose Wala",
+    "album": "Dakuaan Da Munda",
+    "image": "https://c.saavncdn.com/890/Dakuaan-Da-Munda-Punjabi-2018-20240821045152-500x500.jpg",
+    "duration": 157,
+    "stream_url": "https://aac.saavncdn.com/890/569094adbcd170e59a791dcf26748ee3_320.mp4",
+    "language": "punjabi"
+  },
+  {
+    "id": "T7f147sX",
+    "title": "Ghostface Killah",
+    "artist": "Sidhu Moose Wala, MXRCI",
+    "album": "Ghostface Killah",
+    "image": "https://c.saavncdn.com/930/Ghostface-Killah-Punjabi-2026-20260921193403-500x500.jpg",
+    "duration": 137,
+    "stream_url": "https://aac.saavncdn.com/930/25735de6056f5c5029cb79ea79c6e512_320.mp4",
+    "language": "punjabi"
+  },
+  {
     "id": "as1_ashke",
     "title": "Ashke",
     "artist": "Karan Aujla, MXRCI",

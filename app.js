@@ -563,17 +563,15 @@ class PlayifyEngine {
     const isHttp = (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http'));
     const isFileScheme = (typeof window !== 'undefined' && window.location && window.location.protocol === 'file:');
 
-    // 1. Universal Same-Origin Backend / Edge API Proxy (Works across Cloudflare, localhost, custom domains, Render, etc.)
-    if (isHttp) {
-      try {
-        const edgeProxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
-        const edgeRes = await fetch(edgeProxyUrl, { signal: AbortSignal.timeout(3500) });
-        if (edgeRes.ok) {
-          const data = await edgeRes.json();
-          if (data && !data.error) return data;
-        }
-      } catch(e) {}
-    }
+    // 1. Universal Edge API Proxy (Works across Cloudflare, GitHub Pages, Android APK, localhost, etc.)
+    try {
+      const edgeProxyUrl = `${this.getApiBase()}/api/proxy?url=${encodeURIComponent(url)}`;
+      const edgeRes = await fetch(edgeProxyUrl, { signal: AbortSignal.timeout(3500) });
+      if (edgeRes.ok) {
+        const data = await edgeRes.json();
+        if (data && !data.error) return data;
+      }
+    } catch(e) {}
 
     // 2. Direct asynchronous fetch (In Android WebView, intercepted by PlayifyWebClient on background thread with full CORS/UA)
     try {
@@ -1031,7 +1029,7 @@ class PlayifyEngine {
       // 1. Check local dynamic cache (ensures offline persistence of remote synced songs)
       let cachedCharts = null;
       try {
-        const raw = localStorage.getItem('playify_dynamic_charts_v90');
+        const raw = localStorage.getItem('playify_dynamic_charts_v91');
         if (raw) cachedCharts = JSON.parse(raw);
       } catch(e) {}
 
@@ -1088,47 +1086,70 @@ class PlayifyEngine {
 
       for (const endpoint of endpoints) {
         try {
-          const res = await fetch(endpoint, { signal: AbortSignal.timeout(5000) });
+          const res = await fetch(endpoint, { signal: AbortSignal.timeout(6000) });
           if (res.ok) {
             const data = await res.json();
-            let newSongs = [];
-            if (data.status === 'success' && Array.isArray(data.songs)) {
-              newSongs = data.songs;
-            } else if (data.sections && data.sections.trending_punjabi) {
-              newSongs = data.sections.trending_punjabi;
-            } else if (Array.isArray(data.trending_punjabi)) {
-              newSongs = data.trending_punjabi;
-            }
+            if (!this.homeData) this.homeData = {};
+            if (!this.homeData.sections) this.homeData.sections = {};
 
-            if (newSongs.length > 0) {
-              if (!this.homeData) this.homeData = {};
-              if (!this.homeData.sections) this.homeData.sections = {};
+            let updated = false;
 
-              const existing = this.homeData.sections.trending_punjabi || this.homeData.trending_punjabi || [];
-              const seen = new Set(newSongs.map(s => s.id));
-              const merged = [...newSongs, ...existing.filter(s => !seen.has(s.id))];
+            // 1. If full charts JSON with multiple sections (trending_punjabi, bollywood_top, etc.)
+            if (data.sections && typeof data.sections === 'object') {
+              for (const [secKey, secSongs] of Object.entries(data.sections)) {
+                if (Array.isArray(secSongs) && secSongs.length > 0) {
+                  const existing = this.homeData.sections[secKey] || [];
+                  const seen = new Set(secSongs.map(s => s.id));
+                  const merged = [...secSongs, ...existing.filter(s => !seen.has(s.id))];
+                  this.homeData.sections[secKey] = merged;
+                  if (secKey === 'trending_punjabi') this.homeData.trending_punjabi = merged;
 
-              this.homeData.sections.trending_punjabi = merged;
-              this.homeData.trending_punjabi = merged;
-
-              // Also merge into musicDB for instant search discovery
-              if (Array.isArray(this.musicDB)) {
-                const dbSeen = new Set(this.musicDB.map(s => s.id));
-                for (const ns of newSongs) {
-                  if (!dbSeen.has(ns.id)) {
-                    this.musicDB.unshift(ns);
-                    dbSeen.add(ns.id);
+                  if (Array.isArray(this.musicDB)) {
+                    const dbSeen = new Set(this.musicDB.map(s => s.id));
+                    for (const ns of secSongs) {
+                      if (!dbSeen.has(ns.id)) {
+                        this.musicDB.unshift(ns);
+                        dbSeen.add(ns.id);
+                      }
+                    }
                   }
+                  updated = true;
                 }
-                this.buildDatabaseIndices();
+              }
+            } else {
+              // 2. Single array endpoint (e.g. /api/punjabi/trending)
+              let newSongs = [];
+              if (data.status === 'success' && Array.isArray(data.songs)) {
+                newSongs = data.songs;
+              } else if (Array.isArray(data.trending_punjabi)) {
+                newSongs = data.trending_punjabi;
               }
 
-              // Cache to localStorage for offline access
-              try {
-                localStorage.setItem('playify_dynamic_charts_v90', JSON.stringify(this.homeData));
-              } catch(e) {}
+              if (newSongs.length > 0) {
+                const existing = this.homeData.sections.trending_punjabi || this.homeData.trending_punjabi || [];
+                const seen = new Set(newSongs.map(s => s.id));
+                const merged = [...newSongs, ...existing.filter(s => !seen.has(s.id))];
+                this.homeData.sections.trending_punjabi = merged;
+                this.homeData.trending_punjabi = merged;
 
-              // Re-render home view with newly added live tracks
+                if (Array.isArray(this.musicDB)) {
+                  const dbSeen = new Set(this.musicDB.map(s => s.id));
+                  for (const ns of newSongs) {
+                    if (!dbSeen.has(ns.id)) {
+                      this.musicDB.unshift(ns);
+                      dbSeen.add(ns.id);
+                    }
+                  }
+                }
+                updated = true;
+              }
+            }
+
+            if (updated) {
+              if (Array.isArray(this.musicDB)) this.buildDatabaseIndices();
+              try {
+                localStorage.setItem('playify_dynamic_charts_v91', JSON.stringify(this.homeData));
+              } catch(e) {}
               this.renderHomeViews();
               break;
             }
@@ -1146,7 +1167,7 @@ class PlayifyEngine {
       const res = await fetch('https://guru4code.online/playify/version.json', { signal: AbortSignal.timeout(4000) });
       if (res.ok) {
         const verInfo = await res.json();
-        const currentVer = (typeof window !== 'undefined' && window.PLAYIFY_APP_VERSION) ? window.PLAYIFY_APP_VERSION : 90.0;
+        const currentVer = (typeof window !== 'undefined' && window.PLAYIFY_APP_VERSION) ? window.PLAYIFY_APP_VERSION : 91.0;
         if (verInfo && verInfo.version && verInfo.version > currentVer) {
           this.renderUpdateBanner(verInfo);
         }
@@ -1574,9 +1595,8 @@ class PlayifyEngine {
       if (!playUrl) {
         try {
           const query = `${song.title} ${song.artist}`;
-          const isHttp = (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http'));
-          if (isHttp) {
-            const edgeRes = await fetch(`/api/search?q=${encodeURIComponent(query)}`, { signal: AbortSignal.timeout(3000) });
+          try {
+            const edgeRes = await fetch(`${this.getApiBase()}/api/search?q=${encodeURIComponent(query)}`, { signal: AbortSignal.timeout(3500) });
             if (edgeRes.ok) {
               const edgeData = await edgeRes.json();
               if (edgeData.songs && edgeData.songs.length > 0 && edgeData.songs[0].stream_url) {
@@ -1584,7 +1604,7 @@ class PlayifyEngine {
                 song.stream_url = playUrl;
               }
             }
-          }
+          } catch(e) {}
           if (!playUrl) {
             const searchUrl = `https://www.jiosaavn.com/api.php?__call=search.getResults&_format=json&_marker=0&api_version=4&ctx=web6dot0&n=5&p=1&q=${encodeURIComponent(query)}`;
             const data = await this.safeFetchJson(searchUrl);
@@ -2443,25 +2463,21 @@ class PlayifyEngine {
     const seenArtists = new Set();
     const seenAlbums = new Set();
 
-    const isHttp = (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http'));
-
-    if (isHttp) {
-      try {
-        const edgeRes = await fetch(`/api/search?q=${encodeURIComponent(normalizedQuery)}`, { signal: AbortSignal.timeout(3500) });
-        if (edgeRes.ok) {
-          const edgeData = await edgeRes.json();
-          if (edgeData && (edgeData.songs?.length || edgeData.artists?.length || edgeData.albums?.length)) {
-            const fastRes = {
-              songs: edgeData.songs || [],
-              artists: edgeData.artists || [],
-              albums: edgeData.albums || []
-            };
-            this.searchCache.set(qClean, fastRes);
-            return fastRes;
-          }
+    try {
+      const edgeRes = await fetch(`${this.getApiBase()}/api/search?q=${encodeURIComponent(normalizedQuery)}`, { signal: AbortSignal.timeout(4500) });
+      if (edgeRes.ok) {
+        const edgeData = await edgeRes.json();
+        if (edgeData && (edgeData.songs?.length || edgeData.artists?.length || edgeData.albums?.length)) {
+          const fastRes = {
+            songs: edgeData.songs || [],
+            artists: edgeData.artists || [],
+            albums: edgeData.albums || []
+          };
+          this.searchCache.set(qClean, fastRes);
+          return fastRes;
         }
-      } catch(e) {}
-    }
+      }
+    } catch(e) {}
 
     // 1. Live Global Search (Worldwide — English, Hindi, Punjabi, International Pop, Hip-Hop, etc.)
     try {
@@ -3058,32 +3074,28 @@ class PlayifyEngine {
 
     // 2. Client-Side + Native Bridge Full Dynamic Discography Fetch (Always gives 50+ songs and all albums)
     try {
-      const isHttp = (typeof window !== 'undefined' && window.location && window.location.protocol.startsWith('http'));
-
-      if (isHttp) {
-        try {
-          const edgeRes = await fetch(`/api/artist?name=${encodeURIComponent(cleanArtist)}&id=${encodeURIComponent(artistIdParam || '')}`, { signal: AbortSignal.timeout(4000) });
-          if (edgeRes.ok) {
-            const edgeArt = await edgeRes.json();
-            if (edgeArt && edgeArt.status === 'success' && edgeArt.songs && edgeArt.songs.length > 0) {
-              if (edgeArt.follower_count && listEl) {
-                listEl.textContent = `${edgeArt.follower_count} monthly listeners`;
-              }
-              if (edgeArt.image && banner) {
-                banner.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.2), rgba(18,18,18,0.9)), url("${edgeArt.image}")`;
-              }
-              this.currentArtistAllSongs = edgeArt.songs;
-              this.currentArtistTracks = edgeArt.songs;
-              if (edgeArt.albums && edgeArt.albums.length > 0) {
-                this.currentArtistAllAlbums = edgeArt.albums;
-              }
-              this.renderArtistPopularTracks();
-              this.renderArtistDiscography(this.currentArtistAllAlbums);
-              return;
+      try {
+        const edgeRes = await fetch(`${this.getApiBase()}/api/artist?name=${encodeURIComponent(cleanArtist)}&id=${encodeURIComponent(artistIdParam || '')}`, { signal: AbortSignal.timeout(6000) });
+        if (edgeRes.ok) {
+          const edgeArt = await edgeRes.json();
+          if (edgeArt && edgeArt.status === 'success' && edgeArt.songs && edgeArt.songs.length > 0) {
+            if (edgeArt.follower_count && listEl) {
+              listEl.textContent = `${edgeArt.follower_count} monthly listeners`;
             }
+            if (edgeArt.image && banner) {
+              banner.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.2), rgba(18,18,18,0.9)), url("${edgeArt.image}")`;
+            }
+            this.currentArtistAllSongs = edgeArt.songs;
+            this.currentArtistTracks = edgeArt.songs;
+            if (edgeArt.albums && edgeArt.albums.length > 0) {
+              this.currentArtistAllAlbums = edgeArt.albums;
+            }
+            this.renderArtistPopularTracks();
+            this.renderArtistDiscography(this.currentArtistAllAlbums);
+            return;
           }
-        } catch(e) {}
-      }
+        }
+      } catch(e) {}
 
       let resolvedArtistId = artistIdParam;
       
@@ -3353,17 +3365,15 @@ class PlayifyEngine {
     }
 
     if (!songs.length || (albLower.includes('four') && songs.length < 4)) {
-      if (isHttp) {
-        try {
-          const edgeRes = await fetch(`/api/album?id=${encodeURIComponent(albumId || '')}&title=${encodeURIComponent(albumTitle)}`, { signal: AbortSignal.timeout(4000) });
-          if (edgeRes.ok) {
-            const edgeAlb = await edgeRes.json();
-            if (edgeAlb && edgeAlb.status === 'success' && edgeAlb.songs && edgeAlb.songs.length > 0) {
-              songs = edgeAlb.songs;
-            }
+      try {
+        const edgeRes = await fetch(`${this.getApiBase()}/api/album?id=${encodeURIComponent(albumId || '')}&title=${encodeURIComponent(albumTitle)}`, { signal: AbortSignal.timeout(5000) });
+        if (edgeRes.ok) {
+          const edgeAlb = await edgeRes.json();
+          if (edgeAlb && edgeAlb.status === 'success' && edgeAlb.songs && edgeAlb.songs.length > 0) {
+            songs = edgeAlb.songs;
           }
-        } catch(e) {}
-      }
+        }
+      } catch(e) {}
     }
 
     if (!songs.length) {
