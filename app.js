@@ -1023,12 +1023,22 @@ class PlayifyEngine {
   }
 
   // ========================================================================
+  // ========================================================================
   // 1. DATA LOADERS & INITIALIZERS
   // ========================================================================
   async loadDatabaseAndCharts() {
     try {
+      // 1. Check local dynamic cache (ensures offline persistence of remote synced songs)
+      let cachedCharts = null;
+      try {
+        const raw = localStorage.getItem('playify_dynamic_charts_v90');
+        if (raw) cachedCharts = JSON.parse(raw);
+      } catch(e) {}
+
       if (typeof window !== 'undefined') {
-        if (window.PLAYIFY_CHARTS) {
+        if (cachedCharts && cachedCharts.sections) {
+          this.homeData = cachedCharts;
+        } else if (window.PLAYIFY_CHARTS) {
           this.homeData = window.PLAYIFY_CHARTS;
         } else if (window.sp_charts_data) {
           this.homeData = window.sp_charts_data;
@@ -1058,40 +1068,116 @@ class PlayifyEngine {
       // Load 2.2MB Music DB asynchronously in background without blocking UI thread or startup
       this.loadMusicDBInBackground();
 
-      // Automatically sync live 2026 Punjabi releases without blocking initial UI
+      // Automatically sync dynamic remote charts & Punjabi releases in background
       setTimeout(() => {
-        this.fetchLivePunjabiTrending();
-      }, 1500);
+        this.syncRemoteChartsAndMusic();
+        this.checkForAppUpdates();
+      }, 1200);
     } catch(e) {
       console.warn('loadDatabaseAndCharts notice:', e);
     }
   }
 
-  async fetchLivePunjabiTrending() {
+  async syncRemoteChartsAndMusic() {
     if (typeof navigator !== 'undefined' && !navigator.onLine) return;
     try {
-      const apiBase = this.getApiBase();
-      const res = await fetch(`${apiBase}/api/punjabi/trending`, { signal: AbortSignal.timeout(4500) });
-      if (res.ok) {
-        const data = await res.json();
-        if (data.status === 'success' && Array.isArray(data.songs) && data.songs.length > 0) {
-          if (!this.homeData) this.homeData = {};
-          if (!this.homeData.sections) this.homeData.sections = {};
-          
-          const existing = this.homeData.sections.trending_punjabi || this.homeData.trending_punjabi || [];
-          const seen = new Set(data.songs.map(s => s.id));
-          const merged = [...data.songs, ...existing.filter(s => !seen.has(s.id))];
-          
-          this.homeData.sections.trending_punjabi = merged;
-          this.homeData.trending_punjabi = merged;
-          
-          // Re-render home view with newly added live tracks
-          this.renderHomeViews();
-        }
+      const endpoints = [
+        'https://guru4code.online/playify/charts.json',
+        `${this.getApiBase()}/api/punjabi/trending`
+      ];
+
+      for (const endpoint of endpoints) {
+        try {
+          const res = await fetch(endpoint, { signal: AbortSignal.timeout(5000) });
+          if (res.ok) {
+            const data = await res.json();
+            let newSongs = [];
+            if (data.status === 'success' && Array.isArray(data.songs)) {
+              newSongs = data.songs;
+            } else if (data.sections && data.sections.trending_punjabi) {
+              newSongs = data.sections.trending_punjabi;
+            } else if (Array.isArray(data.trending_punjabi)) {
+              newSongs = data.trending_punjabi;
+            }
+
+            if (newSongs.length > 0) {
+              if (!this.homeData) this.homeData = {};
+              if (!this.homeData.sections) this.homeData.sections = {};
+
+              const existing = this.homeData.sections.trending_punjabi || this.homeData.trending_punjabi || [];
+              const seen = new Set(newSongs.map(s => s.id));
+              const merged = [...newSongs, ...existing.filter(s => !seen.has(s.id))];
+
+              this.homeData.sections.trending_punjabi = merged;
+              this.homeData.trending_punjabi = merged;
+
+              // Also merge into musicDB for instant search discovery
+              if (Array.isArray(this.musicDB)) {
+                const dbSeen = new Set(this.musicDB.map(s => s.id));
+                for (const ns of newSongs) {
+                  if (!dbSeen.has(ns.id)) {
+                    this.musicDB.unshift(ns);
+                    dbSeen.add(ns.id);
+                  }
+                }
+                this.buildDatabaseIndices();
+              }
+
+              // Cache to localStorage for offline access
+              try {
+                localStorage.setItem('playify_dynamic_charts_v90', JSON.stringify(this.homeData));
+              } catch(e) {}
+
+              // Re-render home view with newly added live tracks
+              this.renderHomeViews();
+              break;
+            }
+          }
+        } catch(e) {}
       }
     } catch(e) {
-      console.warn('fetchLivePunjabiTrending notice:', e);
+      console.warn('syncRemoteChartsAndMusic notice:', e);
     }
+  }
+
+  async checkForAppUpdates() {
+    if (typeof navigator !== 'undefined' && !navigator.onLine) return;
+    try {
+      const res = await fetch('https://guru4code.online/playify/version.json', { signal: AbortSignal.timeout(4000) });
+      if (res.ok) {
+        const verInfo = await res.json();
+        const currentVer = (typeof window !== 'undefined' && window.PLAYIFY_APP_VERSION) ? window.PLAYIFY_APP_VERSION : 90.0;
+        if (verInfo && verInfo.version && verInfo.version > currentVer) {
+          this.renderUpdateBanner(verInfo);
+        }
+      }
+    } catch(e) {}
+  }
+
+  renderUpdateBanner(verInfo) {
+    if (document.getElementById('sp-inapp-update-banner')) return;
+    const banner = document.createElement('div');
+    banner.id = 'sp-inapp-update-banner';
+    banner.style.cssText = 'position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:999999;width:calc(100% - 24px);max-width:540px;background:linear-gradient(135deg, #181818 0%, #121212 100%);border:1px solid #1db954;border-radius:14px;padding:12px 16px;box-shadow:0 12px 35px rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;animation:slideDown 0.35s ease;';
+    
+    banner.innerHTML = `
+      <div style="display:flex;align-items:center;gap:12px;overflow:hidden;">
+        <div style="background:rgba(29,185,84,0.15);width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#1db954;font-size:18px;flex-shrink:0;">
+          <i class="fa-solid fa-sparkles"></i>
+        </div>
+        <div style="overflow:hidden;text-overflow:ellipsis;">
+          <div style="font-weight:700;font-size:13px;color:#1db954;text-transform:uppercase;letter-spacing:0.5px;">Update Available (${verInfo.version_name || 'v' + verInfo.version})</div>
+          <div style="font-size:12px;color:#ccc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${verInfo.message || 'New songs & features added!'}</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+        <a href="${verInfo.apk_url || 'https://guru4code.online/playify/Playify.apk'}" download target="_blank" style="background:#1db954;color:#000;font-weight:700;font-size:12px;padding:8px 14px;border-radius:20px;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <i class="fa-solid fa-download"></i> Update
+        </a>
+        <button onclick="document.getElementById('sp-inapp-update-banner').remove()" style="background:none;border:none;color:#888;cursor:pointer;font-size:16px;padding:4px 6px;">&times;</button>
+      </div>
+    `;
+    document.body.appendChild(banner);
   }
 
   buildDatabaseIndices() {
