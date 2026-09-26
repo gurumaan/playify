@@ -617,7 +617,7 @@ class PlayifyEngine {
     if (typeof window !== 'undefined' && window.location && window.location.hostname && window.location.hostname.includes('workers.dev')) {
       return window.location.origin;
     }
-    return 'https://peaceful-davinci.famous-olivine.workers.dev';
+    return 'https://peaceful-davinci.destiny-period.workers.dev';
   }
 
   setupNetworkListeners() {
