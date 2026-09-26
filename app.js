@@ -1167,7 +1167,7 @@ class PlayifyEngine {
       const res = await fetch('https://guru4code.online/playify/version.json', { signal: AbortSignal.timeout(4000) });
       if (res.ok) {
         const verInfo = await res.json();
-        const currentVer = (typeof window !== 'undefined' && window.PLAYIFY_APP_VERSION) ? window.PLAYIFY_APP_VERSION : 91.0;
+        const currentVer = (typeof window !== 'undefined' && window.PLAYIFY_APP_VERSION) ? window.PLAYIFY_APP_VERSION : 91.1;
         if (verInfo && verInfo.version && verInfo.version > currentVer) {
           this.renderUpdateBanner(verInfo);
         }
@@ -5115,6 +5115,37 @@ class PlayifyEngine {
   // 12. REAL-TIME SYNCED LYRICS
   // ========================================================================
   async loadLyricsForCurrentSong() {
+    return this.loadLyrics();
+  }
+  generateAutoPacedLyrics(rawText, totalDuration) {
+    if (!rawText) return [];
+    const lines = rawText
+      .replace(/<br\s*\/?>/gi, '\n')
+      .split('\n')
+      .map(l => l.trim())
+      .filter(l => l.length > 0 && !l.startsWith('[by:') && !l.startsWith('[ar:') && !l.startsWith('[ti:'));
+    if (!lines.length) return [];
+
+    const dur = Math.max(30, totalDuration || 180);
+    const introOffset = Math.min(16, Math.max(8, dur * 0.07));
+    const outroBuffer = Math.min(22, Math.max(10, dur * 0.08));
+    const activeDur = Math.max(15, dur - introOffset - outroBuffer);
+
+    const weights = lines.map(l => Math.max(1.5, Math.min(5.5, l.length / 8.0)));
+    const totalWeight = weights.reduce((a, b) => a + b, 0) || 1;
+
+    let accum = 0;
+    return lines.map((text, i) => {
+      const t = introOffset + (accum / totalWeight) * activeDur;
+      accum += weights[i];
+      return {
+        time: Math.round(t * 10) / 10,
+        text: text
+      };
+    });
+  }
+
+  async loadLyrics() {
     if (!this.currentSong) return;
     this.currentLyrics = [];
     this.activeLyricIndex = -1;
@@ -5144,59 +5175,81 @@ class PlayifyEngine {
     };
 
     try {
-      // 1. Direct song embedded lyrics (Instant, offline & APK supported)
-      if (this.currentSong.synced_lyrics) {
+      let hasSynced = false;
+      let fallbackPlain = null;
+
+      // 1. Direct song embedded synced lyrics (AUJLA SZN 1, curated tracks)
+      if (this.currentSong.synced_lyrics && this.currentSong.synced_lyrics.includes('[')) {
         this.currentLyrics = parseLrc(this.currentSong.synced_lyrics);
-      } else if (this.currentSong.lyrics) {
-        this.currentLyrics = this.currentSong.lyrics.split('\n').filter(l => l.trim()).map(l => ({ time: null, text: l.trim() }));
+        if (this.currentLyrics.length > 0) hasSynced = true;
+      }
+      if (!hasSynced && this.currentSong.lyrics) {
+        if (this.currentSong.lyrics.includes('[')) {
+          this.currentLyrics = parseLrc(this.currentSong.lyrics);
+          if (this.currentLyrics.length > 0) hasSynced = true;
+        } else {
+          fallbackPlain = this.currentSong.lyrics;
+        }
       }
 
-      // 2. Multi-tier Cloudflare Edge / LRCLIB API Fetch
-      if (!this.currentLyrics || !this.currentLyrics.length) {
+      // 2. Multi-tier Cloudflare Edge & LRCLIB API Fetch (Priority: Real Millisecond Synced Lyrics)
+      if (!hasSynced) {
         const cleanTitle = (this.currentSong.title || '').replace(/\(.*?\)|\[.*?\]|feat\..*|ft\..*/gi, '').trim();
         const cleanArtist = (this.currentSong.artist || '').split(/[,&/]/)[0].trim();
         const apiBase = this.getApiBase();
 
-        // 2a. Cloudflare Edge /api/lyrics (Has embedded Punjabi & Hindi lyrics dictionary)
+        // 2a. Cloudflare Edge /api/lyrics
         try {
-          const edgeRes = await fetch(`${apiBase}/api/lyrics?id=${encodeURIComponent(this.currentSong.id || '')}&title=${encodeURIComponent(cleanTitle)}&artist=${encodeURIComponent(cleanArtist)}`, { signal: AbortSignal.timeout(3000) });
+          const edgeRes = await fetch(`${apiBase}/api/lyrics?id=${encodeURIComponent(this.currentSong.id || '')}&title=${encodeURIComponent(cleanTitle)}&artist=${encodeURIComponent(cleanArtist)}`, { signal: AbortSignal.timeout(3500) });
           if (edgeRes.ok) {
             const data = await edgeRes.json();
-            if (data.syncedLyrics) {
-              this.currentLyrics = parseLrc(data.syncedLyrics);
-            } else if (data.plainLyrics) {
-              this.currentLyrics = data.plainLyrics.split('\n').filter(l => l.trim()).map(l => ({ time: null, text: l.trim() }));
+            if (data.syncedLyrics && data.syncedLyrics.includes('[')) {
+              const parsed = parseLrc(data.syncedLyrics);
+              if (parsed.length > 0) {
+                this.currentLyrics = parsed;
+                hasSynced = true;
+              }
+            } else if (data.plainLyrics && !fallbackPlain) {
+              fallbackPlain = data.plainLyrics;
             }
           }
         } catch(e) {}
 
         // 2b. Direct LRCLIB exact get
-        if (!this.currentLyrics || !this.currentLyrics.length) {
+        if (!hasSynced) {
           try {
-            const res = await fetch(`https://lrclib.net/api/get?track_name=${encodeURIComponent(cleanTitle)}&artist_name=${encodeURIComponent(cleanArtist)}`, { signal: AbortSignal.timeout(2500) });
+            const res = await fetch(`https://lrclib.net/api/get?track_name=${encodeURIComponent(cleanTitle)}&artist_name=${encodeURIComponent(cleanArtist)}`, { signal: AbortSignal.timeout(3000) });
             if (res.ok) {
               const data = await res.json();
-              if (data.syncedLyrics) {
-                this.currentLyrics = parseLrc(data.syncedLyrics);
-              } else if (data.plainLyrics) {
-                this.currentLyrics = data.plainLyrics.split('\n').filter(l => l.trim()).map(l => ({ time: null, text: l.trim() }));
+              if (data.syncedLyrics && data.syncedLyrics.includes('[')) {
+                const parsed = parseLrc(data.syncedLyrics);
+                if (parsed.length > 0) {
+                  this.currentLyrics = parsed;
+                  hasSynced = true;
+                }
+              } else if (data.plainLyrics && !fallbackPlain) {
+                fallbackPlain = data.plainLyrics;
               }
             }
           } catch(e) {}
         }
 
         // 2c. LRCLIB search fallback
-        if (!this.currentLyrics || !this.currentLyrics.length) {
+        if (!hasSynced) {
           try {
-            const sRes = await fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(cleanTitle + ' ' + cleanArtist)}`, { signal: AbortSignal.timeout(2500) });
+            const sRes = await fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(cleanTitle + ' ' + cleanArtist)}`, { signal: AbortSignal.timeout(3000) });
             if (sRes.ok) {
               const sList = await sRes.json();
               if (Array.isArray(sList) && sList.length > 0) {
-                const best = sList[0];
-                if (best.syncedLyrics) {
-                  this.currentLyrics = parseLrc(best.syncedLyrics);
-                } else if (best.plainLyrics) {
-                  this.currentLyrics = best.plainLyrics.split('\n').filter(l => l.trim()).map(l => ({ time: null, text: l.trim() }));
+                const best = sList.find(x => x.syncedLyrics && x.syncedLyrics.includes('['));
+                if (best) {
+                  const parsed = parseLrc(best.syncedLyrics);
+                  if (parsed.length > 0) {
+                    this.currentLyrics = parsed;
+                    hasSynced = true;
+                  }
+                } else if (sList[0].plainLyrics && !fallbackPlain) {
+                  fallbackPlain = sList[0].plainLyrics;
                 }
               }
             }
@@ -5204,12 +5257,25 @@ class PlayifyEngine {
         }
       }
 
+      // 3. Auto-Timing / Rhythmic Pacing Engine for Plain Lyrics (Guarantees ALL songs sync & scroll!)
+      if (!hasSynced && fallbackPlain) {
+        const songDur = (this.audio && this.audio.duration && this.audio.duration > 30)
+          ? this.audio.duration
+          : (this.currentSong?.duration || 180);
+        this.currentLyrics = this.generateAutoPacedLyrics(fallbackPlain, songDur);
+        if (this.currentLyrics.length > 0) hasSynced = true;
+      }
+
       // Render lyrics in Fullscreen UI
       if (container) {
         if (this.currentLyrics && this.currentLyrics.length > 0) {
           container.innerHTML = this.currentLyrics.map((l, i) => `
-            <p class="mf-lyric ${i === 0 ? 'active' : ''}" id="lyric-line-${i}" ${l.time !== null ? `onclick="sp.seekToLyric(${l.time})"` : ''} style="cursor: ${l.time !== null ? 'pointer' : 'default'}">${l.text}</p>
+            <p class="mf-lyric ${i === 0 ? 'active' : ''}" id="lyric-line-${i}" onclick="sp.seekToLyric(${l.time})">${l.text}</p>
           `).join('');
+
+          // Instantly sync to current playback position
+          const curTime = (this.audio && !isNaN(this.audio.currentTime)) ? this.audio.currentTime : 0;
+          this.syncLyricsProgress(curTime);
         } else {
           container.innerHTML = `
             <p class="mf-lyric active">♪ ${this.currentSong.title} ♪</p>
@@ -5230,8 +5296,9 @@ class PlayifyEngine {
   }
 
   seekToLyric(timeSec) {
-    if (timeSec !== null && this.audio && this.audio.duration) {
+    if (typeof timeSec === 'number' && !isNaN(timeSec) && this.audio && this.audio.duration) {
       this.audio.currentTime = timeSec;
+      this.syncLyricsProgress(timeSec);
     }
   }
 
@@ -5246,17 +5313,25 @@ class PlayifyEngine {
       if (lTime !== null && lTime <= currentTime) newIndex = i;
     }
 
-    if (newIndex !== -1 && newIndex !== this.activeLyricIndex) {
-      const prevEl = document.getElementById(`lyric-line-${this.activeLyricIndex}`);
-      if (prevEl) prevEl.classList.remove('active');
+    if (newIndex === -1 && this.currentLyrics.length > 0) newIndex = 0;
+
+    if (newIndex !== this.activeLyricIndex) {
+      const container = document.getElementById('fs-lyrics-container');
+      if (container) {
+        container.querySelectorAll('.mf-lyric.active').forEach(el => el.classList.remove('active'));
+      }
 
       const nextEl = document.getElementById(`lyric-line-${newIndex}`);
       if (nextEl) {
         nextEl.classList.add('active');
-        const container = document.getElementById('fs-lyrics-container');
         if (container) {
-          const targetScroll = nextEl.offsetTop - container.offsetTop - (container.clientHeight / 2) + (nextEl.clientHeight / 2);
-          container.scrollTo({ top: Math.max(0, targetScroll), behavior: 'smooth' });
+          try {
+            nextEl.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+          } catch(e) {}
+          const targetScroll = nextEl.offsetTop - (container.clientHeight / 2) + (nextEl.clientHeight / 2);
+          if (!isNaN(targetScroll)) {
+            container.scrollTo({ top: Math.max(0, targetScroll), behavior: 'smooth' });
+          }
         }
       }
       this.activeLyricIndex = newIndex;
@@ -5320,6 +5395,10 @@ class PlayifyEngine {
         sc.scrollTop = 0;
         requestAnimationFrame(() => { sc.scrollTop = 0; });
       }
+      setTimeout(() => {
+        const curTime = (this.audio && !isNaN(this.audio.currentTime)) ? this.audio.currentTime : 0;
+        this.syncLyricsProgress(curTime);
+      }, 100);
     }
     document.body.style.overflow = 'hidden';
   }

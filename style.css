@@ -1837,13 +1837,14 @@ body {
 }
 
 .sp-mf-lyrics-lines {
+  position: relative !important;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   overflow-y: auto;
   scroll-behavior: smooth;
-  padding: 8px 0;
-  max-height: 200px;
+  padding: 80px 0;
+  max-height: 260px;
 }
 
 .sp-mf-lyrics-lines::-webkit-scrollbar {
@@ -1856,25 +1857,26 @@ body {
 }
 
 .mf-lyric {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.4);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.35);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  line-height: 1.5;
   cursor: pointer;
+  user-select: none;
 }
 
 .mf-lyric:hover {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .mf-lyric.active {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 900;
   color: #ffffff !important;
-  transform: scale(1.02);
+  transform: scale(1.04);
   transform-origin: left center;
-  text-shadow: 0 0 14px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.45);
 }
 
 .sp-toast {
@@ -3260,11 +3262,22 @@ input:checked + .sp-slider-round:before {
   }
 
   .sp-mf-lyrics-lines {
+    position: relative !important;
     flex: 1 !important;
     max-height: 520px !important;
     overflow-y: auto !important;
+    padding: 160px 0 !important;
+  }
+  .sp-mf-lyrics-lines .mf-lyric {
     font-size: 22px !important;
     line-height: 1.6 !important;
+  }
+  .sp-mf-lyrics-lines .mf-lyric.active {
+    font-size: 28px !important;
+    color: #ffffff !important;
+    font-weight: 900 !important;
+    transform: scale(1.05) !important;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6) !important;
   }
 }
 
